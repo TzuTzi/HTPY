@@ -144,6 +144,106 @@
                                 </td>
                             </tr>
                         </table>
+
+                        <br><br>
+
+                        <!-- Formular setări cont (pentru utilizator logat) -->
+                        <table width="100%" cellpadding="20" cellspacing="0" border="1">
+                            <tr>
+                                <td>
+                                    <h2 align="center">Setări cont și preferințe</h2>
+                                    <p align="center">
+                                        Actualizează-ți preferințele de vizionare direct din contul tău BlimBlau.
+                                        Și aici folosim diacritice: ă, â, î, ș, ț.
+                                    </p>
+
+                                    <form action="update-settings.html" method="post">
+                                        <table width="100%" cellpadding="8" cellspacing="0" border="1">
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>1. Informații profil</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">Nume afișat</td>
+                                                <td width="30%">
+                                                    <input type="text" name="nume_afisat" size="25">
+                                                </td>
+                                                <td width="20%">E-mail (doar citire)</td>
+                                                <td width="30%">
+                                                    <input type="text" name="email_cont" size="25" value="user@exemplu.ro" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Preferi interfață în</td>
+                                                <td>
+                                                    <select name="limba">
+                                                        <option value="ro">Română</option>
+                                                        <option value="en">Engleză</option>
+                                                        <option value="other">Altă limbă</option>
+                                                    </select>
+                                                </td>
+                                                <td>Oraș</td>
+                                                <td>
+                                                    <input type="text" name="oras" size="20">
+                                                </td>
+                                            </tr>
+
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>2. Preferințe de notificare</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Alerta pentru filme noi</td>
+                                                <td colspan="3">
+                                                    <input type="checkbox" name="notif_filme_noi" value="da"> Trimite notificări despre filme noi<br>
+                                                    <input type="checkbox" name="notif_list" value="da"> Trimite notificări despre liste urmărite
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Frecvență e-mail</td>
+                                                <td colspan="3">
+                                                    <select name="frecventa_email">
+                                                        <option value="zilnic">Zilnic</option>
+                                                        <option value="saptamanal">Săptămânal</option>
+                                                        <option value="lunar">Lunar</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>3. Preferințe de conținut</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gen prioritar</td>
+                                                <td colspan="3">
+                                                    <input type="radio" name="gen_prioritar" value="actiune"> Acțiune
+                                                    <input type="radio" name="gen_prioritar" value="drama"> Dramă
+                                                    <input type="radio" name="gen_prioritar" value="comedie"> Comedie
+                                                    <input type="radio" name="gen_prioritar" value="sf"> SF
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Genuri excluse</td>
+                                                <td colspan="3">
+                                                    <input type="checkbox" name="excl_horror" value="da"> Nu afișa horror
+                                                    <input type="checkbox" name="excl_documentar" value="da"> Nu afișa documentare
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Scurt comentariu</td>
+                                                <td colspan="3">
+                                                    <textarea name="comentariu" rows="3" cols="60"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <input type="submit" value="Salvează setările">
+                                                    <input type="reset" value="Anulează modificările">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>

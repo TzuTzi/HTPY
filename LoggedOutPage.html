@@ -153,6 +153,201 @@
                                 </td>
                             </tr>
                         </table>
+
+                        <br><br>
+
+                        <!-- Secțiune formular complex (fără CSS) -->
+                        <table width="100%" cellpadding="20" cellspacing="0" border="1">
+                            <tr>
+                                <td>
+                                    <h2 align="center">Formular de preferințe pentru filme</h2>
+                                    <p align="center">
+                                        Completează formularul de mai jos pentru a ne spune ce fel de filme îți plac.
+                                        În acest formular folosim toate diacriticele limbii române: ă, â, î, ș, ț.
+                                    </p>
+
+                                    <!-- Liste explicative (4 liste, 2 imbricate, tipuri diferite) -->
+                                    <table width="100%" cellpadding="10" cellspacing="0" border="0">
+                                        <tr>
+                                            <td width="50%" valign="top">
+                                                <b>Pași de completare</b>
+                                                <ol type="A" start="5">
+                                                    <li>Date personale
+                                                        <ol type="i">
+                                                            <li>Completează numele și adresa de e‑mail.</li>
+                                                            <li>Alege țara și orașul.</li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>Preferințe de vizionare
+                                                        <ol type="I">
+                                                            <li>Selectează genurile preferate.</li>
+                                                            <li>Bifează opțiunile suplimentare.</li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                            </td>
+                                            <td width="50%" valign="top">
+                                                <b>Reguli și recomandări</b>
+                                                <ul>
+                                                    <li>Completează câmpurile marcate ca importante.</li>
+                                                    <li>Folosește propoziții clare în zona de comentarii.</li>
+                                                    <li>
+                                                        Evită:
+                                                        <ul>
+                                                            <li>limbaj ofensator;</li>
+                                                            <li>date personale sensibile;</li>
+                                                            <li>link‑uri inutile.</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <br>
+
+                                    <form action="submit-preferinte.html" method="post">
+                                        <!-- Tabel principal cu rowspan/colspan + un tabel imbricat în interior -->
+                                        <table width="100%" cellpadding="8" cellspacing="0" border="1">
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>1. Date personale</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">Nume complet</td>
+                                                <td width="30%">
+                                                    <input type="text" name="nume" size="25">
+                                                </td>
+                                                <td width="20%">Adresa de e‑mail</td>
+                                                <td width="30%">
+                                                    <input type="text" name="email" size="25">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Țară</td>
+                                                <td>
+                                                    <select name="tara">
+                                                        <option value="ro">România</option>
+                                                        <option value="md">Republica Moldova</option>
+                                                        <option value="hu">Ungaria</option>
+                                                        <option value="bg">Bulgaria</option>
+                                                        <option value="other">Altă țară</option>
+                                                    </select>
+                                                </td>
+                                                <td>Oraș</td>
+                                                <td>
+                                                    <input type="text" name="oras" size="20">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cod formular (doar citire)</td>
+                                                <td colspan="3">
+                                                    <input type="text" name="cod_formular" size="20" value="BLIMBLAU-2024" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vârstă</td>
+                                                <td>
+                                                    <input type="text" name="varsta" size="5">
+                                                </td>
+                                                <td>Gen preferat de adresare</td>
+                                                <td>
+                                                    <input type="radio" name="gen_adresare" value="dl"> Domnul
+                                                    <input type="radio" name="gen_adresare" value="dna"> Doamna
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mesaj scurt despre tine</td>
+                                                <td colspan="3">
+                                                    <textarea name="descriere" rows="4" cols="60"></textarea>
+                                                </td>
+                                            </tr>
+
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>2. Preferințe de gen și obiceiuri</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">Gen preferat</td>
+                                                <td colspan="3">
+                                                    <input type="radio" name="gen_preferat" value="actiune"> Acțiune
+                                                    <input type="radio" name="gen_preferat" value="drama"> Dramă
+                                                    <input type="radio" name="gen_preferat" value="comedie"> Comedie
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <input type="radio" name="gen_preferat" value="sf"> Științifico‑fantastic
+                                                    <input type="radio" name="gen_preferat" value="animatie"> Animație
+                                                    <input type="radio" name="gen_preferat" value="altul"> Alt gen
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Genuri pe care le urmărești des</td>
+                                                <td colspan="3">
+                                                    <input type="checkbox" name="g_actiune" value="da"> Acțiune
+                                                    <input type="checkbox" name="g_drama" value="da"> Dramă
+                                                    <input type="checkbox" name="g_comedie" value="da"> Comedie
+                                                    <input type="checkbox" name="g_sf" value="da"> SF
+                                                    <input type="checkbox" name="g_horror" value="da"> Horror
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Frecvența cu care vizionezi filme</td>
+                                                <td colspan="3">
+                                                    <select name="frecventa">
+                                                        <option value="zilnic">Zilnic</option>
+                                                        <option value="saptamanal">Săptămânal</option>
+                                                        <option value="lunar">Lunar</option>
+                                                        <option value="rar">Mai rar</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Unde preferi să vezi filme</td>
+                                                <td colspan="3">
+                                                    <!-- Tabel imbricat în interiorul celulei -->
+                                                    <table width="100%" cellpadding="4" cellspacing="0" border="1">
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <input type="checkbox" name="loc_cinema" value="da"> La cinema<br>
+                                                                <input type="checkbox" name="loc_acasa" value="da"> Acasă<br>
+                                                                <input type="checkbox" name="loc_prieteni" value="da"> La prieteni
+                                                            </td>
+                                                            <td width="50%">
+                                                                <input type="radio" name="singur_sau_grup" value="singur"> De obicei singur<br>
+                                                                <input type="radio" name="singur_sau_grup" value="grup"> De obicei cu prietenii
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                            <tr bgcolor="#F5F5F5">
+                                                <td colspan="4" align="center"><b>3. Informații suplimentare</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Primești recomandări pe e‑mail?</td>
+                                                <td colspan="3">
+                                                    <input type="checkbox" name="newsletter" value="da"> Da, doresc să primesc recomandări personalizate.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Comentarii finale</td>
+                                                <td colspan="3">
+                                                    <textarea name="comentarii" rows="3" cols="60"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <input type="submit" value="Trimite formularul">
+                                                    <input type="reset" value="Șterge tot">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
