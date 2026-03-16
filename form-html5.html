@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BlimBlau – Create Account</title>
+    <!--
+        Pagina dedicată FORMULARULUI (cerința: document HTML cu formular).
+        Stilul folosit: style-horizontal.css (stilizează toate elementele formularului)
+
+        Tipuri de input prezente:
+          - text, email, password (câmpuri de text)
+          - date (data nașterii)
+          - number (vârsta)
+          - range (rating preferat)
+          - select (dropdown)
+          - radio (gen)
+          - checkbox (genuri, termeni)
+          - textarea (bio)
+          - file (avatar)
+          - submit + reset (butoane)
+    -->
+    <link rel="stylesheet" href="css/style-horizontal.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER – meniu orizontal
+     ═══════════════════════════════════════════════ -->
+<table id="site-header">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td" ><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="LoggedInPage-html5.html" class="nav-dropdown-trigger">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════
+     CONȚINUT PRINCIPAL – Formular complet
+     ═══════════════════════════════════════════════ -->
+<table id="main-content">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+
+                        <!-- ─────────────────────────────────────────────
+                             FORMULAR CREARE CONT
+                             Demonstrează stilizarea elementelor de formular:
+                             - câmpuri de input (text, email, password, date, number, range)
+                             - select dropdown
+                             - radio buttons
+                             - checkboxes
+                             - textarea
+                             - file upload
+                             - stări :focus
+                             - buton submit (verde) și reset (gri)
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Creează un cont BlimBlau</h2>
+                                    <p class="section-desc">
+                                        Completează formularul de mai jos pentru a te alătura comunității
+                                        BlimBlau. Câmpurile marcate cu * sunt obligatorii.
+                                        Diacriticele sunt suportate: ă, â, î, ș, ț.
+                                    </p>
+
+                                    <form action="register-process.html" method="post" enctype="multipart/form-data">
+                                        <table class="form-table">
+
+                                            <!-- ══════════════════════════
+                                                 SECȚIUNEA 1: Date personale
+                                                 ══════════════════════════ -->
+                                            <tr>
+                                                <td colspan="4" class="form-section-heading">
+                                                    <b>1. Date personale</b>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Prenume + Nume -->
+                                            <tr>
+                                                <td class="form-label">Prenume *</td>
+                                                <td class="form-field">
+                                                    <input type="text" name="prenume" placeholder="ex: Alexandru"
+                                                           required autocomplete="given-name">
+                                                </td>
+                                                <td class="form-label">Nume *</td>
+                                                <td class="form-field">
+                                                    <input type="text" name="nume" placeholder="ex: Ionescu"
+                                                           required autocomplete="family-name">
+                                                </td>
+                                            </tr>
+
+                                            <!-- Username + Data nașterii -->
+                                            <tr>
+                                                <td class="form-label">Username *</td>
+                                                <td class="form-field">
+                                                    <input type="text" name="username" placeholder="@username"
+                                                           required minlength="3" maxlength="30"
+                                                           autocomplete="username">
+                                                </td>
+                                                <td class="form-label">Data nașterii</td>
+                                                <td class="form-field">
+                                                    <!-- input type="date" – afișează un calendar nativ -->
+                                                    <input type="date" name="data_nasterii"
+                                                           min="1900-01-01" max="2010-12-31">
+                                                </td>
+                                            </tr>
+
+                                            <!-- Gen -->
+                                            <tr>
+                                                <td class="form-label">Gen</td>
+                                                <td colspan="3" class="form-field">
+                                                    <label class="radio-label">
+                                                        <input type="radio" name="gen" value="m"> Masculin
+                                                    </label>
+                                                    <label class="radio-label">
+                                                        <input type="radio" name="gen" value="f"> Feminin
+                                                    </label>
+                                                    <label class="radio-label">
+                                                        <input type="radio" name="gen" value="nb"> Non-binar
+                                                    </label>
+                                                    <label class="radio-label">
+                                                        <input type="radio" name="gen" value="ns"> Prefer să nu spun
+                                                    </label>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Țara -->
+                                            <tr>
+                                                <td class="form-label">Țara</td>
+                                                <td colspan="3" class="form-field">
+                                                    <!-- input type="select" – dropdown -->
+                                                    <select name="tara">
+                                                        <option value="">-- Selectează țara --</option>
+                                                        <option value="ro">România</option>
+                                                        <option value="md">Moldova</option>
+                                                        <option value="us">Statele Unite</option>
+                                                        <option value="uk">Marea Britanie</option>
+                                                        <option value="fr">Franța</option>
+                                                        <option value="de">Germania</option>
+                                                        <option value="it">Italia</option>
+                                                        <option value="es">Spania</option>
+                                                        <option value="other">Altă țară</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <!-- ══════════════════════════
+                                                 SECȚIUNEA 2: Date cont
+                                                 ══════════════════════════ -->
+                                            <tr>
+                                                <td colspan="4" class="form-section-heading">
+                                                    <b>2. Date de autentificare</b>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Email -->
+                                            <tr>
+                                                <td class="form-label">E-mail *</td>
+                                                <td class="form-field">
+                                                    <!-- input type="email" – validare format email -->
+                                                    <input type="email" name="email" placeholder="exemplu@email.ro"
+                                                           required autocomplete="email">
+                                                </td>
+                                                <td class="form-label">Confirmă e-mail *</td>
+                                                <td class="form-field">
+                                                    <input type="email" name="email_confirm" placeholder="Repetă e-mail-ul"
+                                                           required>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Parolă -->
+                                            <tr>
+                                                <td class="form-label">Parolă *</td>
+                                                <td class="form-field">
+                                                    <!-- input type="password" – caracterele sunt ascunse -->
+                                                    <input type="password" name="parola" placeholder="Min. 8 caractere"
+                                                           required minlength="8" autocomplete="new-password">
+                                                </td>
+                                                <td class="form-label">Confirmă parola *</td>
+                                                <td class="form-field">
+                                                    <input type="password" name="parola_confirm"
+                                                           placeholder="Repetă parola" required
+                                                           autocomplete="new-password">
+                                                </td>
+                                            </tr>
+
+                                            <!-- ══════════════════════════
+                                                 SECȚIUNEA 3: Preferințe film
+                                                 ══════════════════════════ -->
+                                            <tr>
+                                                <td colspan="4" class="form-section-heading">
+                                                    <b>3. Preferințe cinematografice</b>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Genuri preferate (checkboxes) -->
+                                            <tr>
+                                                <td class="form-label">Genuri preferate</td>
+                                                <td colspan="3" class="form-field">
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="actiune"> Acțiune</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="drama"> Dramă</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="comedie"> Comedie</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="sf"> Sci-Fi</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="horror"> Horror</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="thriller"> Thriller</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="documentar"> Documentar</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="animatie"> Animație</label>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Rating minim preferat (range) -->
+                                            <tr>
+                                                <td class="form-label">Rating minim preferat</td>
+                                                <td colspan="3" class="form-field">
+                                                    <!-- input type="range" – slider -->
+                                                    <input type="range" name="rating_min" min="1" max="10"
+                                                           value="7" step="0.5"
+                                                           oninput="this.nextElementSibling.textContent = this.value + '/10'">
+                                                    <span style="color:#8b949e; margin-left:10px; font-size:0.875rem;">7/10</span>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Număr de filme pe care planuiești să le urmărești -->
+                                            <tr>
+                                                <td class="form-label">Obiectiv anual (filme)</td>
+                                                <td colspan="3" class="form-field">
+                                                    <!-- input type="number" – câmp numeric cu validare min/max -->
+                                                    <input type="number" name="obiectiv_anual" min="1" max="1000"
+                                                           value="52" placeholder="ex: 52">
+                                                </td>
+                                            </tr>
+
+                                            <!-- Bio (textarea) -->
+                                            <tr>
+                                                <td class="form-label">Bio</td>
+                                                <td colspan="3" class="form-field">
+                                                    <!-- textarea – câmp text multilinie, redimensionabil -->
+                                                    <textarea name="bio" rows="4" cols="60"
+                                                              placeholder="Spune-ne ceva despre tine și pasiunea ta pentru film... (max 500 caractere)"
+                                                              maxlength="500"></textarea>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Avatar (file upload) -->
+                                            <tr>
+                                                <td class="form-label">Foto profil</td>
+                                                <td colspan="3" class="form-field">
+                                                    <!-- input type="file" – selector de fișier -->
+                                                    <input type="file" name="avatar" accept="image/jpeg,image/png,image/webp">
+                                                    <br>
+                                                    <small style="color:#484f58; font-size:0.78rem;">JPG, PNG sau WEBP, max. 5MB</small>
+                                                </td>
+                                            </tr>
+
+                                            <!-- ══════════════════════════
+                                                 SECȚIUNEA 4: Termeni
+                                                 ══════════════════════════ -->
+                                            <tr>
+                                                <td colspan="4" class="form-section-heading">
+                                                    <b>4. Termeni și condiții</b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="4" class="form-field" style="padding-left:0.75rem;">
+                                                    <label class="check-label">
+                                                        <input type="checkbox" name="termeni" value="da" required>
+                                                        Sunt de acord cu <a href="terms.html" style="color:#58a6ff;">Termenii și condițiile</a> *
+                                                    </label>
+                                                    <br>
+                                                    <label class="check-label">
+                                                        <input type="checkbox" name="newsletter" value="da">
+                                                        Doresc să primesc newsletter-ul BlimBlau cu recomandări săptămânale
+                                                    </label>
+                                                    <br>
+                                                    <label class="check-label">
+                                                        <input type="checkbox" name="gdpr" value="da" required>
+                                                        Am citit și accept <a href="privacy.html" style="color:#58a6ff;">Politica de confidențialitate</a> (GDPR) *
+                                                    </label>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Butoane submit / reset -->
+                                            <tr>
+                                                <td colspan="4" class="form-actions">
+                                                    <!-- input type="submit" – trimite formularul -->
+                                                    <input type="submit" value="Creează contul">
+                                                    <!-- input type="reset" – resetează toate câmpurile -->
+                                                    <input type="reset" value="Curăță formularul">
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             Secțiunea: Ai deja un cont?
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Ai deja un cont?</h2>
+                                    <p class="section-desc">
+                                        Dacă ești deja înregistrat, poți să te autentifici direct.
+                                        <a href="LoggedInPage-html5.html" style="color:#58a6ff;">
+                                            Mergi la Dashboard &rarr;
+                                        </a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- FOOTER -->
+<table id="site-footer">
+    <tr>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+            &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+            &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

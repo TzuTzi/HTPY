@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="24" viewBox="0 0 192 24">
+  <!--
+    CSS Sprite Sheet  BlimBlau Nav Icons
+    8 icons × 24px = 192px wide, 24px tall.
+    Each icon occupies a 24×24 area, positioned at x = n * 24.
+
+    Icon index ’ x offset:
+      0 = Home        ’   0px
+      1 = Films       ’  24px
+      2 = Lists       ’  48px
+      3 = Members     ’  72px
+      4 = About       ’  96px
+      5 = Account     ’ 120px
+      6 = Sign Out    ’ 144px
+      7 = Search      ’ 168px
+
+    Usage in CSS (display at 16×16):
+      background-image: url('../images/sprites.svg');
+      background-size: 128px 16px;   (192×16/24 = 128)
+      background-position: -(n*16)px 0;
+  -->
+
+  <!-- Shared stroke style via presentation attributes (NOT CSS class,
+       so child elements can override fill with their own attributes) -->
+  <g fill="none" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 0: Home  (local x 024)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <polyline points="2,12 12,4 22,12"/>
+    <rect x="4" y="11" width="16" height="10" rx="1"/>
+    <!-- Door: fill overrides parent fill="none" via presentation attribute -->
+    <rect x="9" y="15" width="6" height="6" fill="#8b949e" stroke="none"/>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 1: Films  (local x 024, global x 2448)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(24,0)">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <line x1="3"  y1="9"  x2="21" y2="9"/>
+      <line x1="3"  y1="15" x2="21" y2="15"/>
+      <line x1="9"  y1="3"  x2="9"  y2="9"/>
+      <line x1="15" y1="3"  x2="15" y2="9"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 2: Lists  (global x 4872)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(48,0)">
+      <circle cx="5" cy="7"  r="1.5" fill="#8b949e" stroke="none"/>
+      <circle cx="5" cy="12" r="1.5" fill="#8b949e" stroke="none"/>
+      <circle cx="5" cy="17" r="1.5" fill="#8b949e" stroke="none"/>
+      <line x1="9" y1="7"  x2="21" y2="7"/>
+      <line x1="9" y1="12" x2="21" y2="12"/>
+      <line x1="9" y1="17" x2="21" y2="17"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 3: Members / People  (global x 7296)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(72,0)">
+      <circle cx="9"  cy="8" r="3.5"/>
+      <path d="M2 21c0-4.5 3-7 7-7s7 2.5 7 7"/>
+      <circle cx="18" cy="7" r="2.5"/>
+      <path d="M16 20c1-3 3-4.5 6-4.5"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 4: About / Info circle  (global x 96120)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(96,0)">
+      <circle cx="12" cy="12" r="9.5"/>
+      <!-- Filled dot for the 'i' top -->
+      <circle cx="12" cy="7" r="1" fill="#8b949e" stroke="none"/>
+      <!-- Stem of the 'i' (thicker stroke) -->
+      <line x1="12" y1="10" x2="12" y2="17" stroke-width="2"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 5: User / Account  (global x 120144)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(120,0)">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21c0-4.5 3.5-7 8-7s8 2.5 8 7"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 6: Sign Out / Logout  (global x 144168)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(144,0)">
+      <!-- Door frame (left side) -->
+      <path d="M9 3H4a1 1 0 00-1 1v16a1 1 0 001 1h5"/>
+      <!-- Arrow pointing right -->
+      <polyline points="15,7 21,12 15,17"/>
+      <line x1="21" y1="12" x2="7" y2="12"/>
+    </g>
+
+    <!-- PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+         Icon 7: Search / Magnifier  (global x 168192)
+         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP -->
+    <g transform="translate(168,0)">
+      <circle cx="10" cy="10" r="7"/>
+      <line x1="15.5" y1="15.5" x2="21" y2="21"/>
+    </g>
+
+  </g>
+</svg>

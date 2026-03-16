@@ -1,0 +1,1049 @@
+/*
+ * ============================================================================
+ * STIL 2 – Meniu VERTICAL (sidebar stânga)
+ * Folosit pe: sprites.html
+ *
+ * CERINȚE ACOPERITE:
+ *   ✔ Meniu vertical (același meniu ca Stil 1, aranjat vertical)
+ *   ✔ CSS Sprites pentru iconițe lângă fiecare intrare din meniu
+ *   ✔ Variabile CSS (Custom Properties)
+ *   ✔ Flexbox (sidebar + coloana principală)
+ *   ✔ Selectori: tip, clasă, id, descendent, atribut, :nth-child, :hover, :focus
+ *   ✔ Pseudo-elemente ::before (iconițele sprite) și ::after (sub titluri)
+ *   ✔ Stilizare formular
+ *   ✔ FĂRĂ animații (cerința: celelalte stiluri nu vor implementa animații)
+ *
+ * SPRITE SHEET: ../images/sprites.svg (192×24px, 8 iconițe × 24px)
+ *   La afișare 16×16: background-size: 128px 16px
+ *   Offset pentru iconița n: background-position: -(n×16)px 0
+ * ============================================================================
+ */
+
+
+/* ============================================================================
+   VARIABILE CSS (:root)
+   Aceleași culori ca Stil 1 pentru consistență vizuală cross-style.
+   ============================================================================ */
+:root {
+    --color-bg:              #0d1117;
+    --color-bg-card:         #161b22;
+    --color-surface:         #1c2228;
+    --color-surface-elevated:#232b33;
+    --color-border:          #30363d;
+    --color-border-subtle:   #21262d;
+    --color-text:            #e6edf3;
+    --color-text-muted:      #8b949e;
+    --color-text-dim:        #484f58;
+    --color-blue:            #58a6ff;
+    --color-green:           #3fb950;
+    --color-orange:          #d29922;
+    --color-gray-badge:      #6e7681;
+    --color-btn:             #21262d;
+    --color-btn-hover:       #30363d;
+    --sidebar-width:         240px;   /* lățimea sidebar-ului vertical */
+    --spacing-xs:  0.25rem;
+    --spacing-sm:  0.5rem;
+    --spacing-md:  1rem;
+    --spacing-lg:  1.5rem;
+    --spacing-xl:  2.5rem;
+    --radius:    8px;
+    --radius-sm: 4px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.55);
+    --transition: 0.17s ease;
+    --font: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+
+/* ============================================================================
+   RESET DE BAZĂ – selector universal
+   ============================================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Selector de tip: body
+   padding-left = sidebar-width face loc pentru sidebar-ul fix din stânga */
+body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    min-height: 100vh;
+    padding-left: var(--sidebar-width); /* conținut nu se ascunde sub sidebar */
+}
+
+
+/* ============================================================================
+   SIDEBAR VERTICAL  –  #site-header
+   ============================================================================
+   Selector de id. position: fixed scoate header-ul din fluxul normal
+   și îl lipește de marginea stângă a ecranului indiferent de scroll.
+   height: 100vh = înălțimea întregului ecran.
+   overflow-y: auto permite scroll în sidebar dacă linkurile depășesc înălțimea.
+   ============================================================================ */
+#site-header {
+    position: fixed;     /* rămâne pe loc la scroll */
+    left: 0;
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-border); /* bordura dreaptă ca separator */
+    overflow-y: auto;    /* scroll vertical dacă e nevoie */
+    z-index: 50;
+}
+
+/* Tabelele din interiorul header-ului – ocupă toată lățimea sidebar-ului */
+#site-header table {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+}
+
+/* Rândul de navigare – Flexbox cu direcție VERTICALĂ (coloană)
+   flex-direction: column = elementele se stivuiesc de sus în jos
+   min-height: 100vh asigură că sidebar-ul umple ecranul */
+#site-header .nav-row {
+    display: flex;
+    flex-direction: column;  /* ← DIFERENȚA față de Stil 1 (care e row implicit) */
+    align-items: stretch;    /* elementele se întind pe toată lățimea */
+    min-height: 100vh;
+    padding: 0;
+    gap: 0;
+}
+
+/* Celulele din nav-row devin blocuri care ocupă toată lățimea.
+   !important suprascrie display:inline-flex de pe Stil 1 (dacă e moștenit). */
+#site-header .nav-row td {
+    display: block !important;
+    width: 100%;
+    border: none;
+    padding: 0;
+}
+
+/* Celulele spacer (pare) devin invizibile în sidebar – nu mai e nevoie de spațiatori.
+   Selector :nth-child() vizează pozițiile 2,4,6,8,10,12 (celulele goale). */
+#site-header .nav-row td:nth-child(2),
+#site-header .nav-row td:nth-child(4),
+#site-header .nav-row td:nth-child(6),
+#site-header .nav-row td:nth-child(8),
+#site-header .nav-row td:nth-child(10),
+#site-header .nav-row td:nth-child(12) {
+    display: none !important;   /* ascunde spacerele – în sidebar nu sunt necesare */
+}
+
+
+/* ============================================================================
+   LOGO-UL DIN SIDEBAR
+   ============================================================================ */
+/* Selector de clasă: .nav-logo-td */
+.nav-logo-td {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: var(--spacing-sm);
+}
+
+.nav-logo-td b {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    display: block;
+}
+
+/* Subtitlu sub logo (via pseudo-element ::after) */
+.nav-logo-td b::after {
+    content: "Your film diary";
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--color-text-dim);
+    margin-top: 2px;
+    letter-spacing: 0.01em;
+}
+
+
+/* ============================================================================
+   LINKURILE DIN MENIU – selector descendent
+   ============================================================================
+   Linkurile sunt blocuri care ocupă toată lățimea sidebar-ului.
+   display: flex cu align-items: center aliniază iconița sprite și textul.
+   ============================================================================ */
+#site-header .nav-row a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.55rem var(--spacing-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0;    /* fără rotunjire în sidebar – ocupă toată lățimea */
+    transition: color var(--transition), background-color var(--transition);
+    border-left: 3px solid transparent; /* bordura stângă invizibilă, animată la :hover */
+}
+
+/* Pseudo-clasă :hover */
+#site-header .nav-row a:hover {
+    color: var(--color-text);
+    background-color: rgba(255,255,255,0.05);
+    border-left-color: var(--color-blue); /* bordura stângă apare la hover */
+}
+
+/* Pseudo-clasă :focus (accesibilitate tastatură) */
+#site-header .nav-row a:focus {
+    outline: none;
+    background-color: rgba(255,255,255,0.05);
+    border-left-color: var(--color-blue);
+}
+
+
+/* ============================================================================
+   CSS SPRITES – ICONIȚE LÂNGĂ LINKURILE DIN MENIU
+   ============================================================================
+   TEHNICA SPRITE: Un singur fișier imagine (sprites.svg) conține TOATE iconițele
+   aranjate orizontal. Cu background-position selectăm iconița dorită.
+
+   Sprite sheet: 192px larg × 24px înalt (8 iconițe × 24px fiecare)
+   Afișăm la 16×16px → background-size: 128px 16px (factor scale: 16/24)
+   Offset iconița n: -(n × 16)px
+
+   Pseudo-element ::before inserează o casetă goală înaintea textului linkului.
+   CSS o umple cu imaginea sprite + background-position corect.
+   ============================================================================ */
+
+/* Regula de bază – se aplică TUTUROR linkurilor din nav (nu dropdown).
+   Selector descendent: #site-header .nav-row td:not(.nav-dropdown-wrap) a::before */
+#site-header .nav-row td:not(.nav-dropdown-wrap) a::before {
+    content: "";                              /* obligatoriu pentru pseudo-elemente */
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/sprites.svg');
+    background-size: 128px 16px;             /* scalează sprite-ul la 16px înălțime */
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity var(--transition);
+}
+
+/* La hover pe link → iconița devine mai luminoasă */
+#site-header .nav-row td:not(.nav-dropdown-wrap) a:hover::before,
+#site-header .nav-row td:not(.nav-dropdown-wrap) a:focus::before {
+    opacity: 1;
+}
+
+/*
+ * SELECTOR DE ATRIBUT [href="..."] – selectează linkul după valoarea href-ului.
+ * Aceasta este o tehnică CSS avansată: nu avem nevoie de clase extra pe fiecare link.
+ * background-position: -(n×16)px 0  → selectează iconița n din sprite sheet.
+ */
+
+/* Films – iconița 1 → offset: -16px */
+#site-header .nav-row a[href="films.html"]::before {
+    background-position: -16px 0;
+}
+
+/* Lists – iconița 2 → offset: -32px */
+#site-header .nav-row a[href="lists.html"]::before {
+    background-position: -32px 0;
+}
+
+/* Members – iconița 3 → offset: -48px */
+#site-header .nav-row a[href="members.html"]::before {
+    background-position: -48px 0;
+}
+
+/* About – iconița 4 → offset: -64px */
+#site-header .nav-row a[href="about.html"]::before {
+    background-position: -64px 0;
+}
+
+/* Sprites pentru linkurile din DROPDOWN (folosim href ca selector de atribut) */
+
+/* Home – iconița 0 → offset: 0px */
+#site-header .nav-dropdown-panel a[href="index-html5.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+/* Profile/Account – iconița 5 → offset: -70px (la scale 14px) */
+#site-header .nav-dropdown-panel a[href="profile-html5.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: -70px 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+/* Sign Out – iconița 6 → offset: -84px (la scale 14px: 6×14=84) */
+#site-header .nav-dropdown-panel a[href="logout.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: -84px 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+/* Films din dropdown – iconița 1 */
+#site-header .nav-dropdown-panel a[href="films.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: -14px 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+/* Lists din dropdown – iconița 2 */
+#site-header .nav-dropdown-panel a[href="lists.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: -28px 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+/* Members (Network) din dropdown – iconița 3 */
+#site-header .nav-dropdown-panel a[href="members.html"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/sprites.svg');
+    background-size: 112px 14px;
+    background-repeat: no-repeat;
+    background-position: -42px 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+
+/* ============================================================================
+   FORMULARUL DE CĂUTARE ÎN SIDEBAR
+   ============================================================================ */
+.nav-search-form {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 1px solid var(--color-border-subtle);
+    margin-top: auto; /* împinge formularul în josul sidebar-ului cu flexbox */
+}
+
+/* Selector de atribut: input[type="text"] */
+.nav-search-form input[type="text"] {
+    flex: 1;             /* ocupă spațiul disponibil */
+    height: 32px;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-border);
+    border-right: none;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    font-size: 0.82rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--transition);
+}
+
+/* Pseudo-element ::placeholder */
+.nav-search-form input[type="text"]::placeholder {
+    color: var(--color-text-dim);
+    font-size: 0.78rem;
+}
+
+/* Pseudo-clasă :focus */
+.nav-search-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-blue);
+}
+
+.nav-search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    background: var(--color-btn);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background var(--transition);
+}
+
+.nav-search-btn:hover {
+    background: var(--color-btn-hover);
+}
+
+
+/* ============================================================================
+   DROPDOWN "MY ACCOUNT"
+   ============================================================================
+   În sidebar, dropdown-ul se deschide SPRE DREAPTA (nu în jos ca la Stil 1).
+   left: 100% îl poziționează imediat la dreapta sidebar-ului.
+   ============================================================================ */
+.nav-dropdown-wrap {
+    position: relative;
+    padding: 0 !important;
+    border-top: 1px solid var(--color-border-subtle);
+    margin-top: auto; /* împinge la baza sidebar-ului */
+}
+
+.nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: var(--spacing-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color var(--transition), background var(--transition);
+    border-left: 3px solid transparent;
+}
+
+/* Pseudo-element ::before – avatar circular */
+.nav-dropdown-trigger::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-border);
+    border: 1px solid var(--color-btn-hover);
+    flex-shrink: 0;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-dropdown-wrap:hover .nav-dropdown-trigger {
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+    border-left-color: var(--color-blue);
+}
+
+.nav-dropdown-chevron {
+    font-size: 0.6rem;
+    opacity: 0.6;
+    margin-left: auto; /* împinge săgeata la dreapta */
+}
+
+/* Panoul se deschide SPRE DREAPTA sidebar-ului.
+   left: 100% = imediat la dreapta wrapper-ului (care e la x=240px).
+   top: 0 = aliniat cu top-ul trigger-ului.
+   min-width: 200px, max-height cu scroll dacă e prea lung. */
+.nav-dropdown-panel {
+    position: absolute;
+    top: 0;
+    left: 100%;       /* SPRE DREAPTA, nu în jos! */
+    right: auto;
+    min-width: 200px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 6px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-8px); /* slide din stânga */
+    transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+    z-index: 200;
+}
+
+/* Pseudo-clasă :hover și :focus-within */
+.nav-dropdown-wrap:hover .nav-dropdown-panel,
+.nav-dropdown-panel:focus-within {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.nav-dropdown-section {
+    padding: 4px 0;
+}
+
+/* Linkuri în dropdown – selector descendent cu specificitate mare */
+#site-header .nav-dropdown-panel a {
+    display: flex;
+    align-items: center;
+    padding: 8px 1rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    background: transparent;
+    transition: background var(--transition), color var(--transition);
+}
+
+#site-header .nav-dropdown-panel a:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+}
+
+#site-header .nav-dropdown-panel a:focus {
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+}
+
+.nav-dropdown-divider {
+    margin: 5px 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ============================================================================
+   CONȚINUT PRINCIPAL  –  #main-content
+   ============================================================================
+   Cu sidebar-ul fix de 240px, conținutul nu mai trebuie centrat cu margin:auto.
+   padding-left mare deja aplicat pe body (padding-left: var(--sidebar-width)).
+   ============================================================================ */
+#main-content {
+    width: 100%;
+    max-width: calc(1280px + var(--sidebar-width));
+    border: 0;
+    border-collapse: collapse;
+}
+
+#main-content > tr > td {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border: none;
+}
+
+.content-stack {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-stack > tr > td {
+    border: none;
+    padding: 0;
+}
+
+
+/* ============================================================================
+   PANOURI DE SECȚIUNE  –  .section-panel
+   Aceleași stiluri ca Stil 1, fără animații.
+   ============================================================================ */
+.section-panel {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition);
+}
+
+.section-panel:hover {
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+
+.section-panel > tr > td,
+.section-panel > tbody > tr > td {
+    padding: var(--spacing-lg);
+    border: none;
+}
+
+.section-inner {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.section-inner > tr > td,
+.section-inner > tbody > tr > td {
+    border: none;
+    padding: 0;
+}
+
+.section-head-row {
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.section-head-row td {
+    border: none;
+    padding: 0 0 var(--spacing-sm) 0;
+    vertical-align: middle;
+}
+
+.section-head-row td:last-child {
+    text-align: right;
+    padding-left: var(--spacing-md);
+    white-space: nowrap;
+}
+
+/* Selector de tip h2 */
+.section-head-row h2 {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Pseudo-element ::after sub titlu */
+.section-head-row h2::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--color-border);
+    margin-top: 4px;
+    border-radius: 1px;
+}
+
+.view-all-link {
+    color: var(--color-text-dim) !important;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.view-all-link:hover {
+    color: var(--color-text-muted) !important;
+}
+
+
+/* ============================================================================
+   GRILĂ FILME  –  .movie-grid / .movie-item
+   ============================================================================ */
+.movie-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+    margin-top: var(--spacing-sm);
+}
+
+.movie-item {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.75rem 0.55rem 1rem !important;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    cursor: default;
+    overflow: hidden;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.movie-item:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+}
+
+/* Pseudo-element ::before – bara stângă albastră la hover */
+.movie-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--color-border);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    transition: background var(--transition);
+}
+
+.movie-item:hover::before {
+    background: var(--color-blue);
+}
+
+.movie-icon { margin-right: 6px; font-size: 0.82rem; opacity: 0.45; }
+.movie-title { font-weight: 500; color: var(--color-text); }
+.movie-meta { display: block; color: var(--color-text-dim); font-size: 0.76rem; margin-top: 2px; }
+
+.movie-priority {
+    float: right;
+    font-size: 0.67rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+}
+
+.priority-high { background: rgba(63,185,80,0.12);  color: var(--color-green);      border: 1px solid rgba(63,185,80,0.28); }
+.priority-med  { background: rgba(210,153,34,0.12); color: var(--color-orange);     border: 1px solid rgba(210,153,34,0.28); }
+.priority-low  { background: rgba(110,118,129,0.12);color: var(--color-gray-badge); border: 1px solid rgba(110,118,129,0.28); }
+
+.movie-item-empty { background: transparent !important; border: none !important; }
+.movie-item-empty::before { display: none; }
+
+
+/* ============================================================================
+   CARDURI RECOMANDĂRI  –  .rec-card
+   ============================================================================ */
+.rec-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin-top: var(--spacing-sm);
+}
+
+.rec-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius);
+    padding: 0 !important;
+    vertical-align: top;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.rec-card:hover {
+    border-color: var(--color-border);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.rec-poster {
+    height: 105px;
+    background: linear-gradient(140deg, #1c2228 0%, #2d3748 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--color-border-subtle);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pseudo-element ::after pe poster – gradient de vigneta */
+.rec-poster::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.35));
+}
+
+.rec-title { display: block; padding: 0.55rem 0.7rem 0.2rem; font-size: 0.78rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+.rec-genre { display: block; padding: 0 0.7rem 0.7rem; font-size: 0.68rem; color: var(--color-text-dim); text-transform: uppercase; letter-spacing: 0.07em; }
+
+
+/* ============================================================================
+   SPRITE-URI ÎN CONȚINUT  –  .sprite și variantele
+   ============================================================================
+   Clase CSS pentru afișarea sprite-urilor în conținutul paginilor.
+   Folosite în sprites.html pentru a demonstra tehnica vizual.
+   ============================================================================ */
+.sprite {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/sprites.svg');
+    background-size: 192px 24px; /* dimensiune originală – 1:1 */
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Variante mai mari (32×32) pentru secțiunea demo */
+.sprite-lg {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/sprites.svg');
+    background-size: 256px 32px; /* scale: 32/24 = 1.33 */
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Selector de clasă pentru fiecare iconiță (la scale 1:1, offset = n×24px) */
+.sprite-home    { background-position:    0px 0; }
+.sprite-films   { background-position:  -24px 0; }
+.sprite-lists   { background-position:  -48px 0; }
+.sprite-members { background-position:  -72px 0; }
+.sprite-about   { background-position:  -96px 0; }
+.sprite-account { background-position: -120px 0; }
+.sprite-signout { background-position: -144px 0; }
+.sprite-search  { background-position: -168px 0; }
+
+/* Variante mari (la scale 32/24=1.33, offset = n×32px) */
+.sprite-lg.sprite-home    { background-position:    0px 0; }
+.sprite-lg.sprite-films   { background-position:  -32px 0; }
+.sprite-lg.sprite-lists   { background-position:  -64px 0; }
+.sprite-lg.sprite-members { background-position:  -96px 0; }
+.sprite-lg.sprite-about   { background-position: -128px 0; }
+.sprite-lg.sprite-account { background-position: -160px 0; }
+.sprite-lg.sprite-signout { background-position: -192px 0; }
+.sprite-lg.sprite-search  { background-position: -224px 0; }
+
+/* Galeria de icoane din sprites.html */
+.sprite-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.sprite-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    min-width: 80px;
+    transition: border-color var(--transition);
+}
+
+/* Pseudo-clasă :hover pe elementul din galerie */
+.sprite-item:hover {
+    border-color: var(--color-border);
+}
+
+.sprite-item span:last-child {
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+    text-align: center;
+}
+
+/* Chenarul vizual al sprite sheet-ului din pagina demo */
+.sprite-sheet-box {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    display: inline-block;
+}
+
+.sprite-sheet-box img {
+    display: block;
+    image-rendering: pixelated;
+}
+
+/* Explicația offset-urilor */
+.offset-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: var(--spacing-md);
+}
+
+.offset-table th,
+.offset-table td {
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 0.75rem;
+    text-align: left;
+    color: var(--color-text);
+}
+
+.offset-table th {
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.offset-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+}
+
+.code-inline {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.82rem;
+    background: var(--color-surface);
+    color: var(--color-blue);
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--color-border-subtle);
+}
+
+
+/* ============================================================================
+   FORMULAR  –  stilizare câmpuri
+   ============================================================================ */
+.form-section-title {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.form-section-title::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--color-border);
+    margin-top: 4px;
+    border-radius: 1px;
+}
+
+.section-desc {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0.75rem 0 var(--spacing-lg);
+}
+
+.form-table { width: 100%; border-collapse: collapse; }
+.form-table td { border: none; padding: 0.4rem 0.75rem; vertical-align: middle; color: var(--color-text); }
+
+.form-section-heading { padding-top: var(--spacing-lg) !important; padding-left: 0 !important; }
+.form-section-heading b {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-text-dim);
+    border-left: 2px solid var(--color-border);
+    padding-left: 8px;
+}
+
+.form-label { color: var(--color-text-muted); font-size: 0.875rem; width: 160px; white-space: nowrap; padding-right: var(--spacing-md) !important; }
+
+/* Selectori de atribut pe câmpuri */
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field select {
+    height: 34px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    width: 100%;
+    max-width: 260px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Pseudo-clasă :focus */
+.form-field input[type="text"]:focus,
+.form-field input[type="email"]:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 2px rgba(88,166,255,0.15);
+}
+
+.input-readonly { background: var(--color-surface) !important; color: var(--color-text-dim) !important; cursor: not-allowed; }
+
+.form-field textarea {
+    width: 100%; max-width: 440px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 0.875rem;
+    background: var(--color-bg); color: var(--color-text);
+    resize: vertical; min-height: 80px;
+}
+
+.check-label, .radio-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.875rem; color: var(--color-text-muted);
+    cursor: pointer; margin-right: var(--spacing-md); margin-bottom: var(--spacing-xs);
+    transition: color var(--transition);
+}
+.check-label:hover, .radio-label:hover { color: var(--color-text); }
+
+.form-actions { padding-top: var(--spacing-lg) !important; border-top: 1px solid var(--color-border-subtle); }
+.form-actions input[type="submit"] {
+    height: 34px; padding: 0 var(--spacing-lg);
+    background: #238636; color: #fff;
+    border: 1px solid rgba(240,246,252,0.1);
+    border-radius: var(--radius-sm); font-family: inherit; font-size: 0.875rem; font-weight: 600;
+    cursor: pointer; margin-right: var(--spacing-sm); transition: background var(--transition);
+}
+.form-actions input[type="submit"]:hover { background: #2ea043; }
+.form-actions input[type="submit"]:focus { outline: 2px solid var(--color-green); outline-offset: 2px; }
+
+.form-actions input[type="reset"] {
+    height: 34px; padding: 0 var(--spacing-lg);
+    background: var(--color-btn); color: var(--color-text-muted);
+    border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 0.875rem; cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+.form-actions input[type="reset"]:hover { background: var(--color-btn-hover); color: var(--color-text); }
+
+
+/* ============================================================================
+   FOOTER  –  #site-footer  (selector de id)
+   ============================================================================ */
+#site-footer {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-xl);
+}
+
+#site-footer table {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+}
+
+#site-footer td {
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    border: none;
+    font-size: 0.78rem;
+    color: var(--color-text-dim);
+}
+
+/* Selector de tip a în footer */
+#site-footer a { color: var(--color-text-dim); text-decoration: none; transition: color var(--transition); }
+#site-footer a:hover { color: var(--color-text-muted); }
+#site-footer a:focus { outline: 2px solid rgba(255,255,255,0.2); outline-offset: 2px; }

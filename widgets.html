@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BlimBlau – Dashboard</title>
+    <!--
+        Pagina de widgeturi / componente stilizate similar (dashboard).
+        Stilul folosit: style-responsive.css (responsive + animații CSS)
+        Conține:
+          - Carduri statistici (stat-card)
+          - Feed de activitate recentă
+          - Tabel cu MULTE COLOANE (responsive, cu overflow-x: auto)
+          - Carduri de recomandări (rec-card)
+    -->
+    <link rel="stylesheet" href="css/style-responsive.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER – meniu orizontal (cu animație slideDown din style-responsive.css)
+     ═══════════════════════════════════════════════ -->
+<table id="site-header">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                            <a href="films.html" role="menuitem">Films</a>
+                                            <a href="watchlist.html" role="menuitem">Watchlist</a>
+                                            <a href="lists.html" role="menuitem">Lists</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════
+     CONȚINUT PRINCIPAL – Dashboard
+     ═══════════════════════════════════════════════ -->
+<table id="main-content">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+
+                        <!-- ─────────────────────────────────────────────
+                             WIDGET 1: Carduri statistici (4 stat-cards)
+                             Fiecare card afișează o metrică cheie.
+                             CSS: .stat-card cu animație scaleIn staggered
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Overview</h2></td>
+                                            <td class="view-all-cell"><a href="profile-html5.html" class="view-all-link">My Profile &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="stats-grid">
+                                                    <tr>
+                                                        <td class="stat-card">
+                                                            <span class="stat-icon">&#127909;</span>
+                                                            <span class="stat-number">1,247</span>
+                                                            <span class="stat-label">Films Watched</span>
+                                                            <span class="stat-trend up">&#8679; +23 this month</span>
+                                                        </td>
+                                                        <td class="stat-card">
+                                                            <span class="stat-icon">&#11088;</span>
+                                                            <span class="stat-number">342</span>
+                                                            <span class="stat-label">Reviews Written</span>
+                                                            <span class="stat-trend up">&#8679; +8 this month</span>
+                                                        </td>
+                                                        <td class="stat-card">
+                                                            <span class="stat-icon">&#128101;</span>
+                                                            <span class="stat-number">89</span>
+                                                            <span class="stat-label">Following</span>
+                                                            <span class="stat-trend flat">&#8212; unchanged</span>
+                                                        </td>
+                                                        <td class="stat-card">
+                                                            <span class="stat-icon">&#128276;</span>
+                                                            <span class="stat-number">234</span>
+                                                            <span class="stat-label">Followers</span>
+                                                            <span class="stat-trend up">&#8679; +12 this week</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             WIDGET 2: Activitate recentă (activity feed)
+                             CSS: .activity-list, .activity-badge
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Recent Activity</h2></td>
+                                            <td class="view-all-cell"><a href="diary.html" class="view-all-link">View diary &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="activity-list">
+                                                    <tr>
+                                                        <td class="activity-film">Inception</td>
+                                                        <td><span class="activity-badge badge-watched">Watched</span></td>
+                                                        <td class="activity-time">2 hours ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="activity-film">The Dark Knight</td>
+                                                        <td><span class="activity-badge badge-reviewed">Reviewed</span></td>
+                                                        <td class="activity-time">Yesterday</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="activity-film">Parasite</td>
+                                                        <td><span class="activity-badge badge-liked">Liked</span></td>
+                                                        <td class="activity-time">2 days ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="activity-film">My Sci-Fi List</td>
+                                                        <td><span class="activity-badge badge-listed">List updated</span></td>
+                                                        <td class="activity-time">3 days ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="activity-film">Interstellar</td>
+                                                        <td><span class="activity-badge badge-watched">Watched</span></td>
+                                                        <td class="activity-time">4 days ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="activity-film">Blade Runner 2049</td>
+                                                        <td><span class="activity-badge badge-reviewed">Reviewed</span></td>
+                                                        <td class="activity-time">1 week ago</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             WIDGET 3: TABEL CU MULTE COLOANE – RESPONSIVE
+                             CSS: .table-scroll-wrap + .data-table
+                             Pe ecrane mici apare scroll orizontal.
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Film Statistics (Responsive Table)</h2></td>
+                                            <td class="view-all-cell"><a href="films.html" class="view-all-link">All films &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <p class="section-desc">
+                                                    Tabelul de mai jos are 10 coloane. Pe ecrane mici (&lt;768px)
+                                                    apare un scroll orizontal, gestionat de <code>.table-scroll-wrap</code>.
+                                                </p>
+                                                <!-- Wrapper-ul responsive: overflow-x:auto -->
+                                                <div class="table-scroll-wrap">
+                                                    <table class="data-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Film</th>
+                                                                <th>An</th>
+                                                                <th>Gen</th>
+                                                                <th>Regizor</th>
+                                                                <th>Rating BlimBlau</th>
+                                                                <th>Rating IMDb</th>
+                                                                <th>Vizionări</th>
+                                                                <th>Recenzii</th>
+                                                                <th>Durata</th>
+                                                                <th>Limbă</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="col-title">Inception</td>
+                                                                <td class="col-muted">2010</td>
+                                                                <td>Sci-Fi</td>
+                                                                <td>Christopher Nolan</td>
+                                                                <td class="col-rating">&#9733; 4.8</td>
+                                                                <td>8.8 / 10</td>
+                                                                <td class="col-good">14.2M</td>
+                                                                <td>87K</td>
+                                                                <td class="col-muted">148 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">The Dark Knight</td>
+                                                                <td class="col-muted">2008</td>
+                                                                <td>Action</td>
+                                                                <td>Christopher Nolan</td>
+                                                                <td class="col-rating">&#9733; 4.9</td>
+                                                                <td>9.0 / 10</td>
+                                                                <td class="col-good">18.7M</td>
+                                                                <td>112K</td>
+                                                                <td class="col-muted">152 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">Parasite</td>
+                                                                <td class="col-muted">2019</td>
+                                                                <td>Thriller</td>
+                                                                <td>Bong Joon-ho</td>
+                                                                <td class="col-rating">&#9733; 4.7</td>
+                                                                <td>8.5 / 10</td>
+                                                                <td class="col-good">9.3M</td>
+                                                                <td>64K</td>
+                                                                <td class="col-muted">132 min</td>
+                                                                <td class="col-muted">KO</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">Interstellar</td>
+                                                                <td class="col-muted">2014</td>
+                                                                <td>Sci-Fi</td>
+                                                                <td>Christopher Nolan</td>
+                                                                <td class="col-rating">&#9733; 4.6</td>
+                                                                <td>8.6 / 10</td>
+                                                                <td class="col-good">13.1M</td>
+                                                                <td>78K</td>
+                                                                <td class="col-muted">169 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">Blade Runner 2049</td>
+                                                                <td class="col-muted">2017</td>
+                                                                <td>Sci-Fi</td>
+                                                                <td>Denis Villeneuve</td>
+                                                                <td class="col-rating">&#9733; 4.5</td>
+                                                                <td>8.0 / 10</td>
+                                                                <td class="col-good">7.8M</td>
+                                                                <td>52K</td>
+                                                                <td class="col-muted">164 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">The Grand Budapest Hotel</td>
+                                                                <td class="col-muted">2014</td>
+                                                                <td>Comedy</td>
+                                                                <td>Wes Anderson</td>
+                                                                <td class="col-rating">&#9733; 4.4</td>
+                                                                <td>8.1 / 10</td>
+                                                                <td class="col-good">6.2M</td>
+                                                                <td>41K</td>
+                                                                <td class="col-muted">99 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-title">Pulp Fiction</td>
+                                                                <td class="col-muted">1994</td>
+                                                                <td>Crime</td>
+                                                                <td>Quentin Tarantino</td>
+                                                                <td class="col-rating">&#9733; 4.9</td>
+                                                                <td>8.9 / 10</td>
+                                                                <td class="col-good">16.4M</td>
+                                                                <td>95K</td>
+                                                                <td class="col-muted">154 min</td>
+                                                                <td class="col-muted">EN</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             WIDGET 4: Carduri recomandări
+                             CSS: .rec-grid / .rec-card
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Trending This Week</h2></td>
+                                            <td class="view-all-cell"><a href="recommendations-html5.html" class="view-all-link">View all &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="rec-grid">
+                                                    <tr>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">OP</div>
+                                                            <b class="rec-title">Oppenheimer</b>
+                                                            <small class="rec-genre">Drama / History</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">D2</div>
+                                                            <b class="rec-title">Dune: Part Two</b>
+                                                            <small class="rec-genre">Sci-Fi</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">PT</div>
+                                                            <b class="rec-title">Poor Things</b>
+                                                            <small class="rec-genre">Comedy / Drama</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">BA</div>
+                                                            <b class="rec-title">The Batman</b>
+                                                            <small class="rec-genre">Action</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">EE</div>
+                                                            <b class="rec-title">Everything Everywhere</b>
+                                                            <small class="rec-genre">Action / Comedy</small>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- FOOTER -->
+<table id="site-footer">
+    <tr>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+            &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+            &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

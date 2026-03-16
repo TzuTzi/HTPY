@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BlimBlau – CSS Sprites</title>
+    <!--
+        Această pagină demonstrează tehnica CSS SPRITES.
+        Stilul folosit: style-vertical.css (meniu vertical + sprite icons în nav)
+    -->
+    <link rel="stylesheet" href="css/style-vertical.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER – meniu vertical (sidebar stânga)
+     Aceleași id/clase ca LoggedInPage – style-vertical.css îl transformă
+     în sidebar fix de 240px prin position:fixed + height:100vh.
+     ═══════════════════════════════════════════════ -->
+<table id="site-header">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9654;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                            <a href="films.html" role="menuitem">Films</a>
+                                            <a href="lists.html" role="menuitem">Lists</a>
+                                            <a href="members.html" role="menuitem">Network</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════
+     CONȚINUT PRINCIPAL
+     ═══════════════════════════════════════════════ -->
+<table id="main-content">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 1: Ce sunt CSS Sprites?
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Ce sunt CSS Sprites?</h2>
+                                    <p class="section-desc">
+                                        O <strong>CSS Sprite</strong> este o imagine unică care conține
+                                        mai multe iconițe sau grafice mici aranjate side-by-side.
+                                        Cu CSS, selectăm și afișăm DOAR porțiunea dorită din imagine
+                                        folosind proprietățile <code>background-position</code> și
+                                        <code>background-size</code>.
+                                    </p>
+                                    <p class="section-desc">
+                                        <strong>Avantaje:</strong> Un singur request HTTP pentru toate
+                                        iconițele → pagina se încarcă mai rapid. Browser-ul cach-ează
+                                        o singură imagine în loc de zeci.
+                                    </p>
+
+                                    <!-- Sprite sheet-ul raw -->
+                                    <h2 class="form-section-title">Fișierul Sprite (images/sprites.svg)</h2>
+                                    <p class="section-desc">
+                                        Aceasta este imaginea COMPLETĂ cu toate iconițele.
+                                        Fiecare iconiță ocupă o zonă de 24×24px, la pozițiile
+                                        x = 0, 24, 48, 72, 96, 120, 144, 168.
+                                    </p>
+                                    <div class="sprite-sheet-box">
+                                        <img src="images/sprites.svg"
+                                             width="192" height="24"
+                                             alt="CSS Sprite Sheet – 8 iconițe × 24px">
+                                    </div>
+                                    <br>
+                                    <!-- Sprite-ul scalat mare pentru vizibilitate -->
+                                    <p class="section-desc">Scalat la 3× pentru vizibilitate:</p>
+                                    <div class="sprite-sheet-box">
+                                        <img src="images/sprites.svg"
+                                             width="576" height="72"
+                                             alt="CSS Sprite Sheet – scalat 3×"
+                                             style="border: 1px dashed #30363d;">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 2: Galerie sprite – iconițe individuale
+                             CSS extrage fiecare iconiță cu background-position
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Galerie Sprite – Iconițe individuale</h2>
+                                    <p class="section-desc">
+                                        Fiecare element de mai jos este un <code>&lt;span&gt;</code> gol,
+                                        stilizat cu <code>background-image</code> și un
+                                        <code>background-position</code> diferit.
+                                    </p>
+                                    <!-- Galeria vizuală cu fiecare iconiță -->
+                                    <div class="sprite-gallery">
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-home"></span>
+                                            <span>Home</span>
+                                            <span class="code-inline">0px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-films"></span>
+                                            <span>Films</span>
+                                            <span class="code-inline">-32px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-lists"></span>
+                                            <span>Lists</span>
+                                            <span class="code-inline">-64px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-members"></span>
+                                            <span>Members</span>
+                                            <span class="code-inline">-96px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-about"></span>
+                                            <span>About</span>
+                                            <span class="code-inline">-128px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-account"></span>
+                                            <span>Account</span>
+                                            <span class="code-inline">-160px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-signout"></span>
+                                            <span>Sign Out</span>
+                                            <span class="code-inline">-192px</span>
+                                        </div>
+                                        <div class="sprite-item">
+                                            <span class="sprite-lg sprite-search"></span>
+                                            <span>Search</span>
+                                            <span class="code-inline">-224px</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 3: Tabel cu offset-urile CSS
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Calculul offset-urilor CSS</h2></td>
+                                            <td class="view-all-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <p class="section-desc">
+                                                    Formula: <code>background-position: -(n × dimensiune_afișare)px 0</code><br>
+                                                    Exemplu la 16×16px: iconița 1 (Films) → <code>-(1 × 16)px = -16px</code>
+                                                </p>
+                                                <!-- Tabelul explicativ -->
+                                                <table class="offset-table">
+                                                    <tr>
+                                                        <th>Index (n)</th>
+                                                        <th>Iconiță</th>
+                                                        <th>X original (24px)</th>
+                                                        <th>Offset la 16px</th>
+                                                        <th>Offset la 32px</th>
+                                                        <th>Previzualizare</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>0</td>
+                                                        <td>Home</td>
+                                                        <td>0px</td>
+                                                        <td class="code-inline">0px</td>
+                                                        <td class="code-inline">0px</td>
+                                                        <td><span class="sprite sprite-home"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Films</td>
+                                                        <td>24px</td>
+                                                        <td class="code-inline">-16px</td>
+                                                        <td class="code-inline">-32px</td>
+                                                        <td><span class="sprite sprite-films"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Lists</td>
+                                                        <td>48px</td>
+                                                        <td class="code-inline">-32px</td>
+                                                        <td class="code-inline">-64px</td>
+                                                        <td><span class="sprite sprite-lists"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Members</td>
+                                                        <td>72px</td>
+                                                        <td class="code-inline">-48px</td>
+                                                        <td class="code-inline">-96px</td>
+                                                        <td><span class="sprite sprite-members"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>About</td>
+                                                        <td>96px</td>
+                                                        <td class="code-inline">-64px</td>
+                                                        <td class="code-inline">-128px</td>
+                                                        <td><span class="sprite sprite-about"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Account</td>
+                                                        <td>120px</td>
+                                                        <td class="code-inline">-80px</td>
+                                                        <td class="code-inline">-160px</td>
+                                                        <td><span class="sprite sprite-account"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6</td>
+                                                        <td>Sign Out</td>
+                                                        <td>144px</td>
+                                                        <td class="code-inline">-96px</td>
+                                                        <td class="code-inline">-192px</td>
+                                                        <td><span class="sprite sprite-signout"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7</td>
+                                                        <td>Search</td>
+                                                        <td>168px</td>
+                                                        <td class="code-inline">-112px</td>
+                                                        <td class="code-inline">-224px</td>
+                                                        <td><span class="sprite sprite-search"></span></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 4: Navigare spre alte pagini
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Alte pagini ale proiectului</h2>
+                                    <p class="section-desc">
+                                        Explorează celelalte stiluri CSS și pagini:
+                                    </p>
+                                    <table class="offset-table">
+                                        <tr>
+                                            <th>Pagina</th>
+                                            <th>Stil CSS</th>
+                                            <th>Caracteristică principală</th>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="LoggedInPage-html5.html">LoggedInPage</a></td>
+                                            <td class="code-inline">style-horizontal.css</td>
+                                            <td>Meniu orizontal, variabile CSS, Flexbox</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="sprites.html">sprites.html</a></td>
+                                            <td class="code-inline">style-vertical.css</td>
+                                            <td>Meniu vertical, CSS Sprites în nav</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="widgets.html">widgets.html</a></td>
+                                            <td class="code-inline">style-responsive.css</td>
+                                            <td>Responsive (2 media queries), animații, tabel responsive</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="form-html5.html">form-html5.html</a></td>
+                                            <td class="code-inline">style-horizontal.css</td>
+                                            <td>Formular complet cu toate tipurile de input</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- FOOTER -->
+<table id="site-footer">
+    <tr>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

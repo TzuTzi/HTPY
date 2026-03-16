@@ -1,0 +1,1112 @@
+/*
+ * ============================================================================
+ * STIL 1 – Meniu orizontal  |  LoggedInPage-html5.html
+ * Tema inspirată din Letterboxd (dark mode)
+ *
+ * TIPURI DE SELECTORI FOLOSIȚI ÎN ACEST FIȘIER:
+ *   - Selector de tip:        body, table, a, input, h2 ...
+ *   - Selector de clasă:      .nav-logo-td, .movie-item, .rec-card ...
+ *   - Selector de id:         #site-header, #main-content, #site-footer
+ *   - Selector descendent:    #site-header .nav-row a  (a în interiorul .nav-row)
+ *   - Selector de atribut:    input[type="text"], input[type="submit"]
+ *   - Selector :nth-child():  td:nth-child(2)  (al doilea td din parinte)
+ *   - Selector :has():        td:has(.nav-search-form)  (td care CONȚINE clasa)
+ *   - Pseudo-clasă:           :hover, :focus, :focus-within
+ *   - Pseudo-element:         ::before, ::after, ::placeholder
+ * ============================================================================
+ */
+
+
+/* ============================================================================
+   VARIABILE CSS  (CSS Custom Properties)
+   ============================================================================
+   :root este pseudo-clasa care vizează elementul rădăcină al documentului
+   (adică <html>). Variabilele definite aici sunt GLOBALE – pot fi folosite
+   oriunde în fișier cu sintaxa: var(--nume-variabila)
+
+   Avantaj: schimbi o culoare sau o dimensiune într-un singur loc
+   și se actualizează automat peste tot unde e folosită.
+   ============================================================================ */
+:root {
+    /* --- Culori de fundal (de la cel mai întunecat la cel mai deschis) --- */
+    --color-bg:              #0d1117;   /* fundalul întregii pagini */
+    --color-bg-card:         #161b22;   /* fundalul cardurilor (panouri de secțiune) */
+    --color-surface:         #1c2228;   /* suprafețe intermediare: header, footer */
+    --color-surface-elevated:#232b33;   /* dropdown-ul de cont (peste header) */
+
+    /* --- Culori de bordură --- */
+    --color-border:          #30363d;   /* borduri vizibile (carduri, inputs) */
+    --color-border-subtle:   #21262d;   /* borduri foarte discrete (separatoare interioare) */
+
+    /* --- Culori de text (de la cel mai vizibil la cel mai estompat) --- */
+    --color-text:            #e6edf3;   /* text principal (titluri, valori) */
+    --color-text-muted:      #8b949e;   /* text secundar (linkuri nav, label-uri) */
+    --color-text-dim:        #484f58;   /* text estompat (footer, meta info) */
+
+    /* --- Culori de accent (folosite punctual pentru evidențiere) --- */
+    --color-blue:            #58a6ff;   /* focus pe input-uri, bara hover de pe movie-item */
+    --color-green:           #3fb950;   /* badge prioritate înaltă + buton submit */
+    --color-orange:          #d29922;   /* badge prioritate medie */
+    --color-gray-badge:      #6e7681;   /* badge prioritate scăzută */
+
+    /* --- Culori pentru butoane generice --- */
+    --color-btn:             #21262d;   /* fundal buton (lupă, reset) */
+    --color-btn-hover:       #30363d;   /* fundal buton la hover */
+
+    /* --- Spațieri (folosite pentru margin și padding consistente) ---
+       rem = relativ la font-size-ul de pe <html> (de obicei 16px)
+       0.25rem = 4px | 0.5rem = 8px | 1rem = 16px | 1.5rem = 24px | 2.5rem = 40px */
+    --spacing-xs:  0.25rem;
+    --spacing-sm:  0.5rem;
+    --spacing-md:  1rem;
+    --spacing-lg:  1.5rem;
+    --spacing-xl:  2.5rem;
+
+    /* --- Raze de colț (border-radius) – rotunjesc colțurile elementelor --- */
+    --radius:    8px;    /* carduri, dropdown */
+    --radius-sm: 4px;    /* butoane, input-uri, badge-uri */
+    --radius-lg: 12px;   /* panouri de secțiune */
+
+    /* --- Umbre (box-shadow) ---
+       sintaxă: offset-x offset-y blur spread culoare
+       rgba(0,0,0,0.4) = negru cu 40% opacitate */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);    /* umbra subtilă a header-ului */
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.55);  /* umbra pronunțată a dropdown-ului */
+
+    /* --- Tranziție implicită ---
+       Folosită pe proprietăți de animație: 0.17s cu accelerare ease */
+    --transition: 0.17s ease;
+
+    /* --- Font stack ---
+       Browserul încearcă fonturile în ordine, folosind primul disponibil.
+       system-ui = fontul implicit al sistemului de operare */
+    --font: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+
+/* ============================================================================
+   RESET DE BAZĂ
+   ============================================================================
+   * (selector universal) vizează TOATE elementele din pagină.
+   ::before și ::after sunt pseudo-elementele generate de CSS.
+
+   box-sizing: border-box înseamnă că padding-ul și border-ul sunt
+   INCLUSE în lățimea/înălțimea unui element, nu adăugate pe lângă.
+   Exemplu: un div cu width:100px și padding:10px are tot 100px lățime.
+   ============================================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Selector de tip: body
+   Setează aspectul global al paginii.
+   min-height: 100vh  asigură că fundalul acoperă tot ecranul chiar dacă
+   pagina are puțin conținut (vh = viewport height, 100vh = înălțimea ecranului) */
+body {
+    margin: 0;                          /* elimină marginea implicită a browser-ului */
+    font-family: var(--font);           /* fontul global din variabila definită mai sus */
+    font-size: 0.9375rem;               /* 15px (0.9375 * 16px baza) */
+    line-height: 1.6;                   /* spațiere între rânduri (1.6 * font-size) */
+    color: var(--color-text);           /* culoarea implicită a textului */
+    background-color: var(--color-bg);  /* fundalul aproape negru */
+    min-height: 100vh;
+}
+
+
+/* ============================================================================
+   HEADER  –  #site-header
+   ============================================================================
+   Selectorul de id #site-header vizează elementul cu id="site-header"
+   din HTML: <table id="site-header">
+
+   position: sticky + top: 0  face ca header-ul să rămână fixat în
+   partea de sus a ferestrei pe măsură ce utilizatorul derulează pagina.
+   z-index: 50 asigură că header-ul apare DEASUPRA celorlalte elemente
+   (dropdown-ul are z-index:200, deci va fi deasupra header-ului).
+   ============================================================================ */
+#site-header {
+    background-color: var(--color-surface); /* gri închis, diferit de fundalul paginii */
+    border-bottom: 1px solid var(--color-border); /* linie fină sub header */
+    box-shadow: var(--shadow-sm);               /* umbra subtilă față de conținut */
+    position: sticky;   /* rămâne vizibil la scroll */
+    top: 0;             /* lipit de marginea de sus a viewport-ului */
+    z-index: 50;        /* deasupra conținutului, sub dropdown (care are 200) */
+    width: 100%;
+}
+
+/* Selector descendent: #site-header table
+   Vizează TOATE elementele <table> din interiorul #site-header.
+   Tabelele HTML din header sunt folosite ca structură de layout.
+   margin: 0 auto centrează tabelul orizontal (stânga și dreapta automate).
+   border-collapse: collapse elimină spațiul dintre celulele tabelului. */
+#site-header table {
+    width: 100%;
+    max-width: 1280px;      /* lățimea maximă a conținutului (nu se lățeste pe ecrane mari) */
+    margin: 0 auto;         /* centrare orizontală */
+    border: 0;
+    border-collapse: collapse;
+}
+
+/* Selector descendent + clasă: #site-header .nav-row
+   Vizează elementul <tr class="nav-row"> din interiorul header-ului.
+
+   FLEXBOX: display: flex transformă elementul într-un container flex.
+   Copiii direcți (celulele <td>) devin "flex items" și se aranjează
+   automat pe o singură linie orizontală.
+   align-items: center le aliniază vertical pe mijloc.
+   height: 58px fixează înălțimea barei de navigare. */
+#site-header .nav-row {
+    display: flex;
+    align-items: center;
+    height: 58px;
+    padding: 0 var(--spacing-lg);
+    gap: 0;
+}
+
+/* Selector descendent: #site-header .nav-row td
+   Vizează toate celulele <td> din rândul .nav-row.
+   display: inline-flex le face să se comporte ca elemente flex inline,
+   păstrând conținutul aliniat vertical. */
+#site-header .nav-row td {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    white-space: nowrap; /* împiedică textul să treacă pe rândul următor */
+}
+
+/* Selector :nth-child() – pseudo-clasă structurală
+   Vizează celulele <td> PARE din .nav-row – acestea sunt celule goale
+   folosite ca separatoare în HTML (structura veche cu tabele).
+   Le comprimăm la dimensiune 0 deoarece spațierea o gestionăm prin
+   padding-ul individual al linkurilor. */
+#site-header .nav-row td:nth-child(2),
+#site-header .nav-row td:nth-child(4),
+#site-header .nav-row td:nth-child(6),
+#site-header .nav-row td:nth-child(8),
+#site-header .nav-row td:nth-child(10),
+#site-header .nav-row td:nth-child(12) {
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Selector de clasă: .nav-logo-td
+   Vizează <td class="nav-logo-td"> – celula cu logoul "BlimBlau".
+   margin-right separă logo-ul de restul linkurilor din meniu. */
+.nav-logo-td {
+    margin-right: var(--spacing-xl);
+}
+
+/* Selector descendent: .nav-logo-td b
+   Vizează elementul <b> din interiorul celulei de logo.
+   text-shadow adaugă o strălucire albicioasă subtilă în jurul textului:
+   sintaxă: offset-x offset-y blur-radius culoare */
+.nav-logo-td b {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;              /* spațiere ușor mărită între litere */
+    text-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+/* Selector descendent: #site-header .nav-row a
+   Vizează TOATE linkurile <a> din interiorul .nav-row (Films, Lists etc.).
+   transition animează proprietățile color și background-color la hover.
+   Sintaxă: transition: proprietate durata functie-timp */
+#site-header .nav-row a {
+    color: var(--color-text-muted);      /* gri deschis – nu prea strident */
+    text-decoration: none;               /* elimină sublinierea implicită */
+    padding: var(--spacing-xs) 0.7rem;   /* spațiu interior (sus/jos și stânga/dreapta) */
+    border-radius: var(--radius-sm);     /* colțuri ușor rotunjite pentru efectul hover */
+    font-size: 0.875rem;                 /* 14px */
+    font-weight: 500;
+    transition: color var(--transition), background-color var(--transition);
+}
+
+/* PSEUDO-CLASĂ :hover
+   Se activează când utilizatorul mișcă cursorul peste element.
+   rgba(255,255,255,0.06) = alb cu 6% opacitate → efect subtil de iluminare. */
+#site-header .nav-row a:hover {
+    color: var(--color-text);
+    background-color: rgba(255,255,255,0.06);
+}
+
+/* PSEUDO-CLASĂ :focus
+   Se activează când elementul este selectat prin tastatură (Tab).
+   outline (conturul) este important pentru accesibilitate – arată utilizatorilor
+   care navighează cu tastatura unde se află focusul.
+   outline-offset: spațiul dintre element și contur. */
+#site-header .nav-row a:focus {
+    outline: 2px solid rgba(255,255,255,0.25);
+    outline-offset: 2px;
+}
+
+/* Selector :has() – pseudo-clasă relațională (modernă)
+   Vizează celula <td> care CONȚINE în interior clasa .nav-search-form.
+   margin-left: auto împinge tot ce urmează (search + cont) la dreapta.
+   Funcționează deoarece .nav-row este un container flex. */
+#site-header .nav-row td:has(.nav-search-form) {
+    margin-left: auto;
+}
+
+
+/* ============================================================================
+   FORMULARUL DE CĂUTARE DIN MENIU
+   ============================================================================
+   HTML asociat: <form class="nav-search-form"> din header
+   Conține: un <input type="text"> și un <button class="nav-search-btn">
+
+   Sunt stilizate astfel încât să pară un singur element unitar:
+   - input-ul are border-radius rotunjit DOAR în stânga (radius 0 dreapta)
+   - butonul are border-radius rotunjit DOAR în dreapta (radius 0 stânga)
+   ============================================================================ */
+.nav-search-form {
+    display: inline-flex;    /* Flexbox inline: se aliniază pe aceeași linie */
+    align-items: center;
+}
+
+/* Selector de atribut + clasă descendent:
+   .nav-search-form input[type="text"]
+   Vizează input-ul de tip text DIN INTERIORUL formularului de căutare.
+   border-right: none elimină bordura din dreapta ca să nu existe dublă bordură
+   între input și buton. */
+.nav-search-form input[type="text"] {
+    height: 32px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--color-border);
+    border-right: none;                             /* fără bordura dreapta */
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm); /* rotunjit doar stânga */
+    font-size: 0.82rem;
+    min-width: 170px;
+    background: var(--color-bg);   /* fundalul câmpului = fundalul paginii */
+    color: var(--color-text);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* PSEUDO-ELEMENT ::placeholder
+   Stilizează textul placeholder din câmpul de input
+   (textul gri "Search movies..." care dispare când scrii). */
+.nav-search-form input[type="text"]::placeholder {
+    color: var(--color-text-dim);
+}
+
+/* PSEUDO-CLASĂ :focus pe câmpul de căutare
+   box-shadow: 0 0 0 2px – o umbră "spread" de 2px fără blur, ca un contur extra.
+   Efectul: bordura se colorează albastru și apare un inel albăstrui transparent. */
+.nav-search-form input[type="text"]:focus {
+    outline: none;                                  /* eliminăm conturul implicit */
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 2px rgba(88,166,255,0.2);    /* inel albastru semi-transparent */
+}
+
+/* Butonul lupă – <button class="nav-search-btn">
+   Selector de clasă. justify-content: center centrează emoji-ul pe orizontală. */
+.nav-search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    background: var(--color-btn);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0; /* rotunjit doar dreapta */
+    cursor: pointer;         /* cursorul devine mână la hover */
+    font-size: 0.8rem;
+    transition: background var(--transition), color var(--transition);
+}
+
+.nav-search-btn:hover {
+    background: var(--color-btn-hover);
+    color: var(--color-text);
+}
+
+
+/* ============================================================================
+   DROPDOWN-UL "MY ACCOUNT"
+   ============================================================================
+   HTML asociat:
+     <td class="nav-dropdown-wrap">          ← wrapper cu position:relative
+       <a class="nav-dropdown-trigger">      ← butonul vizibil în nav
+       <div class="nav-dropdown-panel">      ← panoul ascuns cu opțiunile
+
+   Mecanismul de afișare:
+   - Panoul are implicit opacity:0 + visibility:hidden (invizibil + inaccessibil)
+   - La hover pe wrapper (.nav-dropdown-wrap:hover) sau focus în interior
+     (:focus-within), panoul devine opacity:1 + visibility:visible
+   - transform: translateY(-6px → 0) adaugă o animație de "coborâre"
+   ============================================================================ */
+
+/* Wrapper-ul care conține trigger-ul și panoul.
+   position: relative este esențial – permite panoului poziționat absolut
+   să se ancoreze față de ACEST element (nu față de pagină). */
+.nav-dropdown-wrap {
+    position: relative;
+    padding: 0 !important;   /* !important suprascrie padding-ul de pe .nav-row td */
+    margin-left: var(--spacing-sm);
+}
+
+/* Trigger-ul (link-ul "My Account") – selector de clasă */
+.nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;             /* spațiu între avatar, text și săgeată */
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color var(--transition), background var(--transition);
+}
+
+/* PSEUDO-ELEMENT ::before pe trigger
+   Inserează un cerc gri ÎNAINTE de textul linkului – avatarul utilizatorului.
+   content: "" este obligatoriu (pseudo-elementul nu apare fără content).
+   border-radius: 50% face dreptunghiul un cerc perfect.
+   flex-shrink: 0 împiedică cercul să se micșoreze în container flex. */
+.nav-dropdown-trigger::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;                        /* cerc perfect */
+    background: var(--color-border);
+    border: 1px solid var(--color-btn-hover);
+    flex-shrink: 0;
+}
+
+/* Hover pe trigger SAU hover pe wrapper (care include și panoul).
+   A doua regulă (.nav-dropdown-wrap:hover .nav-dropdown-trigger) asigură
+   că trigger-ul rămâne evidențiat chiar și când cursorul e pe panou. */
+.nav-dropdown-trigger:hover,
+.nav-dropdown-wrap:hover .nav-dropdown-trigger {
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+}
+
+.nav-dropdown-trigger:focus {
+    outline: 2px solid rgba(255,255,255,0.25);
+    outline-offset: 2px;
+}
+
+/* Săgeata mică ▼ lângă "My Account" */
+.nav-dropdown-chevron {
+    font-size: 0.58rem;
+    opacity: 0.6;
+}
+
+/* Panoul dropdown – invizibil implicit.
+   position: absolute  îl scoate din fluxul normal și îl poziționează
+   față de cel mai apropiat părinte cu position:relative (.nav-dropdown-wrap).
+   top: calc(100% + 8px) = imediat sub trigger + 8px spațiu.
+   right: 0 aliniază dreapta panoului cu dreapta trigger-ului. */
+.nav-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 8px);      /* calc() combină unități: 100% + 8px */
+    right: 0;
+    min-width: 196px;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 6px 0;
+    /* Starea ascunsă: */
+    opacity: 0;                          /* complet transparent */
+    visibility: hidden;                  /* nu poate fi click-uit sau tab-uit */
+    transform: translateY(-6px);         /* deplasat 6px în sus */
+    /* Animație pentru toate cele 3 proprietăți: */
+    transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+    z-index: 200;    /* deasupra header-ului (z-index: 50) */
+}
+
+/* Selector :hover și :focus-within – afișează panoul.
+   :focus-within se activează dacă ORICE element din interior are focus.
+   Astfel panoul rămâne deschis când utilizatorul navighează cu Tab în el. */
+.nav-dropdown-wrap:hover .nav-dropdown-panel,
+.nav-dropdown-panel:focus-within {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);  /* revine la poziția normală */
+}
+
+/* Gruparea linkurilor în secțiuni (delimitate de <hr class="nav-dropdown-divider">) */
+.nav-dropdown-section {
+    padding: 4px 0;
+}
+
+/* Linkuri din dropdown – selector descendent cu id + clasă pentru specificitate mare.
+   Specificitate mare = această regulă câștigă față de regula generică
+   "#site-header .nav-row a" definită mai sus. */
+#site-header .nav-dropdown-panel a {
+    display: block;          /* ocupă toată lățimea (nu inline) */
+    padding: 7px 1.1rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.87rem;
+    background: transparent;
+    border-radius: 0;        /* fără rotunjire – ocupă toată lățimea panoului */
+    transition: background var(--transition), color var(--transition);
+}
+
+#site-header .nav-dropdown-panel a:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+}
+
+#site-header .nav-dropdown-panel a:focus {
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text);
+}
+
+/* Linia separatoare dintre secțiunile din dropdown.
+   HTML: <hr class="nav-dropdown-divider">
+   border: 0 elimină bordura implicită a <hr>, iar border-top o redefinim. */
+.nav-dropdown-divider {
+    margin: 5px 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ============================================================================
+   CONȚINUT PRINCIPAL  –  #main-content
+   ============================================================================
+   HTML asociat: <table id="main-content">
+   Tabelul principal care învelește tot conținutul paginii.
+   margin: 0 auto îl centrează orizontal (la fel ca header-ul și footer-ul).
+   ============================================================================ */
+#main-content {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+/* Celula principală din #main-content – adaugă spațiu interior
+   față de marginile paginii. Selector: #main-content > tr > td
+   > înseamnă COPIL DIRECT (nu orice descendent). */
+#main-content > tr > td {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border: none;
+}
+
+/* Tabelul interior care stivuiește toate secțiunile vertical.
+   HTML: <table class="content-stack"> */
+.content-stack {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-stack > tr > td {
+    border: none;
+    padding: 0;
+}
+
+
+/* ============================================================================
+   PANOURI DE SECȚIUNE  –  .section-panel
+   ============================================================================
+   HTML asociat: <table class="section-panel">
+   Fiecare secțiune (Recently Watched, Watchlist, Recommendations, Form)
+   este un "card" – un panou vizual distinct cu fundal, bordură și umbră.
+
+   overflow: hidden este esențial pentru border-radius: face ca conținutul
+   să nu iasă în afara colțurilor rotunjite.
+   ============================================================================ */
+.section-panel {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-card);         /* puțin mai deschis decât fundalul paginii */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);           /* 12px – rotunjire mai mare pentru carduri */
+    overflow: hidden;                          /* conținutul respectă colțurile rotunjite */
+    margin-bottom: var(--spacing-lg);          /* spațiu între secțiuni */
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition);  /* animație pentru umbra la hover */
+}
+
+/* Pseudo-clasă :hover pe întregul card – umbre mai pronunțate */
+.section-panel:hover {
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+
+/* Celula exterioară a cardului – padding intern al cardului.
+   Dublul selector (cu și fără tbody) acoperă ambele cazuri:
+   browserele adaugă automat <tbody> la tabele, deci selectorul
+   trebuie să funcționeze și cu și fără el. */
+.section-panel > tr > td,
+.section-panel > tbody > tr > td {
+    padding: var(--spacing-lg);
+    border: none;
+}
+
+/* Tabelul interior al secțiunii – nu are stiluri proprii, doar resetăm */
+.section-inner {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.section-inner > tr > td,
+.section-inner > tbody > tr > td {
+    border: none;
+    padding: 0;
+}
+
+/* Rândul cu titlul secțiunii și link-ul "View all"
+   HTML: <tr class="section-head-row">
+   border-bottom creează o linie separatoare sub titlu. */
+.section-head-row {
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.section-head-row td {
+    border: none;
+    padding: 0 0 var(--spacing-sm) 0;
+    vertical-align: middle;   /* alinierea verticală a celulelor pe mijloc */
+}
+
+/* Ultima celulă din rândul de titlu conține link-ul "View all →"
+   text-align: right îl împinge la dreapta în celulă.
+   white-space: nowrap împiedică textul să se rupă pe mai multe rânduri. */
+.section-head-row td:last-child {
+    text-align: right;
+    padding-left: var(--spacing-md);
+    white-space: nowrap;
+}
+
+/* SELECTOR DE TIP: h2 descendent din .section-head-row
+   Titlul secțiunii stilizat ca etichetă mică uppercase
+   (inspirat din UI-urile moderne de tip dashboard). */
+.section-head-row h2 {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;     /* transformă textul în MAJUSCULE */
+    letter-spacing: 0.1em;         /* spațiu mare între litere – efect grafic */
+}
+
+/* PSEUDO-ELEMENT ::after pe h2 – linia decorativă sub titlu.
+   content: "" este obligatoriu (chiar și gol).
+   display: block îl face să ocupe un rând întreg sub text. */
+.section-head-row h2::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--color-border);
+    margin-top: 4px;
+    border-radius: 1px;
+}
+
+/* Link-ul "View all →"
+   !important este folosit pentru a suprascrie regula mai generică
+   #site-header .nav-row a (care altfel ar putea colora linkurile diferit). */
+.view-all-link {
+    color: var(--color-text-dim) !important;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.view-all-link:hover {
+    color: var(--color-text-muted) !important;
+}
+
+
+/* ============================================================================
+   GRILA DE FILME  –  .movie-grid  /  .movie-item
+   ============================================================================
+   HTML asociat: <table class="movie-grid"> cu celule <td class="movie-item">
+   Folosit în secțiunile "Recently Watched" și "My Watchlist".
+
+   border-collapse: separate + border-spacing: 6px creează spațiu
+   între celulele tabelului (ca un gap între carduri).
+   ============================================================================ */
+.movie-grid {
+    width: 100%;
+    border-collapse: separate;   /* border-spacing funcționează doar cu separate */
+    border-spacing: 6px;          /* spațiu de 6px între celule */
+    margin-top: var(--spacing-sm);
+}
+
+/* Fiecare celulă cu un film – card individual.
+   position: relative este necesar pentru pseudo-elementul ::before
+   (bara colorată din stânga) care folosește position: absolute. */
+.movie-item {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    /* padding: stânga mai mare (1rem) pentru bara ::before de 3px */
+    padding: 0.55rem 0.75rem 0.55rem 1rem !important;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    cursor: default;       /* cursorul rămâne săgeată (nu mână) */
+    overflow: hidden;      /* bara ::before nu iese în afara colțurilor */
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.movie-item:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+}
+
+/* PSEUDO-ELEMENT ::before – bara verticală din stânga cardului.
+   position: absolute + left:0 + top:0 + bottom:0 = înaltă cât întregul card,
+   lipită de marginea stângă.
+   La hover devine albastru (via regula .movie-item:hover::before). */
+.movie-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--color-border);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    transition: background var(--transition);
+}
+
+/* Combinare de pseudo-clasă și pseudo-element: :hover::before
+   Se activează când elementul .movie-item este hover-uit,
+   și stilizează pseudo-elementul ::before al acelui element. */
+.movie-item:hover::before {
+    background: var(--color-blue);  /* bara devine albastru */
+}
+
+/* Emoji-ul din stânga titlului filmului */
+.movie-icon {
+    margin-right: 6px;
+    font-size: 0.82rem;
+    opacity: 0.45;   /* estompat ca să nu distragă atenția */
+}
+
+/* Titlul filmului – font mai gros */
+.movie-title {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* Metadatele (data vizionării / eticheta "Priority")
+   display: block îl pune pe un rând nou sub titlu. */
+.movie-meta {
+    display: block;
+    color: var(--color-text-dim);
+    font-size: 0.76rem;
+    margin-top: 2px;
+}
+
+/* Badge-ul de prioritate din Watchlist
+   float: right îl împinge la dreapta în celulă (față de titlu care e stânga).
+   border-radius: 20px face o "pilulă" rotundă. */
+.movie-priority {
+    float: right;
+    font-size: 0.67rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+}
+
+/* Variantele de culoare ale badge-ului – selectori de clasă.
+   rgba(63,185,80,0.12) = verde cu 12% opacitate (fundal transparent colorat). */
+.priority-high {
+    background: rgba(63,185,80,0.12);
+    color: var(--color-green);
+    border: 1px solid rgba(63,185,80,0.28);
+}
+
+.priority-med {
+    background: rgba(210,153,34,0.12);
+    color: var(--color-orange);
+    border: 1px solid rgba(210,153,34,0.28);
+}
+
+.priority-low {
+    background: rgba(110,118,129,0.12);
+    color: var(--color-gray-badge);
+    border: 1px solid rgba(110,118,129,0.28);
+}
+
+/* Celule goale din grila de filme (ultimul slot dacă sunt număr impar de filme).
+   !important suprascrie regulile de mai sus pentru .movie-item. */
+.movie-item-empty {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Ascunde bara ::before pentru celulele goale */
+.movie-item-empty::before {
+    display: none;
+}
+
+
+/* ============================================================================
+   CARDURI DE RECOMANDĂRI  –  .rec-card  /  .rec-poster
+   ============================================================================
+   HTML asociat: <table class="rec-grid"> cu celule <td class="rec-card">
+   Fiecare card are un placeholder de poster și textul filmului dedesubt.
+
+   Efectul de "ridicare" la hover: transform: translateY(-3px) mișcă
+   cardul 3px în sus. Combinat cu box-shadow mai pronunțat, creează
+   impresia că "se ridică" de pe pagină.
+   ============================================================================ */
+.rec-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;         /* spațiu mai mare între carduri față de movie-grid */
+    margin-top: var(--spacing-sm);
+}
+
+/* Cardul de recomandare – selector de clasă */
+.rec-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius);
+    padding: 0 !important;        /* posterul trebuie să atingă marginile */
+    vertical-align: top;           /* aliniare sus (nu centru) */
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+/* La hover: ridicare + umbră mai pronunțată */
+.rec-card:hover {
+    border-color: var(--color-border);
+    transform: translateY(-3px);              /* mișcare 3px în sus */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* Placeholder-ul de poster – zona colorată din partea de sus a cardului.
+   linear-gradient creează un gradient de culori.
+   Sintaxă: linear-gradient(direcție, culoare1 procent, culoare2 procent)
+   position: relative + overflow: hidden sunt necesare pentru ::after. */
+.rec-poster {
+    height: 105px;
+    background: linear-gradient(140deg, #1c2228 0%, #2d3748 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.12);   /* inițialele aproape invizibile */
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--color-border-subtle);
+    position: relative;
+    overflow: hidden;
+}
+
+/* PSEUDO-ELEMENT ::after pe poster – gradient de umbră din jos.
+   inset: 0 este prescurtare pentru top:0; right:0; bottom:0; left:0
+   (umple tot spațiul posterului).
+   Gradientul transparent→negru creează efectul de "vignetă" de jos. */
+.rec-poster::after {
+    content: "";
+    position: absolute;
+    inset: 0;    /* echivalent cu: top:0; right:0; bottom:0; left:0 */
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.35));
+}
+
+/* Titlul filmului – display: block îl pune pe rând propriu */
+.rec-title {
+    display: block;
+    padding: 0.55rem 0.7rem 0.2rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+}
+
+/* Genul filmului – etichetă mică uppercase */
+.rec-genre {
+    display: block;
+    padding: 0 0.7rem 0.7rem;
+    font-size: 0.68rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+
+/* ============================================================================
+   SECȚIUNEA DE FORMULAR  –  .form-section-title, .form-table etc.
+   ============================================================================
+   HTML asociat: ultimul <table class="section-panel"> din pagină
+   Conține titlul secțiunii, o descriere și formularul de setări.
+
+   Formularul folosește un <table class="form-table"> cu două coloane:
+   - coloana stângă: .form-label (eticheta câmpului)
+   - coloana dreaptă: .form-field (câmpul propriu-zis)
+   ============================================================================ */
+
+/* Titlul "Setări cont și preferințe" – la fel ca h2 din secțiuni */
+.form-section-title {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* PSEUDO-ELEMENT ::after sub titlul formularului (identic cu h2::after) */
+.form-section-title::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--color-border);
+    margin-top: 4px;
+    border-radius: 1px;
+}
+
+/* Paragraful descriptiv al formularului */
+.section-desc {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0.75rem 0 var(--spacing-lg);
+    line-height: 1.6;
+}
+
+/* Tabelul formularului – resetăm bordurile */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form-table td {
+    border: none;
+    padding: 0.4rem 0.75rem;
+    vertical-align: middle;
+    color: var(--color-text);
+}
+
+/* Rândurile cu titlurile sub-secțiunilor (1. Informații profil, 2. Notificări...)
+   padding-top mai mare creează spațiu vizual față de câmpurile de deasupra. */
+.form-section-heading {
+    padding-top: var(--spacing-lg) !important;
+    padding-left: 0 !important;
+}
+
+/* Eticheta sub-secțiunii – bara verticală stângă creată cu border-left */
+.form-section-heading b {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-text-dim);
+    border-left: 2px solid var(--color-border);  /* bara verticală gri */
+    padding-left: 8px;                            /* spațiu față de bară */
+}
+
+/* Eticheta câmpului (coloana stângă a formularului)
+   width: 160px fixează lățimea coloanei de etichete. */
+.form-label {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    width: 160px;
+    white-space: nowrap;
+    padding-right: var(--spacing-md) !important;
+}
+
+/* Câmpurile de input text și select – selector de atribut descendent dintr-o clasă.
+   height: 34px asigură înălțimea uniformă a tuturor câmpurilor.
+   font-family: inherit preia fontul paginii (implicit browser-ul folosește altul). */
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field select {
+    height: 34px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;    /* moștenește fontul de pe body */
+    font-size: 0.875rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    width: 100%;
+    max-width: 260px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* PSEUDO-CLASĂ :focus – aceeași abordare ca la câmpul de căutare din nav.
+   Grupăm mai multe selectori (input text + email + select + textarea)
+   separați prin virgulă – toți primesc același stil la focus. */
+.form-field input[type="text"]:focus,
+.form-field input[type="email"]:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 2px rgba(88,166,255,0.15);
+}
+
+/* Câmpul readonly (email-ul care nu poate fi editat).
+   cursor: not-allowed arată că nu se poate interacționa cu el. */
+.input-readonly {
+    background: var(--color-surface) !important;
+    color: var(--color-text-dim) !important;
+    cursor: not-allowed;
+}
+
+/* Textarea – câmpul de comentariu.
+   resize: vertical permite utilizatorului să-l mărească doar pe verticală. */
+.form-field textarea {
+    width: 100%;
+    max-width: 440px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Etichetele pentru checkbox și radio.
+   display: inline-flex cu gap asigură că inputul și textul
+   sunt aliniate perfect pe orizontală. */
+.check-label,
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    cursor: pointer;         /* cursorul devine mână – indică că e clickabil */
+    margin-right: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    transition: color var(--transition);
+}
+
+/* Pseudo-clasă :hover pe label – textul devine mai luminos */
+.check-label:hover,
+.radio-label:hover {
+    color: var(--color-text);
+}
+
+/* Pseudo-clasă :focus pe inputul din interiorul label-ului.
+   Selector descendent: .check-label input (inputul din label)
+   cu pseudo-clasa :focus. */
+.check-label input:focus,
+.radio-label input:focus {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+}
+
+/* Rândul cu butoanele de submit/reset
+   border-top separă vizual butoanele de câmpurile formularului. */
+.form-actions {
+    padding-top: var(--spacing-lg) !important;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Butonul "Salvează setările" – selector de atribut în clasă.
+   Verde GitHub (#238636) – culoare consacrată pentru acțiuni pozitive. */
+.form-actions input[type="submit"] {
+    height: 34px;
+    padding: 0 var(--spacing-lg);
+    background: #238636;
+    color: #fff;
+    border: 1px solid rgba(240,246,252,0.1);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: var(--spacing-sm);
+    transition: background var(--transition);
+}
+
+.form-actions input[type="submit"]:hover {
+    background: #2ea043;   /* verde puțin mai deschis la hover */
+}
+
+/* PSEUDO-CLASĂ :focus pe butonul submit – outline verde pentru accesibilitate */
+.form-actions input[type="submit"]:focus {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+}
+
+/* Butonul "Anulează modificările" – mai puțin evident vizual */
+.form-actions input[type="reset"] {
+    height: 34px;
+    padding: 0 var(--spacing-lg);
+    background: var(--color-btn);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+
+.form-actions input[type="reset"]:hover {
+    background: var(--color-btn-hover);
+    color: var(--color-text);
+}
+
+
+/* ============================================================================
+   FOOTER  –  #site-footer
+   ============================================================================
+   HTML asociat: <table id="site-footer">
+   Selector de id. Structura identică cu header-ul: tabel centrat cu max-width.
+   border-top creează linia de separare față de conținut.
+   ============================================================================ */
+#site-footer {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-xl);
+}
+
+#site-footer table {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+#site-footer td {
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;     /* textul centrat orizontal */
+    border: none;
+    font-size: 0.78rem;
+    color: var(--color-text-dim);  /* foarte estompat – footer e informație secundară */
+    letter-spacing: 0.01em;
+}
+
+/* SELECTOR DE TIP: a în footer – descendent din #site-footer */
+#site-footer a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+/* PSEUDO-CLASĂ :hover */
+#site-footer a:hover {
+    color: var(--color-text-muted);
+}
+
+/* PSEUDO-CLASĂ :focus – accesibilitate pentru navigare cu tastatura */
+#site-footer a:focus {
+    outline: 2px solid rgba(255,255,255,0.2);
+    outline-offset: 2px;
+}
