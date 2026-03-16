@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     <title>BlimBlau - Logged In</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
 </head>
 <body>
 
-<!-- Header -->
-<table>
+<!-- Header cu meniu orizontal -->
+<table id="site-header">
     <tr>
         <td>
             <table>
                 <tr>
                     <td>
                         <table>
-                            <tr>
-                                <td><b>BlimBlau</b></td>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
                                 <td></td>
                                 <td><a href="films.html">Films</a></td>
                                 <td></td>
@@ -26,15 +27,42 @@
                                 <td><a href="about.html">About</a></td>
                                 <td></td>
                                 <td>
-                                    <form action="search.html" method="get">
+                                    <form action="search.html" method="get" class="nav-search-form">
                                         <input type="text" name="query" size="25" placeholder="Search movies...">
-                                        <input type="submit" value="Go">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
                                     </form>
                                 </td>
                                 <td></td>
-                                <td><a href="profile-html5.html">My Account</a></td>
-                                <td></td>
-                                <td><a href="logout.html">Sign Out</a></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">▼</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                            <a href="films.html" role="menuitem">Films</a>
+                                            <a href="diary.html" role="menuitem">Diary</a>
+                                            <a href="reviews.html" role="menuitem">Reviews</a>
+                                            <a href="watchlist.html" role="menuitem">Watchlist</a>
+                                            <a href="lists.html" role="menuitem">Lists</a>
+                                            <a href="likes.html" role="menuitem">Likes</a>
+                                            <a href="tags.html" role="menuitem">Tags</a>
+                                            <a href="members.html" role="menuitem">Network</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="video-store.html" role="menuitem">Video Store rentals</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="profile-html5.html#settings" role="menuitem">Settings</a>
+                                            <a href="subscriptions.html" role="menuitem">Subscriptions</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -45,33 +73,54 @@
 </table>
 
 <!-- Main Content -->
-<table>
+<table id="main-content">
     <tr>
         <td>
-            <table>
+            <table class="content-stack">
                 <tr>
                     <td>
+
                         <!-- Recently Watched Section -->
-                        <table>
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table>
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Recently Watched</h2></td>
-                                            <td><a href="watch-history.html">View All →</a></td>
+                                            <td class="view-all-cell"><a href="watch-history.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <table>
+                                                <table class="movie-grid">
                                                     <tr>
-                                                        <td>• Inception - 2 days ago</td>
-                                                        <td>• The Dark Knight - 5 days ago</td>
-                                                        <td>• Interstellar - 1 week ago</td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127909;</span>
+                                                            <span class="movie-title">Inception</span>
+                                                            <span class="movie-meta">2 days ago</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127909;</span>
+                                                            <span class="movie-title">The Dark Knight</span>
+                                                            <span class="movie-meta">5 days ago</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127909;</span>
+                                                            <span class="movie-title">Interstellar</span>
+                                                            <span class="movie-meta">1 week ago</span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>• Pulp Fiction - 1 week ago</td>
-                                                        <td>• The Matrix - 2 weeks ago</td>
-                                                        <td>&nbsp;</td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127909;</span>
+                                                            <span class="movie-title">Pulp Fiction</span>
+                                                            <span class="movie-meta">1 week ago</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127909;</span>
+                                                            <span class="movie-title">The Matrix</span>
+                                                            <span class="movie-meta">2 weeks ago</span>
+                                                        </td>
+                                                        <td class="movie-item-empty"></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -80,30 +129,53 @@
                                 </td>
                             </tr>
                         </table>
-
-                        <br><br>
 
                         <!-- Watchlist Section -->
-                        <table>
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table>
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>My Watchlist</h2></td>
-                                            <td><a href="watchlist.html">View All →</a></td>
+                                            <td class="view-all-cell"><a href="watchlist.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <table>
+                                                <table class="movie-grid">
                                                     <tr>
-                                                        <td>• Dune: Part Two (High)</td>
-                                                        <td>• Oppenheimer (Medium)</td>
-                                                        <td>• Killers of the Flower Moon (High)</td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">Dune: Part Two</span>
+                                                            <span class="movie-priority priority-high">High</span>
+                                                            <span class="movie-meta">Priority</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">Oppenheimer</span>
+                                                            <span class="movie-priority priority-med">Medium</span>
+                                                            <span class="movie-meta">Priority</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">Killers of the Flower Moon</span>
+                                                            <span class="movie-priority priority-high">High</span>
+                                                            <span class="movie-meta">Priority</span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>• Poor Things (Low)</td>
-                                                        <td>• The Batman (Medium)</td>
-                                                        <td>&nbsp;</td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">Poor Things</span>
+                                                            <span class="movie-priority priority-low">Low</span>
+                                                            <span class="movie-meta">Priority</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">The Batman</span>
+                                                            <span class="movie-priority priority-med">Medium</span>
+                                                            <span class="movie-meta">Priority</span>
+                                                        </td>
+                                                        <td class="movie-item-empty"></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -112,27 +184,45 @@
                                 </td>
                             </tr>
                         </table>
-
-                        <br><br>
 
                         <!-- Recommendations Section -->
-                        <table>
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table>
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Recommended For You</h2></td>
-                                            <td><a href="recommendations-html5.html">View All →</a></td>
+                                            <td class="view-all-cell"><a href="recommendations-html5.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <table>
+                                                <table class="rec-grid">
                                                     <tr>
-                                                        <td><b>Blade Runner 2049</b><br><small>Sci-Fi</small></td>
-                                                        <td><b>The Grand Budapest Hotel</b><br><small>Comedy</small></td>
-                                                        <td><b>Parasite</b><br><small>Thriller</small></td>
-                                                        <td><b>Everything Everywhere</b><br><small>Action</small></td>
-                                                        <td><b>The Social Network</b><br><small>Drama</small></td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">BR</div>
+                                                            <b class="rec-title">Blade Runner 2049</b>
+                                                            <small class="rec-genre">Sci-Fi</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">GB</div>
+                                                            <b class="rec-title">The Grand Budapest Hotel</b>
+                                                            <small class="rec-genre">Comedy</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">PA</div>
+                                                            <b class="rec-title">Parasite</b>
+                                                            <small class="rec-genre">Thriller</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">EE</div>
+                                                            <b class="rec-title">Everything Everywhere</b>
+                                                            <small class="rec-genre">Action</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">SN</div>
+                                                            <b class="rec-title">The Social Network</b>
+                                                            <small class="rec-genre">Drama</small>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -142,61 +232,59 @@
                             </tr>
                         </table>
 
-                        <br><br>
-
-                        <!-- Formular setări cont (pentru utilizator logat) -->
-                        <table>
+                        <!-- Formular setări cont -->
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2>Setări cont și preferințe</h2>
-                                    <p>
+                                    <h2 class="form-section-title">Setări cont și preferințe</h2>
+                                    <p class="section-desc">
                                         Actualizează-ți preferințele de vizionare direct din contul tău BlimBlau.
                                         Și aici folosim diacritice: ă, â, î, ș, ț.
                                     </p>
 
                                     <form action="update-settings-html5.html" method="post">
-                                        <table>
+                                        <table class="form-table">
                                             <tr>
-                                                <td colspan="4"><b>1. Informații profil</b></td>
+                                                <td colspan="4" class="form-section-heading"><b>1. Informații profil</b></td>
                                             </tr>
                                             <tr>
-                                                <td>Nume afișat</td>
-                                                <td>
+                                                <td class="form-label">Nume afișat</td>
+                                                <td class="form-field">
                                                     <input type="text" name="nume_afisat" size="25">
                                                 </td>
-                                                <td>E-mail (doar citire)</td>
-                                                <td>
-                                                    <input type="text" name="email_cont" size="25" value="user@exemplu.ro" readonly>
+                                                <td class="form-label">E-mail (doar citire)</td>
+                                                <td class="form-field">
+                                                    <input type="text" name="email_cont" size="25" value="user@exemplu.ro" readonly class="input-readonly">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Preferi interfață în</td>
-                                                <td>
+                                                <td class="form-label">Interfață în</td>
+                                                <td class="form-field">
                                                     <select name="limba">
                                                         <option value="ro">Română</option>
                                                         <option value="en">Engleză</option>
                                                         <option value="other">Altă limbă</option>
                                                     </select>
                                                 </td>
-                                                <td>Oraș</td>
-                                                <td>
+                                                <td class="form-label">Oraș</td>
+                                                <td class="form-field">
                                                     <input type="text" name="oras" size="20">
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td colspan="4"><b>2. Preferințe de notificare</b></td>
+                                                <td colspan="4" class="form-section-heading"><b>2. Preferințe de notificare</b></td>
                                             </tr>
                                             <tr>
-                                                <td>Alerta pentru filme noi</td>
-                                                <td colspan="3">
-                                                    <input type="checkbox" name="notif_filme_noi" value="da"> Trimite notificări despre filme noi<br>
-                                                    <input type="checkbox" name="notif_list" value="da"> Trimite notificări despre liste urmărite
+                                                <td class="form-label">Alerte filme noi</td>
+                                                <td colspan="3" class="form-field">
+                                                    <label class="check-label"><input type="checkbox" name="notif_filme_noi" value="da"> Notificări filme noi</label>
+                                                    <label class="check-label"><input type="checkbox" name="notif_list" value="da"> Notificări liste urmărite</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Frecvență e-mail</td>
-                                                <td colspan="3">
+                                                <td class="form-label">Frecvență e-mail</td>
+                                                <td colspan="3" class="form-field">
                                                     <select name="frecventa_email">
                                                         <option value="zilnic">Zilnic</option>
                                                         <option value="saptamanal">Săptămânal</option>
@@ -206,32 +294,32 @@
                                             </tr>
 
                                             <tr>
-                                                <td colspan="4"><b>3. Preferințe de conținut</b></td>
+                                                <td colspan="4" class="form-section-heading"><b>3. Preferințe de conținut</b></td>
                                             </tr>
                                             <tr>
-                                                <td>Gen prioritar</td>
-                                                <td colspan="3">
-                                                    <input type="radio" name="gen_prioritar" value="actiune"> Acțiune
-                                                    <input type="radio" name="gen_prioritar" value="drama"> Dramă
-                                                    <input type="radio" name="gen_prioritar" value="comedie"> Comedie
-                                                    <input type="radio" name="gen_prioritar" value="sf"> SF
+                                                <td class="form-label">Gen prioritar</td>
+                                                <td colspan="3" class="form-field">
+                                                    <label class="radio-label"><input type="radio" name="gen_prioritar" value="actiune"> Acțiune</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_prioritar" value="drama"> Dramă</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_prioritar" value="comedie"> Comedie</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_prioritar" value="sf"> SF</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Genuri excluse</td>
-                                                <td colspan="3">
-                                                    <input type="checkbox" name="excl_horror" value="da"> Nu afișa horror
-                                                    <input type="checkbox" name="excl_documentar" value="da"> Nu afișa documentare
+                                                <td class="form-label">Genuri excluse</td>
+                                                <td colspan="3" class="form-field">
+                                                    <label class="check-label"><input type="checkbox" name="excl_horror" value="da"> Nu afișa horror</label>
+                                                    <label class="check-label"><input type="checkbox" name="excl_documentar" value="da"> Nu afișa documentare</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Scurt comentariu</td>
-                                                <td colspan="3">
+                                                <td class="form-label">Comentariu</td>
+                                                <td colspan="3" class="form-field">
                                                     <textarea name="comentariu" rows="3" cols="60"></textarea>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="4" class="form-actions">
                                                     <input type="submit" value="Salvează setările">
                                                     <input type="reset" value="Anulează modificările">
                                                 </td>
@@ -241,6 +329,7 @@
                                 </td>
                             </tr>
                         </table>
+
                     </td>
                 </tr>
             </table>
@@ -249,10 +338,15 @@
 </table>
 
 <!-- Footer -->
-<table>
+<table id="site-footer">
     <tr>
         <td>
-            &copy; 2024 BlimBlau. All rights reserved. | <a href="LoggedOutPage-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+            &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+            &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
         </td>
     </tr>
 </table>
