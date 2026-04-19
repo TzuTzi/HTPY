@@ -2,28 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BlimBlau - Recommendations</title>
+    <title>BlimBlau – Recommendations</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
 </head>
 <body>
 
 <!-- Header -->
-<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#333333">
+<table id="site-header">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="10" cellspacing="0" border="0">
+        <td>
+            <table>
                 <tr>
                     <td>
-                        <table cellpadding="5" cellspacing="0" border="0">
-                            <tr>
-                                <td><font color="white" size="4"><b>BlimBlau</b></font></td>
-                                <td width="40"></td>
-                                <td><a href="films.html"><font color="white">Films</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedOutPage-html5.html"><font color="white">Home</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedInPage-html5.html"><font color="white">Dashboard</font></a></td>
-                                <td width="20"></td>
-                                <td bgcolor="#444444" align="center" width="140"><a href="LoggedOutPage-html5.html"><font color="white">← Back to welcome</font></a></td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -34,57 +59,43 @@
 </table>
 
 <!-- Main Content -->
-<table width="100%" cellpadding="20" cellspacing="0" border="0">
+<table id="main-content">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="15" cellspacing="0" border="0">
+        <td>
+            <table class="content-stack">
                 <tr>
                     <td>
-                        <!-- Intro -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
-                            <tr>
-                                <td align="center" bgcolor="#F5F5F5">
-                                    <h2>Recommended Movies</h2>
-                                    <p>A longer list of titles that might suit your taste.</p>
-                                    <p>
-                                        <a href="LoggedOutPage-html5.html">← Back to welcome page</a> |
-                                        <a href="LoggedInPage-html5.html">Go to logged-in dashboard →</a>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <br><br>
 
                         <!-- By Genre -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table width="100%" cellpadding="5" cellspacing="0">
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>By Genre</h2></td>
+                                            <td class="view-all-cell"><a href="LoggedInPage-html5.html" class="view-all-link">&larr; Dashboard</a></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <table width="100%" cellpadding="10" cellspacing="0" border="0">
+                                            <td colspan="2">
+                                                <table class="rec-simple-grid">
                                                     <tr>
-                                                        <td width="33%" valign="top" bgcolor="#F0F0F0">
-                                                            <b>Science Fiction</b><br>
-                                                            • Dune: Part Two<br>
-                                                            • Blade Runner 2049<br>
-                                                            • Arrival
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#128640; Science Fiction</b>
+                                                            <small>Dune: Part Two</small>
+                                                            <small>Blade Runner 2049</small>
+                                                            <small>Arrival</small>
                                                         </td>
-                                                        <td width="33%" valign="top" bgcolor="#F0F0F0">
-                                                            <b>Drama</b><br>
-                                                            • Oppenheimer<br>
-                                                            • Parasite<br>
-                                                            • The Social Network
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#127917; Drama</b>
+                                                            <small>Oppenheimer</small>
+                                                            <small>Parasite</small>
+                                                            <small>The Social Network</small>
                                                         </td>
-                                                        <td width="34%" valign="top" bgcolor="#F0F0F0">
-                                                            <b>Comedy</b><br>
-                                                            • The Grand Budapest Hotel<br>
-                                                            • Groundhog Day<br>
-                                                            • Superbad
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#128514; Comedy</b>
+                                                            <small>The Grand Budapest Hotel</small>
+                                                            <small>Groundhog Day</small>
+                                                            <small>Superbad</small>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -95,25 +106,39 @@
                             </tr>
                         </table>
 
-                        <br><br>
-
                         <!-- Surprise Me -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table width="100%" cellpadding="5" cellspacing="0">
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Surprise Me</h2></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <p>Pick one of these at random if you can't decide:</p>
-                                                <table width="100%" cellpadding="8" cellspacing="0" border="0">
-                                                    <tr align="center">
-                                                        <td width="25%" bgcolor="#F0F0F0"><b>Everything Everywhere All at Once</b></td>
-                                                        <td width="25%" bgcolor="#F0F0F0"><b>Spider-Man: Into the Spider-Verse</b></td>
-                                                        <td width="25%" bgcolor="#F0F0F0"><b>Whiplash</b></td>
-                                                        <td width="25%" bgcolor="#F0F0F0"><b>Mad Max: Fury Road</b></td>
+                                            <td colspan="2">
+                                                <p class="section-desc">Pick one of these at random if you can&rsquo;t decide:</p>
+                                                <table class="rec-grid">
+                                                    <tr>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">EE</div>
+                                                            <b class="rec-title">Everything Everywhere All at Once</b>
+                                                            <small class="rec-genre">Action / Comedy</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">SM</div>
+                                                            <b class="rec-title">Spider-Man: Into the Spider-Verse</b>
+                                                            <small class="rec-genre">Animation</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">WH</div>
+                                                            <b class="rec-title">Whiplash</b>
+                                                            <small class="rec-genre">Drama / Music</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">MM</div>
+                                                            <b class="rec-title">Mad Max: Fury Road</b>
+                                                            <small class="rec-genre">Action</small>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -122,6 +147,7 @@
                                 </td>
                             </tr>
                         </table>
+
                     </td>
                 </tr>
             </table>
@@ -130,10 +156,13 @@
 </table>
 
 <!-- Footer -->
-<table width="100%" cellpadding="15" cellspacing="0" border="0" bgcolor="#F5F5F5">
+<table id="site-footer">
     <tr>
-        <td align="center">
-            <font size="2">&copy; 2024 BlimBlau. All rights reserved. | <a href="LoggedOutPage-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></font>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>
     </tr>
 </table>

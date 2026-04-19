@@ -37,11 +37,51 @@ const cities = {
 
 /* ── Carousel slides (used by carousel.js) ── */
 const carouselSlides = [
-    { title: "Dune: Part Two",   year: "2024", genre: "Sci-Fi / Adventure", color: "#c8a96e", link: "featured-html5.html" },
-    { title: "Oppenheimer",      year: "2023", genre: "Drama / History",    color: "#e05c2a", link: "featured-html5.html" },
-    { title: "Poor Things",      year: "2023", genre: "Comedy / Fantasy",   color: "#6eafc8", link: "featured-html5.html" },
-    { title: "Parasite",         year: "2019", genre: "Thriller / Drama",   color: "#4e9b4e", link: "featured-html5.html" },
-    { title: "Interstellar",     year: "2014", genre: "Sci-Fi / Drama",     color: "#5a7fa8", link: "featured-html5.html" },
+    {
+        title: "Dune: Part Two",
+        year: "2024",
+        genre: "Sci-Fi / Adventure",
+        color: "#c8a96e",
+        link: "featured-html5.html",
+        imageFile: "dune-part-two.jpg",      // ← filename for poster
+        imageAlt: "Dune Part Two poster"
+    },
+    {
+        title: "Oppenheimer",
+        year: "2023",
+        genre: "Drama / History",
+        color: "#e05c2a",
+        link: "featured-html5.html",
+        imageFile: "oppenheimer.jpg",
+        imageAlt: "Oppenheimer movie poster"
+    },
+    {
+        title: "Poor Things",
+        year: "2023",
+        genre: "Comedy / Fantasy",
+        color: "#6eafc8",
+        link: "featured-html5.html",
+        imageFile: "poor-things.png",
+        imageAlt: "Poor Things poster"
+    },
+    {
+        title: "Parasite",
+        year: "2019",
+        genre: "Thriller / Drama",
+        color: "#4e9b4e",
+        link: "featured-html5.html",
+        imageFile: "parasite.jpg",
+        imageAlt: "Parasite movie poster"
+    },
+    {
+        title: "Interstellar",
+        year: "2014",
+        genre: "Sci-Fi / Drama",
+        color: "#5a7fa8",
+        link: "featured-html5.html",
+        imageFile: "interstellar.png",
+        imageAlt: "Interstellar poster"
+    },
 ];
 
 /* ── Mood labels and colors (used by mood-picker.js) ── */

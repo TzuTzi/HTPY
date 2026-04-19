@@ -2,26 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BlimBlau - My Profile</title>
+    <title>BlimBlau – My Profile</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
 </head>
 <body>
 
 <!-- Header -->
-<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#333333">
+<table id="site-header">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="10" cellspacing="0" border="0">
+        <td>
+            <table>
                 <tr>
                     <td>
-                        <table cellpadding="5" cellspacing="0" border="0">
-                            <tr>
-                                <td><font color="white" size="4"><b>BlimBlau</b></font></td>
-                                <td width="40"></td>
-                                <td><a href="films.html"><font color="white">Films</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedInPage-html5.html"><font color="white">Dashboard</font></a></td>
-                                <td width="20"></td>
-                                <td bgcolor="#444444" align="center" width="120"><a href="LoggedInPage-html5.html"><font color="white">← Back to dashboard</font></a></td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                            <a href="films.html" role="menuitem">Films</a>
+                                            <a href="lists.html" role="menuitem">Lists</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -32,39 +62,83 @@
 </table>
 
 <!-- Main Content -->
-<table width="100%" cellpadding="20" cellspacing="0" border="0">
+<table id="main-content">
     <tr>
-        <td align="center">
-            <table width="800" cellpadding="15" cellspacing="0" border="1">
+        <td>
+            <table class="content-stack">
                 <tr>
-                    <td bgcolor="#F5F5F5">
-                        <h2>My Account</h2>
-                        <p>This is a placeholder profile page for a logged-in user.</p>
-                        <p>In a real app you would show username, avatar, and account details here.</p>
-                        <table width="100%" cellpadding="8" cellspacing="0" border="0">
+                    <td>
+
+                        <!-- Profile Header Card -->
+                        <table class="section-panel">
                             <tr>
-                                <td width="120" valign="top"><b>Username</b></td>
-                                <td>film_fan_123</td>
-                            </tr>
-                            <tr>
-                                <td valign="top"><b>Member since</b></td>
-                                <td>2024</td>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>My Profile</h2></td>
+                                            <td class="view-all-cell">
+                                                <a href="LoggedInPage-html5.html" class="view-all-link">&larr; Dashboard</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top:1rem;">
+                                                <table style="border-collapse:collapse;width:100%;">
+                                                    <tr>
+                                                        <td style="border:none;width:80px;vertical-align:top;padding:0 1rem 0 0;">
+                                                            <!-- Avatar placeholder -->
+                                                            <div style="width:64px;height:64px;border-radius:50%;background:var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--color-text-dim);">&#128100;</div>
+                                                        </td>
+                                                        <td style="border:none;vertical-align:top;padding:0;">
+                                                            <b style="color:var(--color-text);font-size:1.1rem;">film_fan_123</b>
+                                                            <span style="display:block;color:var(--color-text-muted);font-size:0.85rem;margin-top:2px;">Member since 2024</span>
+                                                            <span style="display:block;color:var(--color-text-dim);font-size:0.82rem;margin-top:6px;">Film lover · 1,247 films watched</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
-                        <br>
-                        <h3>Recent Activity</h3>
-                        <table width="100%" cellpadding="5" cellspacing="0" border="0">
+
+                        <!-- Recent Activity -->
+                        <table class="section-panel">
                             <tr>
-                                <td>• Rated <b>Inception</b> ★★★★★</td>
-                            </tr>
-                            <tr>
-                                <td>• Added <b>Dune: Part Two</b> to watchlist</td>
-                            </tr>
-                            <tr>
-                                <td>• Reviewed <b>Oppenheimer</b></td>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Recent Activity</h2></td>
+                                            <td class="view-all-cell"><a href="diary.html" class="view-all-link">Full diary &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="movie-grid" style="margin-top:0.75rem;">
+                                                    <tr>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#11088;</span>
+                                                            <span class="movie-title">Inception</span>
+                                                            <span class="movie-meta">Rated ★★★★★</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#127902;</span>
+                                                            <span class="movie-title">Dune: Part Two</span>
+                                                            <span class="movie-meta">Added to watchlist</span>
+                                                        </td>
+                                                        <td class="movie-item">
+                                                            <span class="movie-icon">&#128221;</span>
+                                                            <span class="movie-title">Oppenheimer</span>
+                                                            <span class="movie-meta">Reviewed</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
-                        <p><a href="LoggedInPage-html5.html">← Back to logged-in home</a></p>
+
                     </td>
                 </tr>
             </table>
@@ -73,10 +147,13 @@
 </table>
 
 <!-- Footer -->
-<table width="100%" cellpadding="15" cellspacing="0" border="0" bgcolor="#F5F5F5">
+<table id="site-footer">
     <tr>
-        <td align="center">
-            <font size="2">&copy; 2024 BlimBlau. All rights reserved. | <a href="LoggedOutPage-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></font>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>
     </tr>
 </table>

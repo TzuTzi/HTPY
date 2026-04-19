@@ -2,28 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BlimBlau - Featured Movies</title>
+    <title>BlimBlau – Featured Movies</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
 </head>
 <body>
 
 <!-- Header -->
-<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#333333">
+<table id="site-header">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="10" cellspacing="0" border="0">
+        <td>
+            <table>
                 <tr>
                     <td>
-                        <table cellpadding="5" cellspacing="0" border="0">
-                            <tr>
-                                <td><font color="white" size="4"><b>BlimBlau</b></font></td>
-                                <td width="40"></td>
-                                <td><a href="films.html"><font color="white">Films</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="lists.html"><font color="white">Lists</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedOutPage-html5.html"><font color="white">Home</font></a></td>
-                                <td width="20"></td>
-                                <td bgcolor="#444444" align="center" width="120"><a href="LoggedOutPage-html5.html"><font color="white">← Back to welcome</font></a></td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="LoggedOutPage-html5.html">Home</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td><a href="LoggedInPage-html5.html" style="color:var(--color-text-muted);">Dashboard</a></td>
                             </tr>
                         </table>
                     </td>
@@ -34,45 +44,31 @@
 </table>
 
 <!-- Main Content -->
-<table width="100%" cellpadding="20" cellspacing="0" border="0">
+<table id="main-content">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="15" cellspacing="0" border="0">
+        <td>
+            <table class="content-stack">
                 <tr>
                     <td>
-                        <!-- Featured Movies intro -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
-                            <tr>
-                                <td align="center" bgcolor="#F5F5F5">
-                                    <h2>Featured Movies</h2>
-                                    <p>Hand-picked highlights from across BlimBlau.</p>
-                                    <p><a href="LoggedOutPage-html5.html">← Back to welcome page</a></p>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <br><br>
 
                         <!-- Now Trending -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table width="100%" cellpadding="5" cellspacing="0">
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Now Trending</h2></td>
+                                            <td class="view-all-cell"><a href="LoggedOutPage-html5.html" class="view-all-link">&larr; Welcome page</a></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <table width="100%" cellpadding="8" cellspacing="0" border="0">
+                                            <td colspan="2">
+                                                <table class="rec-simple-grid">
                                                     <tr>
-                                                        <td width="33%" bgcolor="#F0F0F0">• Dune: Part Two (2024)</td>
-                                                        <td width="33%" bgcolor="#F0F0F0">• Oppenheimer (2023)</td>
-                                                        <td width="34%" bgcolor="#F0F0F0">• Killers of the Flower Moon (2023)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td bgcolor="#F0F0F0">• Past Lives (2023)</td>
-                                                        <td bgcolor="#F0F0F0">• Spider-Man: Across the Spider-Verse (2023)</td>
-                                                        <td bgcolor="#F0F0F0">&nbsp;</td>
+                                                        <td class="rec-simple-cell"><b>Dune: Part Two</b><small>2024 · Sci-Fi</small></td>
+                                                        <td class="rec-simple-cell"><b>Oppenheimer</b><small>2023 · Drama</small></td>
+                                                        <td class="rec-simple-cell"><b>Killers of the Flower Moon</b><small>2023 · Drama</small></td>
+                                                        <td class="rec-simple-cell"><b>Past Lives</b><small>2023 · Romance</small></td>
+                                                        <td class="rec-simple-cell"><b>Spider-Man: Across the Spider-Verse</b><small>2023 · Animation</small></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -82,25 +78,43 @@
                             </tr>
                         </table>
 
-                        <br><br>
-
                         <!-- Staff Picks -->
-                        <table width="100%" cellpadding="15" cellspacing="0" border="1">
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table width="100%" cellpadding="5" cellspacing="0">
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Staff Picks</h2></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <table width="100%" cellpadding="8" cellspacing="0" border="0">
-                                                    <tr align="center">
-                                                        <td width="20%" bgcolor="#F0F0F0"><b>In the Mood for Love</b></td>
-                                                        <td width="20%" bgcolor="#F0F0F0"><b>Mad Max: Fury Road</b></td>
-                                                        <td width="20%" bgcolor="#F0F0F0"><b>Moonlight</b></td>
-                                                        <td width="20%" bgcolor="#F0F0F0"><b>Portrait of a Lady on Fire</b></td>
-                                                        <td width="20%" bgcolor="#F0F0F0"><b>The Lord of the Rings</b></td>
+                                            <td colspan="2">
+                                                <table class="rec-grid">
+                                                    <tr>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">ITMFL</div>
+                                                            <b class="rec-title">In the Mood for Love</b>
+                                                            <small class="rec-genre">Drama / Romance</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">MM</div>
+                                                            <b class="rec-title">Mad Max: Fury Road</b>
+                                                            <small class="rec-genre">Action</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">ML</div>
+                                                            <b class="rec-title">Moonlight</b>
+                                                            <small class="rec-genre">Drama</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">PF</div>
+                                                            <b class="rec-title">Portrait of a Lady on Fire</b>
+                                                            <small class="rec-genre">Drama / Romance</small>
+                                                        </td>
+                                                        <td class="rec-card">
+                                                            <div class="rec-poster">LOR</div>
+                                                            <b class="rec-title">The Lord of the Rings</b>
+                                                            <small class="rec-genre">Fantasy / Adventure</small>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -109,6 +123,7 @@
                                 </td>
                             </tr>
                         </table>
+
                     </td>
                 </tr>
             </table>
@@ -117,10 +132,13 @@
 </table>
 
 <!-- Footer -->
-<table width="100%" cellpadding="15" cellspacing="0" border="0" bgcolor="#F5F5F5">
+<table id="site-footer">
     <tr>
-        <td align="center">
-            <font size="2">&copy; 2024 BlimBlau. All rights reserved. | <a href="LoggedOutPage-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></font>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>
     </tr>
 </table>

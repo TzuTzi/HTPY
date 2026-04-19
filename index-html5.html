@@ -3,23 +3,39 @@
 <head>
     <meta charset="utf-8">
     <title>BlimBlau</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
 </head>
 <body>
 
 <!-- Header -->
-<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#333333">
+<table id="site-header">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="10" cellspacing="0" border="0">
+        <td>
+            <table>
                 <tr>
                     <td>
-                        <table cellpadding="5" cellspacing="0" border="0">
-                            <tr>
-                                <td><font color="white" size="4"><b>BlimBlau</b></font></td>
-                                <td width="40"></td>
-                                <td><a href="LoggedOutPage-html5.html"><font color="white">Welcome</font></a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedInPage-html5.html"><font color="white">Dashboard</font></a></td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="lists.html">Lists</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td><a href="LoggedOutPage-html5.html" style="color:var(--color-text-muted);">Welcome</a></td>
+                                <td></td>
+                                <td><a href="LoggedInPage-html5.html" style="color:var(--color-text-muted);">Dashboard</a></td>
                             </tr>
                         </table>
                     </td>
@@ -30,31 +46,52 @@
 </table>
 
 <!-- Main Content -->
-<table width="100%" cellpadding="20" cellspacing="0" border="0">
+<table id="main-content">
     <tr>
-        <td align="center">
-            <table width="1200" cellpadding="15" cellspacing="0" border="1">
+        <td>
+            <table class="content-stack">
                 <tr>
-                    <td bgcolor="#F5F5F5" align="center">
-                        <h2>Welcome to BlimBlau</h2>
-                        <p>Your place to track movies, write reviews, and share recommendations.</p>
-                        <table cellpadding="10" cellspacing="0" border="0">
+                    <td>
+                        <table class="section-panel">
                             <tr>
-                                <td><a href="LoggedOutPage-html5.html">Go to welcome page</a></td>
-                                <td width="20"></td>
-                                <td><a href="LoggedInPage-html5.html">Go to logged-in dashboard</a></td>
+                                <td class="cta-box">
+                                    <h3>Welcome to BlimBlau</h3>
+                                    <p>Your place to track movies, write reviews, and share recommendations.</p>
+                                    <a href="LoggedOutPage-html5.html" class="cta-btn-primary">Go to Welcome Page</a>
+                                    <a href="LoggedInPage-html5.html" class="cta-btn-secondary">Go to Dashboard</a>
+                                </td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td bgcolor="#F0F0F0" cellpadding="15">
-                        <h3>What you can do here</h3>
-                        <table width="100%" cellpadding="8" cellspacing="0" border="0">
+
+                        <table class="section-panel">
                             <tr>
-                                <td width="33%" valign="top">• Discover new films other members are talking about.</td>
-                                <td width="33%" valign="top">• Organize a watchlist so you never forget what to see next.</td>
-                                <td width="34%" valign="top">• Record what you've watched and when.</td>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>What you can do here</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="rec-simple-grid">
+                                                    <tr>
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#127909; Discover Films</b>
+                                                            <small>Find new films other members are talking about.</small>
+                                                        </td>
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#128203; Watchlist</b>
+                                                            <small>Organize a watchlist so you never forget what to see next.</small>
+                                                        </td>
+                                                        <td class="rec-simple-cell">
+                                                            <b>&#128336; Track Viewing</b>
+                                                            <small>Record what you've watched and when.</small>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -65,10 +102,13 @@
 </table>
 
 <!-- Footer -->
-<table width="100%" cellpadding="15" cellspacing="0" border="0" bgcolor="#F5F5F5">
+<table id="site-footer">
     <tr>
-        <td align="center">
-            <font size="2">&copy; 2024 BlimBlau. All rights reserved. | <a href="index-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></font>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="index-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>
     </tr>
 </table>
