@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BlimBlau – Browse by Genre</title>
+    <!--
+        Pagina demonstrează tehnica LISTE IMBRICATE COLAPSABILE.
+        Tehnica: JavaScript + CSS transitions.
+        JavaScript adaugă/elimină clasa "open" pe <li> la click.
+        CSS ascunde sublista implicit (max-height:0, opacity:0) și
+        o face vizibilă când <li> are clasa "open".
+    -->
+    <link rel="stylesheet" href="css/style-horizontal.css">
+
+    <style>
+        /* ================================================================
+           LISTE IMBRICATE COLAPSABILE  –  controlate prin JS
+           ================================================================ */
+
+        .tree-list,
+        .tree-sublist,
+        .tree-sub2 {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Separator între elementele principale */
+        .tree-list > li {
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .tree-list > li:last-child {
+            border-bottom: none;
+        }
+
+        /* ── Butonul de toggle (generat curat în HTML, fără checkbox) ── */
+        .tree-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            border-radius: var(--radius-sm);
+            transition: background-color var(--transition), color var(--transition);
+        }
+
+        .tree-toggle:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--color-blue);
+        }
+
+        /* ── Săgeata — triunghi CSS pur, rotit de JS via clasa "open" ── */
+        .tree-arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-top:    5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left:   7px solid var(--color-text-muted);
+            flex-shrink: 0;
+            transition: transform 0.22s ease;
+        }
+
+        /* ── SUBLISTA — ASCUNSĂ IMPLICIT prin CSS ── */
+        .tree-sublist {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.32s ease, opacity 0.25s ease;
+        }
+
+        /* Elementele din sublistă */
+        .tree-sublist > li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1rem 0.45rem 2.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.86rem;
+            transition: color var(--transition);
+            border-bottom: none;
+        }
+
+        .tree-sublist > li:hover {
+            color: var(--color-text);
+        }
+
+        /* Bullet colorat */
+        .tree-sublist > li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-border);
+            flex-shrink: 0;
+            transition: background var(--transition);
+        }
+
+        .tree-sublist > li:hover::before {
+            background: var(--color-blue);
+        }
+
+        /* ── NIVEL 2 — buton de toggle pentru sub-subliste ── */
+        .tree-toggle2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.45rem 1rem 0.45rem 2.5rem;
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 0.86rem;
+            cursor: pointer;
+            text-align: left;
+            transition: color var(--transition);
+        }
+
+        .tree-toggle2:hover { color: var(--color-text); }
+
+        .tree-arrow2 {
+            display: inline-block;
+            width: 0; height: 0;
+            border-top:    4px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left:   5px solid var(--color-border);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        /* Sub-sublista (nivel 3) — ascunsă implicit */
+        .tree-sub2 {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.28s ease, opacity 0.22s ease;
+        }
+
+        .tree-sub2 > li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem 0.35rem 4rem;
+            color: var(--color-text-dim);
+            font-size: 0.82rem;
+            border-bottom: none;
+        }
+
+        .tree-sub2 > li::before {
+            content: "›";
+            color: var(--color-blue);
+        }
+
+        /* ── STAREA EXPANDATĂ — clasa "open" adăugată de JavaScript ── */
+        li.open > .tree-toggle  .tree-arrow  { transform: rotate(90deg); }
+        li.open > .tree-toggle              { color: var(--color-blue); background-color: rgba(88,166,255,0.06); }
+        li.open > .tree-sublist             { max-height: 600px; opacity: 1; }
+
+        li.open2 > .tree-toggle2 .tree-arrow2 { transform: rotate(90deg); }
+        li.open2 > .tree-sub2                 { max-height: 400px; opacity: 1; }
+
+        /* ── Elementele frunză (fără sublistă) ── */
+        .tree-leaf {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .tree-leaf::before {
+            content: "–";
+            color: var(--color-border);
+            font-weight: 400;
+        }
+
+        /* ── Badge cu numărul de filme ── */
+        .tree-badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: var(--color-surface-elevated);
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        /* ── Explicație tehnică ── */
+        .explain-box {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border-subtle);
+            border-left: 3px solid var(--color-blue);
+            border-radius: var(--radius-sm);
+            padding: 0.9rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .explain-box code {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 3px;
+            padding: 1px 5px;
+            font-size: 0.8rem;
+            color: var(--color-blue);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER – meniu orizontal
+     ═══════════════════════════════════════════════ -->
+<table id="site-header">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="nested-list.html" class="nav-active">Browse</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                            <a href="films.html" role="menuitem">Films</a>
+                                            <a href="lists.html" role="menuitem">Lists</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════
+     CONȚINUT PRINCIPAL
+     ═══════════════════════════════════════════════ -->
+<table id="main-content">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 1: Explicație tehnică
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Liste Imbricate Colapsabile</h2>
+                                    <div class="explain-box">
+                                        Tehnica folosită: <strong>JavaScript + CSS transitions</strong>.<br>
+                                        La click pe un buton <code>.tree-toggle</code>, JavaScript apelează
+                                        <code>li.classList.toggle("open")</code>.
+                                        CSS ascunde sublista implicit (<code>max-height:0; opacity:0</code>)
+                                        și o face vizibilă când <code>li</code> are clasa <code>open</code>.
+                                        Animația este realizată de tranziția CSS pe <code>max-height</code> și <code>opacity</code>.
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 2: Lista imbricate colapsabilă
+                             Structură: ul > li > button.tree-toggle + ul.tree-sublist
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Browse by Genre</h2></td>
+                                            <td class="view-all-cell"><a href="films.html" class="view-all-link">All Films &rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+
+                                                <!-- LISTA PRINCIPALĂ (nivel 1) -->
+                                                <ul class="tree-list">
+
+                                                    <!-- ── Drama ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#127916; Drama
+                                                            <span class="tree-badge">142 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Historical Drama <span class="tree-badge">38</span></li>
+                                                            <li>Psychological Drama <span class="tree-badge">29</span></li>
+                                                            <li>Social Drama <span class="tree-badge">41</span></li>
+                                                            <li>Romantic Drama <span class="tree-badge">34</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <!-- ── Science Fiction (cu nivel 3: Cyberpunk) ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#128640; Science Fiction
+                                                            <span class="tree-badge">98 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Space Opera <span class="tree-badge">22</span></li>
+                                                            <!-- Sub-nivel 2: Cyberpunk → titluri -->
+                                                            <li>
+                                                                <button class="tree-toggle2" aria-expanded="false">
+                                                                    <span class="tree-arrow2"></span>
+                                                                    Cyberpunk
+                                                                    <span class="tree-badge">17</span>
+                                                                </button>
+                                                                <ul class="tree-sub2" aria-hidden="true">
+                                                                    <li>Blade Runner 2049</li>
+                                                                    <li>Ghost in the Shell</li>
+                                                                    <li>The Matrix</li>
+                                                                    <li>Akira</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>Time Travel <span class="tree-badge">19</span></li>
+                                                            <li>Dystopian <span class="tree-badge">31</span></li>
+                                                            <li>AI &amp; Robots <span class="tree-badge">9</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <!-- ── Thriller ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#128373; Thriller
+                                                            <span class="tree-badge">76 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Psychological Thriller <span class="tree-badge">28</span></li>
+                                                            <li>Crime Thriller <span class="tree-badge">24</span></li>
+                                                            <li>Conspiracy <span class="tree-badge">14</span></li>
+                                                            <li>Neo-Noir <span class="tree-badge">10</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <!-- ── Animation ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#127775; Animation
+                                                            <span class="tree-badge">54 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Studio Ghibli <span class="tree-badge">21</span></li>
+                                                            <li>Pixar &amp; Disney <span class="tree-badge">18</span></li>
+                                                            <li>Stop Motion <span class="tree-badge">8</span></li>
+                                                            <li>Adult Animation <span class="tree-badge">7</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <!-- ── Documentary (frunză, fără sublistă) ── -->
+                                                    <li class="tree-leaf">
+                                                        &#127902; Documentary
+                                                        <span class="tree-badge">33 films</span>
+                                                    </li>
+
+                                                    <!-- ── Horror ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#128123; Horror
+                                                            <span class="tree-badge">61 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Supernatural <span class="tree-badge">23</span></li>
+                                                            <li>Slasher <span class="tree-badge">15</span></li>
+                                                            <li>Body Horror <span class="tree-badge">12</span></li>
+                                                            <li>Folk Horror <span class="tree-badge">11</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <!-- ── Comedy (frunză) ── -->
+                                                    <li class="tree-leaf">
+                                                        &#128514; Comedy
+                                                        <span class="tree-badge">89 films</span>
+                                                    </li>
+
+                                                    <!-- ── Action ── -->
+                                                    <li>
+                                                        <button class="tree-toggle" aria-expanded="false">
+                                                            <span class="tree-arrow"></span>
+                                                            &#128293; Action
+                                                            <span class="tree-badge">115 films</span>
+                                                        </button>
+                                                        <ul class="tree-sublist" aria-hidden="true">
+                                                            <li>Martial Arts <span class="tree-badge">27</span></li>
+                                                            <li>Superhero <span class="tree-badge">34</span></li>
+                                                            <li>Heist <span class="tree-badge">21</span></li>
+                                                            <li>War <span class="tree-badge">33</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ─────────────────────────────────────────────
+                             SECȚIUNEA 3: Navigare spre alte pagini
+                             ───────────────────────────────────────────── -->
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Alte pagini ale proiectului</h2>
+                                    <table class="offset-table">
+                                        <tr>
+                                            <th>Pagina</th>
+                                            <th>Caracteristică principală</th>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="sprites.html">sprites.html</a></td>
+                                            <td>CSS Sprites – iconițe din sprite sheet</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="widgets.html">widgets.html</a></td>
+                                            <td>Dashboard – carduri, feed, tabel responsive</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="form-html5.html">form-html5.html</a></td>
+                                            <td>Formular complet cu toate tipurile de input</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="LoggedInPage-html5.html">LoggedInPage</a></td>
+                                            <td>Pagina principală – meniu orizontal, Flexbox</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- FOOTER -->
+<table id="site-footer">
+    <tr>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+        </td>
+    </tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT – extern, în js/collapsible.js
+     ═══════════════════════════════════════════════ -->
+<script src="js/collapsible.js" defer></script>
+
+</body>
+</html>

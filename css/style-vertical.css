@@ -53,6 +53,7 @@
     --shadow-lg: 0 8px 28px rgba(0,0,0,0.55);
     --transition: 0.17s ease;
     --font: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --sprite-url: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOTInIGhlaWdodD0nMjQnIHZpZXdCb3g9JzAgMCAxOTIgMjQnPjxnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzhiOTQ5ZScgc3Ryb2tlLXdpZHRoPScxLjUnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBvbHlsaW5lIHBvaW50cz0nMiwxMiAxMiw0IDIyLDEyJy8+PHJlY3QgeD0nNCcgeT0nMTEnIHdpZHRoPScxNicgaGVpZ2h0PScxMCcgcng9JzEnLz48cmVjdCB4PSc5JyB5PScxNScgd2lkdGg9JzYnIGhlaWdodD0nNicgZmlsbD0nIzhiOTQ5ZScgc3Ryb2tlPSdub25lJy8+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjQsMCknPjxyZWN0IHg9JzMnIHk9JzMnIHdpZHRoPScxOCcgaGVpZ2h0PScxOCcgcng9JzInLz48bGluZSB4MT0nMycgeTE9JzknIHgyPScyMScgeTI9JzknLz48bGluZSB4MT0nMycgeTE9JzE1JyB4Mj0nMjEnIHkyPScxNScvPjxsaW5lIHgxPSc5JyB5MT0nMycgeDI9JzknIHkyPSc5Jy8+PGxpbmUgeDE9JzE1JyB5MT0nMycgeDI9JzE1JyB5Mj0nOScvPjwvZz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0OCwwKSc+PGNpcmNsZSBjeD0nNScgY3k9JzcnIHI9JzEuNScgZmlsbD0nIzhiOTQ5ZScgc3Ryb2tlPSdub25lJy8+PGNpcmNsZSBjeD0nNScgY3k9JzEyJyByPScxLjUnIGZpbGw9JyM4Yjk0OWUnIHN0cm9rZT0nbm9uZScvPjxjaXJjbGUgY3g9JzUnIGN5PScxNycgcj0nMS41JyBmaWxsPScjOGI5NDllJyBzdHJva2U9J25vbmUnLz48bGluZSB4MT0nOScgeTE9JzcnIHgyPScyMScgeTI9JzcnLz48bGluZSB4MT0nOScgeTE9JzEyJyB4Mj0nMjEnIHkyPScxMicvPjxsaW5lIHgxPSc5JyB5MT0nMTcnIHgyPScyMScgeTI9JzE3Jy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDcyLDApJz48Y2lyY2xlIGN4PSc5JyBjeT0nOCcgcj0nMy41Jy8+PHBhdGggZD0nTTIgMjFjMC00LjUgMy03IDctN3M3IDIuNSA3IDcnLz48Y2lyY2xlIGN4PScxOCcgY3k9JzcnIHI9JzIuNScvPjxwYXRoIGQ9J00xNiAyMGMxLTMgMy00LjUgNi00LjUnLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoOTYsMCknPjxjaXJjbGUgY3g9JzEyJyBjeT0nMTInIHI9JzkuNScvPjxjaXJjbGUgY3g9JzEyJyBjeT0nNycgcj0nMScgZmlsbD0nIzhiOTQ5ZScgc3Ryb2tlPSdub25lJy8+PGxpbmUgeDE9JzEyJyB5MT0nMTAnIHgyPScxMicgeTI9JzE3JyBzdHJva2Utd2lkdGg9JzInLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTIwLDApJz48Y2lyY2xlIGN4PScxMicgY3k9JzgnIHI9JzQnLz48cGF0aCBkPSdNNCAyMWMwLTQuNSAzLjUtNyA4LTdzOCAyLjUgOCA3Jy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE0NCwwKSc+PHBhdGggZD0nTTkgM0g0YTEgMSAwIDAwLTEgMXYxNmExIDEgMCAwMDEgMWg1Jy8+PHBvbHlsaW5lIHBvaW50cz0nMTUsNyAyMSwxMiAxNSwxNycvPjxsaW5lIHgxPScyMScgeTE9JzEyJyB4Mj0nNycgeTI9JzEyJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE2OCwwKSc+PGNpcmNsZSBjeD0nMTAnIGN5PScxMCcgcj0nNycvPjxsaW5lIHgxPScxNS41JyB5MT0nMTUuNScgeDI9JzIxJyB5Mj0nMjEnLz48L2c+PC9nPjwvc3ZnPg==");
 }
 
 
@@ -223,7 +224,7 @@ body {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 128px 16px;             /* scalează sprite-ul la 16px înălțime */
     background-repeat: no-repeat;
     margin-right: 10px;
@@ -273,7 +274,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: 0 0;
@@ -288,7 +289,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: -70px 0;
@@ -303,7 +304,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: -84px 0;
@@ -318,7 +319,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: -14px 0;
@@ -333,7 +334,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: -28px 0;
@@ -348,7 +349,7 @@ body {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 112px 14px;
     background-repeat: no-repeat;
     background-position: -42px 0;
@@ -471,22 +472,23 @@ body {
    left: 100% = imediat la dreapta wrapper-ului (care e la x=240px).
    top: 0 = aliniat cu top-ul trigger-ului.
    min-width: 200px, max-height cu scroll dacă e prea lung. */
-.nav-dropdown-panel {
+   .nav-dropdown-panel {
     position: absolute;
-    top: 0;
-    left: 100%;       /* SPRE DREAPTA, nu în jos! */
+    bottom: 0;      /* anchor to the BOTTOM of the trigger → panel grows upward */
+    top: auto;      /* remove the old top: 0 */
+    left: 100%;     /* still opens to the right of the sidebar */
     right: auto;
     min-width: 200px;
     max-height: 80vh;
     overflow-y: auto;
     background: var(--color-surface-elevated);
     border: 1px solid var(--color-border);
-    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    border-radius: var(--radius) var(--radius) var(--radius) 0; /* flat bottom-left corner */
     box-shadow: var(--shadow-lg);
     padding: 6px 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-8px); /* slide din stânga */
+    transform: translateX(-8px);
     transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
     z-index: 200;
 }
@@ -780,7 +782,7 @@ body {
     display: inline-block;
     width: 24px;
     height: 24px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 192px 24px; /* dimensiune originală – 1:1 */
     background-repeat: no-repeat;
     vertical-align: middle;
@@ -791,7 +793,7 @@ body {
     display: inline-block;
     width: 32px;
     height: 32px;
-    background-image: url('../images/sprites.svg');
+    background-image: var(--sprite-url);
     background-size: 256px 32px; /* scale: 32/24 = 1.33 */
     background-repeat: no-repeat;
     vertical-align: middle;

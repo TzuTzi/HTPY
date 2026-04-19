@@ -374,6 +374,71 @@
     </tr>
 </table>
 
+<!-- ═══════════════════════════════════════════════
+     TABEL SORTABIL – generat și sortat din JS
+     ═══════════════════════════════════════════════ -->
+<table id="main-content" style="margin-top:0;">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Film Database — Sortable Table</h2></td>
+                                            <td class="view-all-cell"><span style="font-size:0.75rem;color:var(--color-text-muted);">Click any column header to sort &#8597;</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <style>
+                                                    #film-table { width:100%; border-collapse:collapse; font-size:0.86rem; }
+                                                    #film-table th { padding:0.55rem 0.8rem; background:var(--color-surface); color:var(--color-text-muted); font-weight:600; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; border-bottom:2px solid var(--color-border); cursor:pointer; white-space:nowrap; user-select:none; }
+                                                    #film-table th:hover { color:var(--color-blue); }
+                                                    #film-table th.sorted-asc::after  { content:" ▲"; color:var(--color-blue); }
+                                                    #film-table th.sorted-desc::after { content:" ▼"; color:var(--color-blue); }
+                                                    #film-table td { padding:0.5rem 0.8rem; border-bottom:1px solid var(--color-border-subtle); color:var(--color-text-muted); vertical-align:middle; }
+                                                    #film-table tr:hover td { background:rgba(255,255,255,0.03); color:var(--color-text); }
+                                                    .genre-badge { background:var(--color-surface-elevated); border:1px solid var(--color-border-subtle); border-radius:999px; padding:1px 8px; font-size:0.75rem; }
+                                                    .rating-stars { color:#f0b429; letter-spacing:-1px; }
+                                                    .mood-tag { border-radius:999px; padding:2px 8px; font-size:0.72rem; font-weight:600; text-transform:capitalize; }
+                                                    .mood-happy       { background:rgba(240,180,41,0.15); color:#f0b429; }
+                                                    .mood-tense       { background:rgba(224,92,42,0.15);  color:#e05c2a; }
+                                                    .mood-melancholic { background:rgba(90,127,168,0.15); color:#7eb3e0; }
+                                                    .mood-adventurous { background:rgba(63,185,80,0.15);  color:#3fb950; }
+                                                </style>
+                                                <div style="overflow-x:auto;">
+                                                    <table id="film-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-col="0">Title</th>
+                                                                <th data-col="1">Year</th>
+                                                                <th data-col="2">Genre</th>
+                                                                <th data-col="3">Rating</th>
+                                                                <th data-col="4">Reviews</th>
+                                                                <th data-col="5">Mood</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- Populat de table-sort.js -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
 <!-- FOOTER -->
 <table id="site-footer">
     <tr>
@@ -388,5 +453,7 @@
     </tr>
 </table>
 
+<script src="js/data.js" defer></script>
+<script src="js/table-sort.js" defer></script>
 </body>
 </html>

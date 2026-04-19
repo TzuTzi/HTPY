@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BlimBlau – Mood Picker</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
+    <style>
+        /* ── Butoane de mood ── */
+        .mood-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 999px;
+            border: 2px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+        }
+        .mood-btn:hover { transform: translateY(-2px); border-color: var(--color-border); color: var(--color-text); }
+        .mood-btn.active { color: #fff; transform: translateY(-2px); }
+        .mood-btn[data-mood="happy"].active       { background:#f0b429; border-color:#f0b429; }
+        .mood-btn[data-mood="tense"].active        { background:#e05c2a; border-color:#e05c2a; }
+        .mood-btn[data-mood="melancholic"].active  { background:#5a7fa8; border-color:#5a7fa8; }
+        .mood-btn[data-mood="adventurous"].active  { background:#3fb950; border-color:#3fb950; }
+
+        /* ── Grid de carduri ── */
+        #mood-film-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            transition: opacity 0.2s;
+        }
+        #mood-film-grid.animating { opacity: 0; }
+
+        .mood-film-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius);
+            padding: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            animation: cardIn 0.3s ease both;
+            transition: border-color var(--transition), transform var(--transition);
+        }
+        .mood-film-card:hover { border-color: var(--color-border); transform: translateY(-3px); }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        /* Poster placeholder colorat per mood */
+        .mood-card-poster {
+            width: 100%; height: 90px;
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.3rem; color: rgba(255,255,255,0.7);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.2rem;
+        }
+        .mood-poster-happy       { background: linear-gradient(135deg,#f0b429,#c8882a); }
+        .mood-poster-tense        { background: linear-gradient(135deg,#e05c2a,#8b1a00); }
+        .mood-poster-melancholic  { background: linear-gradient(135deg,#5a7fa8,#1e3a5f); }
+        .mood-poster-adventurous  { background: linear-gradient(135deg,#3fb950,#1a6e2e); }
+
+        .mood-card-title { font-size: 0.85rem; font-weight: 700; color: var(--color-text); line-height: 1.3; }
+        .mood-card-meta  { font-size: 0.75rem; color: var(--color-text-muted); }
+        .mood-card-stars { font-size: 0.78rem; color: #f0b429; }
+        .mood-card-stars small { color: var(--color-text-muted); }
+
+        /* ── Titlu rezultate ── */
+        #mood-result-title {
+            font-size: 1.05rem; font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        /* ── Descrieri mood ── */
+        .mood-desc-bar {
+            display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+            margin-top: 0.8rem; margin-bottom: 0.3rem;
+        }
+        .mood-desc-item { font-size: 0.8rem; color: var(--color-text-muted); }
+        .mood-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+    </style>
+</head>
+<body>
+
+<table id="site-header">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
+                                <td></td>
+                                <td><a href="films.html">Films</a></td>
+                                <td></td>
+                                <td><a href="mood-picker.html" class="nav-active">Mood Picker</a></td>
+                                <td></td>
+                                <td><a href="members.html">Members</a></td>
+                                <td></td>
+                                <td><a href="about.html">About</a></td>
+                                <td></td>
+                                <td>
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                                    </form>
+                                </td>
+                                <td></td>
+                                <td class="nav-dropdown-wrap">
+                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+                                        <span class="nav-dropdown-trigger-text">My Account</span>
+                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
+                                    </a>
+                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
+                                        <div class="nav-dropdown-section">
+                                            <a href="index-html5.html" role="menuitem">Home</a>
+                                            <a href="profile-html5.html" role="menuitem">Profile</a>
+                                        </div>
+                                        <hr class="nav-dropdown-divider">
+                                        <div class="nav-dropdown-section">
+                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
+                                            <a href="logout.html" role="menuitem">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table id="main-content">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">&#127916; Cinematic Mood Picker</h2>
+                                    <p class="section-desc" style="margin-bottom:1.2rem;">
+                                        How are you feeling tonight? Pick a mood and we'll show you the perfect films.
+                                        Click the same mood again to reset.
+                                    </p>
+
+                                    <!-- ── Butoane de mood ── -->
+                                    <div style="display:flex;flex-wrap:wrap;gap:0.7rem;margin-bottom:0.5rem;">
+                                        <button class="mood-btn" data-mood="happy"       aria-pressed="false">&#128516; Happy</button>
+                                        <button class="mood-btn" data-mood="tense"        aria-pressed="false">&#128552; Tense</button>
+                                        <button class="mood-btn" data-mood="melancholic"  aria-pressed="false">&#128546; Melancholic</button>
+                                        <button class="mood-btn" data-mood="adventurous"  aria-pressed="false">&#128640; Adventurous</button>
+                                    </div>
+
+                                    <!-- Descrieri rapide -->
+                                    <div class="mood-desc-bar">
+                                        <span class="mood-desc-item"><span class="mood-dot" style="background:#f0b429;"></span>Happy — light, fun, uplifting</span>
+                                        <span class="mood-desc-item"><span class="mood-dot" style="background:#e05c2a;"></span>Tense — thrillers, suspense</span>
+                                        <span class="mood-desc-item"><span class="mood-dot" style="background:#5a7fa8;"></span>Melancholic — emotional dramas</span>
+                                        <span class="mood-desc-item"><span class="mood-dot" style="background:#3fb950;"></span>Adventurous — action, sci-fi</span>
+                                    </div>
+
+                                    <!-- Buton reset -->
+                                    <div style="margin-top:1rem;">
+                                        <button id="mood-reset" style="display:none;background:none;border:1px solid var(--color-border);color:var(--color-text-muted);padding:0.3rem 0.9rem;border-radius:999px;cursor:pointer;font-size:0.8rem;">
+                                            ✕ Clear filter
+                                        </button>
+                                    </div>
+
+                                    <!-- Titlu secțiune rezultate -->
+                                    <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1rem;">
+                                        <span id="mood-result-title"></span>
+                                    </div>
+
+                                    <!-- Grid de filme (populat de mood-picker.js) -->
+                                    <div id="mood-film-grid"></div>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <h2 class="form-section-title">Alte pagini</h2>
+                                    <table class="offset-table">
+                                        <tr><th>Pagina</th><th>Funcționalitate</th></tr>
+                                        <tr><td><a href="nested-list.html">nested-list.html</a></td><td>Liste imbricate colapsabile (JS)</td></tr>
+                                        <tr><td><a href="widgets.html">widgets.html</a></td><td>Tabel sortabil (JS)</td></tr>
+                                        <tr><td><a href="LoggedOutPage-html5.html">LoggedOutPage</a></td><td>Carousel automat (JS)</td></tr>
+                                        <tr><td><a href="form-html5.html">form-html5.html</a></td><td>Validare formular + dependențe (JS)</td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table id="site-footer">
+    <tr>
+        <td>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+        </td>
+    </tr>
+</table>
+
+<script src="js/data.js" defer></script>
+<script src="js/mood-picker.js" defer></script>
+</body>
+</html>

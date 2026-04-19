@@ -1010,3 +1010,150 @@ body {
     .form-actions input[type="submit"],
     .form-actions input[type="reset"] { height: 32px; font-size: 0.82rem; }
 }
+
+
+/* ============================================================================
+   LISTE IMBRICATE COLAPSABILE  –  .tree-list
+   ============================================================================ */
+
+/* Lista principală */
+.tree-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Fiecare element principal */
+.tree-list > li {
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+.tree-list > li:last-child {
+    border-bottom: none;
+}
+
+/* Butonul de expand/collapse (elementele cu sublistă) */
+.tree-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.65rem var(--spacing-md);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color var(--transition), color var(--transition);
+    border-radius: var(--radius-sm);
+}
+
+.tree-toggle:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: var(--color-blue);
+}
+
+/* Săgeata indicatoare — rotită cu CSS, fără JS */
+.tree-arrow {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    transition: transform 0.22s ease;
+    flex-shrink: 0;
+    /* triunghi CSS pur */
+    border: 5px solid transparent;
+    border-left: 7px solid var(--color-text-muted);
+    border-right: none;
+    margin-right: 2px;
+}
+
+/* Elementele fără sublistă (frunze) — fără buton de toggle */
+.tree-leaf {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem var(--spacing-md) 0.6rem calc(var(--spacing-md) + 28px);
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+}
+
+.tree-leaf::before {
+    content: "•";
+    color: var(--color-blue);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* SUBLISTA — ascunsă implicit cu CSS */
+.tree-sublist {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.4rem 0;
+    /* Ascundere: height 0 + overflow hidden + opacity */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+/* Elementele sublistei */
+.tree-sublist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem var(--spacing-md) 0.45rem calc(var(--spacing-md) + 28px);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    transition: color var(--transition);
+}
+
+.tree-sublist li:hover {
+    color: var(--color-text);
+}
+
+/* Bullet colorat pentru subelemente */
+.tree-sublist li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border);
+    flex-shrink: 0;
+    transition: background var(--transition);
+}
+
+.tree-sublist li:hover::before {
+    background: var(--color-blue);
+}
+
+/* Badge opțional pe elementele listei */
+.tree-badge {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--color-surface-elevated);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-subtle);
+}
+
+/* ── STAREA EXPANDATĂ ── controlată de checkbox hack (fără JS) */
+.tree-cb {
+    display: none; /* checkbox ascuns */
+}
+
+/* Când checkbox-ul e bifat → rotește săgeata */
+.tree-cb:checked + label .tree-arrow {
+    transform: rotate(90deg);
+}
+
+/* Când checkbox-ul e bifat → arată sublista */
+.tree-cb:checked ~ .tree-sublist {
+    max-height: 600px;
+    opacity: 1;
+}

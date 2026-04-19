@@ -3,19 +3,148 @@
 <head>
     <meta charset="utf-8">
     <title>BlimBlau - Welcome</title>
+    <link rel="stylesheet" href="css/style-horizontal.css">
+    <style>
+        .input-error { outline: 2px solid #f85149 !important; border-color: #f85149 !important; }
+        .field-error-msg { display: block; color: #f85149; font-size: 0.78rem; margin-top: 3px; }
+
+        /* ── Recommended movies row ── */
+        .rec-simple-grid {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 8px;
+            margin-top: 0.5rem;
+        }
+        .rec-simple-cell {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius);
+            padding: 0.6rem 0.9rem !important;
+            font-size: 0.85rem;
+            color: var(--color-text);
+            vertical-align: top;
+        }
+        .rec-simple-cell small { color: var(--color-text-dim); display: block; margin-top: 2px; }
+
+        /* ── News cards ── */
+        .news-grid { width:100%; border-collapse:separate; border-spacing:8px; margin-top:0.5rem; }
+        .news-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius);
+            padding: 0.8rem 1rem !important;
+            vertical-align: top;
+            font-size: 0.875rem;
+        }
+        .news-card b { color: var(--color-text); display: block; margin-bottom: 4px; }
+        .news-card small { color: var(--color-text-muted); display: block; margin-bottom: 8px; line-height:1.5; }
+        .news-card a { color: var(--color-blue); font-size: 0.82rem; }
+
+        /* ── CTA section ── */
+        .cta-box {
+            background: linear-gradient(135deg, #161b22 0%, #1c2228 100%);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem !important;
+            text-align: center;
+        }
+        .cta-box h3 { margin: 0 0 0.5rem; font-size: 1.3rem; color: var(--color-text); }
+        .cta-box p  { margin: 0 0 1.2rem; color: var(--color-text-muted); font-size: 0.9rem; }
+        .cta-btn-primary {
+            display: inline-block;
+            padding: 0.55rem 1.4rem;
+            background: #238636;
+            color: #fff !important;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            margin-right: 0.5rem;
+            transition: background 0.17s;
+        }
+        .cta-btn-primary:hover { background: #2ea043; }
+        .cta-btn-secondary {
+            display: inline-block;
+            padding: 0.55rem 1.4rem;
+            background: var(--color-btn);
+            color: var(--color-text-muted) !important;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: background 0.17s, color 0.17s;
+        }
+        .cta-btn-secondary:hover { background: var(--color-btn-hover); color: var(--color-text) !important; }
+
+        /* ── Preference form inside section-panel ── */
+        .pref-form-table { width:100%; border-collapse:collapse; }
+        .pref-form-table td { border:none; padding:0.4rem 0.6rem; vertical-align:middle; color:var(--color-text); font-size:0.875rem; }
+        .pref-form-table input[type="text"],
+        .pref-form-table input[type="email"],
+        .pref-form-table select,
+        .pref-form-table textarea {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            color: var(--color-text);
+            font-family: inherit;
+            font-size: 0.875rem;
+            padding: 0.3rem 0.6rem;
+            transition: border-color 0.17s, box-shadow 0.17s;
+        }
+        .pref-form-table input[type="text"]:focus,
+        .pref-form-table input[type="email"]:focus,
+        .pref-form-table select:focus,
+        .pref-form-table textarea:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 2px rgba(88,166,255,0.15);
+        }
+        .pref-form-table input[readonly] { background: var(--color-surface); color: var(--color-text-dim); cursor:not-allowed; }
+        .pref-form-table input[type="submit"] {
+            background: #238636; color:#fff; border:none; border-radius:var(--radius-sm);
+            padding:0.4rem 1.2rem; font-size:0.875rem; font-weight:600; cursor:pointer;
+            margin-right:0.4rem; transition: background 0.17s;
+        }
+        .pref-form-table input[type="submit"]:hover { background:#2ea043; }
+        .pref-form-table input[type="reset"] {
+            background: var(--color-btn); color:var(--color-text-muted);
+            border:1px solid var(--color-border); border-radius:var(--radius-sm);
+            padding:0.4rem 1.2rem; font-size:0.875rem; cursor:pointer; transition:background 0.17s;
+        }
+        .pref-form-table input[type="reset"]:hover { background:var(--color-btn-hover); }
+        .pref-section-heading { padding-top:1rem !important; padding-left:0 !important; }
+        .pref-section-heading b {
+            display:inline-block; font-size:0.7rem; font-weight:700;
+            text-transform:uppercase; letter-spacing:0.09em;
+            color:var(--color-text-dim); border-left:2px solid var(--color-border); padding-left:8px;
+        }
+
+        /* ── Collapsible lists ── */
+        .collapsible-wrap { color: var(--color-text-muted); font-size:0.875rem; }
+        .collapsible-wrap ol, .collapsible-wrap ul { padding-left: 1.2rem; }
+        .collapsible-wrap li { margin-bottom: 0.25rem; line-height:1.6; }
+
+        /* ── Carousel dots / bar (duplicated from inline for cleanliness) ── */
+        .carousel-dot { width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.25);border:none;cursor:pointer;padding:0;transition:background 0.2s,transform 0.2s; }
+        .carousel-dot.active { background:#fff;transform:scale(1.3); }
+        #carousel-prev:hover, #carousel-next:hover { background:rgba(255,255,255,0.18) !important; }
+    </style>
 </head>
 <body>
 
-<!-- Header -->
-<table>
+<!-- ═══════════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════════ -->
+<table id="site-header" width="100%">
     <tr>
         <td>
             <table>
                 <tr>
                     <td>
                         <table>
-                            <tr>
-                                <td><b>BlimBlau</b></td>
+                            <tr class="nav-row">
+                                <td class="nav-logo-td"><b>BlimBlau</b></td>
                                 <td></td>
                                 <td><a href="films.html">Films</a></td>
                                 <td></td>
@@ -26,15 +155,15 @@
                                 <td><a href="about.html">About</a></td>
                                 <td></td>
                                 <td>
-                                    <form action="search.html" method="get">
-                                        <input type="text" name="query" size="25" placeholder="Search movies...">
-                                        <input type="submit" value="Go">
+                                    <form action="search.html" method="get" class="nav-search-form">
+                                        <input type="text" name="query" placeholder="Search movies...">
+                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
                                     </form>
                                 </td>
                                 <td></td>
                                 <td><a href="login.html">Login</a></td>
                                 <td></td>
-                                <td><a href="register.html">Register</a></td>
+                                <td><a href="form-html5.html">Register</a></td>
                             </tr>
                         </table>
                     </td>
@@ -44,48 +173,58 @@
     </tr>
 </table>
 
-<!-- Main Content -->
-<table>
+<!-- ═══════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════ -->
+<table id="main-content">
     <tr>
         <td>
-            <table>
+            <table class="content-stack">
                 <tr>
                     <td>
-                        <!-- Cover Image Section -->
-                        <table>
+
+                        <!-- ── Carousel ─────────────────────────────── -->
+                        <table class="section-panel">
                             <tr>
-                                <td>
-                                    <img src="cover-image.jpg" alt="Movie Cover" width="800" height="400">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h2>Featured Movies</h2>
-                                    <a href="featured-html5.html">Browse All Featured Movies →</a>
+                                <td style="padding:0 !important;">
+                                    <div id="carousel" style="position:relative;height:340px;background:var(--color-surface);border-radius:var(--radius-lg);overflow:hidden;display:flex;align-items:center;justify-content:center;">
+                                        <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--slide-color,#58a6ff) 0%,#0d1117 70%);opacity:0.25;transition:background 0.5s;"></div>
+                                        <div style="position:relative;z-index:2;text-align:center;padding:2rem;">
+                                            <div id="carousel-genre" style="font-size:0.8rem;letter-spacing:0.15em;color:var(--color-text-muted);text-transform:uppercase;margin-bottom:0.4rem;"></div>
+                                            <a id="carousel-link" href="featured-html5.html" style="text-decoration:none;">
+                                                <h2 id="carousel-title" style="font-size:2.2rem;font-weight:800;color:#fff;margin:0 0 0.3rem;transition:color 0.3s;"></h2>
+                                            </a>
+                                            <div id="carousel-year" style="font-size:1rem;color:var(--color-text-muted);"></div>
+                                        </div>
+                                        <button id="carousel-prev" aria-label="Previous" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;z-index:3;transition:background 0.2s;">&#8592;</button>
+                                        <button id="carousel-next" aria-label="Next"     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;z-index:3;transition:background 0.2s;">&#8594;</button>
+                                        <div id="carousel-dots" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3;"></div>
+                                        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.1);z-index:3;">
+                                            <div id="carousel-bar" style="height:100%;background:var(--slide-color,#58a6ff);width:0%;transition:width 0.1s linear;"></div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
 
-                        <br><br>
-
-                        <!-- Movie Recommendations Section -->
-                        <table>
+                        <!-- ── Recommended Movies ───────────────────── -->
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table>
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Recommended Movies</h2></td>
-                                            <td><a href="recommendations-html5.html">View All →</a></td>
+                                            <td class="view-all-cell"><a href="recommendations-html5.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <table>
+                                                <table class="rec-simple-grid">
                                                     <tr>
-                                                        <td><b>Dune: Part Two</b><br><small>2024</small></td>
-                                                        <td><b>Oppenheimer</b><br><small>2023</small></td>
-                                                        <td><b>Poor Things</b><br><small>2023</small></td>
-                                                        <td><b>The Batman</b><br><small>2022</small></td>
-                                                        <td><b>Killers of the Flower Moon</b><br><small>2023</small></td>
+                                                        <td class="rec-simple-cell"><b>Dune: Part Two</b><small>2024</small></td>
+                                                        <td class="rec-simple-cell"><b>Oppenheimer</b><small>2023</small></td>
+                                                        <td class="rec-simple-cell"><b>Poor Things</b><small>2023</small></td>
+                                                        <td class="rec-simple-cell"><b>The Batman</b><small>2022</small></td>
+                                                        <td class="rec-simple-cell"><b>Killers of the Flower Moon</b><small>2023</small></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -95,35 +234,33 @@
                             </tr>
                         </table>
 
-                        <br><br>
-
-                        <!-- Movie News Section -->
-                        <table>
+                        <!-- ── Movie News ────────────────────────────── -->
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <table>
-                                        <tr>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
                                             <td><h2>Movie News</h2></td>
-                                            <td><a href="news.html">View All →</a></td>
+                                            <td class="view-all-cell"><a href="news.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <table>
+                                                <table class="news-grid">
                                                     <tr>
-                                                        <td>
-                                                            <b>New Marvel Movie Announced</b><br>
+                                                        <td class="news-card">
+                                                            <b>New Marvel Movie Announced</b>
                                                             <small>Marvel Studios reveals Phase 6 plans at Comic-Con...</small>
-                                                            <br><a href="news1.html">Read more</a>
+                                                            <a href="news1.html">Read more &rarr;</a>
                                                         </td>
-                                                        <td>
-                                                            <b>Oscars 2024 Nominations</b><br>
+                                                        <td class="news-card">
+                                                            <b>Oscars 2024 Nominations</b>
                                                             <small>Full list of nominees announced for the 96th Academy Awards...</small>
-                                                            <br><a href="news2.html">Read more</a>
+                                                            <a href="news2.html">Read more &rarr;</a>
                                                         </td>
-                                                        <td>
-                                                            <b>Star Wars: New Trilogy</b><br>
+                                                        <td class="news-card">
+                                                            <b>Star Wars: New Trilogy</b>
                                                             <small>Lucasfilm announces three new movies in development...</small>
-                                                            <br><a href="news3.html">Read more</a>
+                                                            <a href="news3.html">Read more &rarr;</a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -134,43 +271,34 @@
                             </tr>
                         </table>
 
-                        <br><br>
-
-                        <!-- Call to Action -->
-                        <table>
+                        <!-- ── Call to Action ────────────────────────── -->
+                        <table class="section-panel">
                             <tr>
-                                <td>
+                                <td class="cta-box">
                                     <h3>Join BlimBlau Today!</h3>
                                     <p>Track movies, write reviews, and connect with other film lovers.</p>
-                                    <table>
-                                        <tr>
-                                            <td><a href="register.html">Sign Up Now</a></td>
-                                            <td></td>
-                                            <td><a href="login.html">Login</a></td>
-                                        </tr>
-                                    </table>
+                                    <a href="form-html5.html" class="cta-btn-primary">Sign Up Now</a>
+                                    <a href="login.html"      class="cta-btn-secondary">Login</a>
                                 </td>
                             </tr>
                         </table>
 
-                        <br><br>
-
-                        <!-- Secțiune formular complex (fără CSS) -->
-                        <table>
+                        <!-- ── Preference Form ───────────────────────── -->
+                        <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2>Formular de preferințe pentru filme</h2>
-                                    <p>
+                                    <h2 class="form-section-title">Formular de preferințe pentru filme</h2>
+                                    <p class="section-desc">
                                         Completează formularul de mai jos pentru a ne spune ce fel de filme îți plac.
                                         În acest formular folosim toate diacriticele limbii române: ă, â, î, ș, ț.
                                     </p>
 
-                                    <!-- Liste explicative (4 liste, 2 imbricate, tipuri diferite) -->
-                                    <table>
+                                    <!-- Collapsible lists -->
+                                    <table style="width:100%;border-collapse:collapse;margin-bottom:1rem;">
                                         <tr>
-                                            <td>
-                                                <b>Pași de completare</b>
-                                                <ol type="A">
+                                            <td style="width:50%;vertical-align:top;border:none;padding:0 1rem 0 0;">
+                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">Pași de completare</b>
+                                                <ol type="A" class="collapsible-wrap" style="margin-top:0.5rem;">
                                                     <li>Date personale
                                                         <ol type="i">
                                                             <li>Completează numele și adresa de e‑mail.</li>
@@ -185,13 +313,12 @@
                                                     </li>
                                                 </ol>
                                             </td>
-                                            <td>
-                                                <b>Reguli și recomandări</b>
-                                                <ul>
+                                            <td style="width:50%;vertical-align:top;border:none;padding:0;">
+                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">Reguli și recomandări</b>
+                                                <ul class="collapsible-wrap" style="margin-top:0.5rem;">
                                                     <li>Completează câmpurile marcate ca importante.</li>
                                                     <li>Folosește propoziții clare în zona de comentarii.</li>
-                                                    <li>
-                                                        Evită:
+                                                    <li>Evită:
                                                         <ul>
                                                             <li>limbaj ofensator;</li>
                                                             <li>date personale sensibile;</li>
@@ -203,26 +330,19 @@
                                         </tr>
                                     </table>
 
-                                    <br>
-
                                     <form action="submit-preferinte.html" method="post">
-                                        <!-- Tabel principal cu rowspan/colspan + un tabel imbricat în interior -->
-                                        <table>
+                                        <table class="pref-form-table">
+
+                                            <tr><td colspan="4" class="pref-section-heading"><b>1. Date personale</b></td></tr>
+
                                             <tr>
-                                                <td colspan="4"><b>1. Date personale</b></td>
+                                                <td style="width:160px;color:var(--color-text-muted);">Nume complet</td>
+                                                <td><input type="text" name="nume" size="25"></td>
+                                                <td style="width:160px;color:var(--color-text-muted);">Adresa de e‑mail</td>
+                                                <td><input type="text" name="email" size="25"></td>
                                             </tr>
                                             <tr>
-                                                <td>Nume complet</td>
-                                                <td>
-                                                    <input type="text" name="nume" size="25">
-                                                </td>
-                                                <td>Adresa de e‑mail</td>
-                                                <td>
-                                                    <input type="text" name="email" size="25">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Țară</td>
+                                                <td style="color:var(--color-text-muted);">Țară</td>
                                                 <td>
                                                     <select name="tara">
                                                         <option value="ro">România</option>
@@ -232,65 +352,56 @@
                                                         <option value="other">Altă țară</option>
                                                     </select>
                                                 </td>
-                                                <td>Oraș</td>
+                                                <td style="color:var(--color-text-muted);">Oraș</td>
+                                                <td><input type="text" name="oras" size="20"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:var(--color-text-muted);">Cod formular</td>
+                                                <td colspan="3"><input type="text" name="cod_formular" size="20" value="BLIMBLAU-2024" readonly></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:var(--color-text-muted);">Vârstă</td>
+                                                <td><input type="text" name="varsta" size="5"></td>
+                                                <td style="color:var(--color-text-muted);">Gen preferat de adresare</td>
                                                 <td>
-                                                    <input type="text" name="oras" size="20">
+                                                    <label class="radio-label"><input type="radio" name="gen_adresare" value="dl"> Domnul</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_adresare" value="dna"> Doamna</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Cod formular (doar citire)</td>
-                                                <td colspan="3">
-                                                    <input type="text" name="cod_formular" size="20" value="BLIMBLAU-2024" readonly>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vârstă</td>
-                                                <td>
-                                                    <input type="text" name="varsta" size="5">
-                                                </td>
-                                                <td>Gen preferat de adresare</td>
-                                                <td>
-                                                    <input type="radio" name="gen_adresare" value="dl"> Domnul
-                                                    <input type="radio" name="gen_adresare" value="dna"> Doamna
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mesaj scurt despre tine</td>
-                                                <td colspan="3">
-                                                    <textarea name="descriere" rows="4" cols="60"></textarea>
-                                                </td>
+                                                <td style="color:var(--color-text-muted);">Mesaj scurt</td>
+                                                <td colspan="3"><textarea name="descriere" rows="4" cols="60"></textarea></td>
                                             </tr>
 
+                                            <tr><td colspan="4" class="pref-section-heading"><b>2. Preferințe de gen și obiceiuri</b></td></tr>
+
                                             <tr>
-                                                <td colspan="4"><b>2. Preferințe de gen și obiceiuri</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="2">Gen preferat</td>
+                                                <td rowspan="2" style="color:var(--color-text-muted);">Gen preferat</td>
                                                 <td colspan="3">
-                                                    <input type="radio" name="gen_preferat" value="actiune"> Acțiune
-                                                    <input type="radio" name="gen_preferat" value="drama"> Dramă
-                                                    <input type="radio" name="gen_preferat" value="comedie"> Comedie
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="actiune"> Acțiune</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="drama"> Dramă</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="comedie"> Comedie</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3">
-                                                    <input type="radio" name="gen_preferat" value="sf"> Științifico‑fantastic
-                                                    <input type="radio" name="gen_preferat" value="animatie"> Animație
-                                                    <input type="radio" name="gen_preferat" value="altul"> Alt gen
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="sf"> Științifico‑fantastic</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="animatie"> Animație</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="altul"> Alt gen</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Genuri pe care le urmărești des</td>
+                                                <td style="color:var(--color-text-muted);">Genuri urmărite des</td>
                                                 <td colspan="3">
-                                                    <input type="checkbox" name="g_actiune" value="da"> Acțiune
-                                                    <input type="checkbox" name="g_drama" value="da"> Dramă
-                                                    <input type="checkbox" name="g_comedie" value="da"> Comedie
-                                                    <input type="checkbox" name="g_sf" value="da"> SF
-                                                    <input type="checkbox" name="g_horror" value="da"> Horror
+                                                    <label class="check-label"><input type="checkbox" name="g_actiune" value="da"> Acțiune</label>
+                                                    <label class="check-label"><input type="checkbox" name="g_drama"   value="da"> Dramă</label>
+                                                    <label class="check-label"><input type="checkbox" name="g_comedie" value="da"> Comedie</label>
+                                                    <label class="check-label"><input type="checkbox" name="g_sf"      value="da"> SF</label>
+                                                    <label class="check-label"><input type="checkbox" name="g_horror"  value="da"> Horror</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Frecvența cu care vizionezi filme</td>
+                                                <td style="color:var(--color-text-muted);">Frecvență vizionare</td>
                                                 <td colspan="3">
                                                     <select name="frecventa">
                                                         <option value="zilnic">Zilnic</option>
@@ -300,53 +411,50 @@
                                                     </select>
                                                 </td>
                                             </tr>
-
                                             <tr>
-                                                <td>Unde preferi să vezi filme</td>
+                                                <td style="color:var(--color-text-muted);">Unde preferi să vezi filme</td>
                                                 <td colspan="3">
-                                                    <!-- Tabel imbricat în interiorul celulei -->
-                                                    <table>
+                                                    <table style="border-collapse:collapse;">
                                                         <tr>
-                                                            <td>
-                                                                <input type="checkbox" name="loc_cinema" value="da"> La cinema<br>
-                                                                <input type="checkbox" name="loc_acasa" value="da"> Acasă<br>
-                                                                <input type="checkbox" name="loc_prieteni" value="da"> La prieteni
+                                                            <td style="border:none;padding:0 1.5rem 0 0;">
+                                                                <label class="check-label"><input type="checkbox" name="loc_cinema"   value="da"> La cinema</label><br>
+                                                                <label class="check-label"><input type="checkbox" name="loc_acasa"    value="da"> Acasă</label><br>
+                                                                <label class="check-label"><input type="checkbox" name="loc_prieteni" value="da"> La prieteni</label>
                                                             </td>
-                                                            <td>
-                                                                <input type="radio" name="singur_sau_grup" value="singur"> De obicei singur<br>
-                                                                <input type="radio" name="singur_sau_grup" value="grup"> De obicei cu prietenii
+                                                            <td style="border:none;padding:0;">
+                                                                <label class="radio-label"><input type="radio" name="singur_sau_grup" value="singur"> De obicei singur</label><br>
+                                                                <label class="radio-label"><input type="radio" name="singur_sau_grup" value="grup">   De obicei cu prietenii</label>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                             </tr>
 
+                                            <tr><td colspan="4" class="pref-section-heading"><b>3. Informații suplimentare</b></td></tr>
+
                                             <tr>
-                                                <td colspan="4"><b>3. Informații suplimentare</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Primești recomandări pe e‑mail?</td>
+                                                <td style="color:var(--color-text-muted);">Recomandări pe e‑mail?</td>
                                                 <td colspan="3">
-                                                    <input type="checkbox" name="newsletter" value="da"> Da, doresc să primesc recomandări personalizate.
+                                                    <label class="check-label"><input type="checkbox" name="newsletter" value="da"> Da, doresc să primesc recomandări personalizate.</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Comentarii finale</td>
-                                                <td colspan="3">
-                                                    <textarea name="comentarii" rows="3" cols="60"></textarea>
-                                                </td>
+                                                <td style="color:var(--color-text-muted);">Comentarii finale</td>
+                                                <td colspan="3"><textarea name="comentarii" rows="3" cols="60"></textarea></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="4" style="padding-top:1rem;border-top:1px solid var(--color-border-subtle);">
                                                     <input type="submit" value="Trimite formularul">
-                                                    <input type="reset" value="Șterge tot">
+                                                    <input type="reset"  value="Șterge tot">
                                                 </td>
                                             </tr>
+
                                         </table>
                                     </form>
                                 </td>
                             </tr>
                         </table>
+
                     </td>
                 </tr>
             </table>
@@ -354,14 +462,25 @@
     </tr>
 </table>
 
-<!-- Footer -->
-<table>
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════ -->
+<table id="site-footer" width="100%">
     <tr>
         <td>
-            &copy; 2024 BlimBlau. All rights reserved. | <a href="LoggedOutPage-html5.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+            &copy; 2024 BlimBlau. All rights reserved.
+            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="about.html">About</a>
+            &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
+            &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+            &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
         </td>
     </tr>
 </table>
 
+<script src="js/data.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/collapsible.js"></script>
 </body>
 </html>

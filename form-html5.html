@@ -20,6 +20,11 @@
           - submit + reset (butoane)
     -->
     <link rel="stylesheet" href="css/style-horizontal.css">
+    <style>
+        /* Validare: câmp cu eroare */
+        .input-error { outline: 2px solid #f85149 !important; border-color: #f85149 !important; }
+        .field-error-msg { display: block; color: #f85149; font-size: 0.78rem; margin-top: 3px; }
+    </style>
 </head>
 <body>
 
@@ -186,6 +191,26 @@
                                                         <option value="es">Spania</option>
                                                         <option value="other">Altă țară</option>
                                                     </select>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Oraș (populat dinamic de dependencies.js) -->
+                                            <tr>
+                                                <td class="form-label">Orașul</td>
+                                                <td colspan="3" class="form-field">
+                                                    <select name="oras_select" id="oras_select" disabled>
+                                                        <option value="">-- Selectează mai întâi țara --</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Vârstă (calculată automat din data nașterii) -->
+                                            <tr>
+                                                <td class="form-label">Vârstă</td>
+                                                <td colspan="3" class="form-field">
+                                                    <input type="number" name="varsta" id="varsta"
+                                                           min="1" max="120" placeholder="Calculat automat din data nașterii"
+                                                           readonly style="background:var(--color-surface);cursor:default;">
                                                 </td>
                                             </tr>
 
@@ -379,5 +404,8 @@
     </tr>
 </table>
 
+<script src="js/data.js" defer></script>
+<script src="js/validation.js" defer></script>
+<script src="js/dependencies.js" defer></script>
 </body>
 </html>
