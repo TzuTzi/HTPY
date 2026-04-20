@@ -439,6 +439,98 @@
     </tr>
 </table>
 
+<!-- ═══════════════════════════════════════════════
+     CERINȚA B – TABEL VERTICAL SORTABIL
+     Prima coloană = antet (atributele filmului).
+     Click pe o celulă din antet → sortează coloanele (filmele).
+     ═══════════════════════════════════════════════ -->
+<table id="main-content" style="margin-top:0;">
+    <tr>
+        <td>
+            <table class="content-stack">
+                <tr>
+                    <td>
+                        <table class="section-panel">
+                            <tr>
+                                <td>
+                                    <table class="section-inner">
+                                        <tr class="section-head-row">
+                                            <td><h2>Film Database — Tabel Vertical Sortabil</h2></td>
+                                            <td class="view-all-cell">
+                                                <span style="font-size:0.75rem;color:var(--color-text-muted);">
+                                                    Click pe rândul din stânga pentru a sorta &#8597;
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <!-- Stiluri specifice tabelului vertical -->
+                                                <style>
+                                                    #film-table-vertical { width:100%; border-collapse:collapse; font-size:0.83rem; }
+
+                                                    /* Prima coloană = antet rând (clickabil) */
+                                                    #film-table-vertical th {
+                                                        background: var(--color-surface);
+                                                        color: var(--color-text-muted);
+                                                        font-weight: 600;
+                                                        font-size: 0.75rem;
+                                                        text-transform: uppercase;
+                                                        letter-spacing: 0.05em;
+                                                        border-right: 2px solid var(--color-border);
+                                                        border-bottom: 1px solid var(--color-border-subtle);
+                                                        padding: 0.5rem 0.9rem;
+                                                        white-space: nowrap;
+                                                        user-select: none;
+                                                        min-width: 100px;
+                                                        text-align: left;
+                                                    }
+                                                    #film-table-vertical th:hover { color: var(--color-blue); background: var(--color-btn); }
+                                                    #film-table-vertical th.sorted-asc,
+                                                    #film-table-vertical th.sorted-desc { color: var(--color-blue); }
+
+                                                    /* Celulele de date */
+                                                    #film-table-vertical td {
+                                                        padding: 0.45rem 0.75rem;
+                                                        border-bottom: 1px solid var(--color-border-subtle);
+                                                        border-right: 1px solid var(--color-border-subtle);
+                                                        color: var(--color-text-muted);
+                                                        vertical-align: middle;
+                                                        white-space: nowrap;
+                                                        text-align: center;
+                                                    }
+                                                    #film-table-vertical tr:hover th { color: var(--color-blue); }
+                                                    #film-table-vertical tr:hover td { background: rgba(255,255,255,0.03); color: var(--color-text); }
+
+                                                    .v-stars { color: #f0b429; letter-spacing: -1px; }
+                                                </style>
+                                                <div style="overflow-x:auto;">
+                                                    <table id="film-table-vertical">
+                                                        <tbody>
+                                                            <!-- Populat de table-sort-vertical.js
+                                                                 Structură generată:
+                                                                 <tr>
+                                                                   <th data-row="0">Title</th>   ← antet rând (clickabil)
+                                                                   <td>Dune: Part Two</td>        ← date film 1
+                                                                   <td>Oppenheimer</td>           ← date film 2
+                                                                   ...
+                                                                 </tr>
+                                                            -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
 <!-- FOOTER -->
 <table id="site-footer">
     <tr>
@@ -455,5 +547,6 @@
 
 <script src="js/data.js" defer></script>
 <script src="js/table-sort.js" defer></script>
+<script src="js/table-sort-vertical.js" defer></script>
 </body>
 </html>
