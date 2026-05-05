@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (taraSelect && orasSelect) {
         taraSelect.addEventListener("change", function () {
-            var selectedCountry = this.value;
+            var selectedCountry = this.value
             var oraseCurente    = cities[selectedCountry] || [];
 
             /* Resetează dropdown-ul de orașe */

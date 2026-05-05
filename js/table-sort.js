@@ -16,23 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
        0=title, 1=year, 2=genre, 3=rating, 4=reviews, 5=mood */
     var cols = ["title", "year", "genre", "rating", "reviews", "mood"];
 
-    /* ── Construiește rândurile tabelului ── */
-    function renderTable() {
-        var sorted = films.slice(); /* copie pentru a nu modifica originalul */
 
-        if (sortCol >= 0) {
-            sorted.sort(function (a, b) {
-                var key = cols[sortCol];
-                var va  = a[key];
-                var vb  = b[key];
-                var cmp = (typeof va === "string")
-                    ? va.localeCompare(vb)
-                    : (va > vb ? 1 : va < vb ? -1 : 0);
-                return sortAsc ? cmp : -cmp;
-            });
-        }
+    function getSortedFilms(items, colIndex, asc) {
+        var sorted = items.slice(); /* copie pentru a nu modifica originalul */
+        if (colIndex < 0) return sorted;
 
-        tbody.innerHTML = sorted.map(function (f) {
+        sorted.sort(function (a, b) {
+            var key = cols[colIndex];
+            var va  = a[key];
+            var vb  = b[key];
+            var cmp = (typeof va === "string")
+                ? va.localeCompare(vb)
+                : (va > vb ? 1 : va < vb ? -1 : 0);
+            return asc ? cmp : -cmp;
+        });
+
+        return sorted;
+    }
+
+    /* ── Render: primește date deja sortate și construiește tabelul ── */
+    function renderTableRows(sortedFilms) {
+        tbody.innerHTML = sortedFilms.map(function (f) {
             var stars = "★".repeat(Math.round(f.rating / 2)) + "☆".repeat(5 - Math.round(f.rating / 2));
             return "<tr>" +
                 "<td>" + f.title + "</td>" +
@@ -43,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 "<td><span class='mood-tag mood-" + f.mood + "'>" + f.mood + "</span></td>" +
                 "</tr>";
         }).join("");
+    }
+
+    function renderTable() {
+        var sorted = getSortedFilms(films, sortCol, sortAsc);
+        renderTableRows(sorted);
 
         /* Actualizează indicatoarele de sortare pe headere */
         table.querySelectorAll("th[data-col]").forEach(function (th, i) {

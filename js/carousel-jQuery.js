@@ -50,9 +50,14 @@ $(function () {
         $link.attr("href", s.link);
 
         if ($img.length && s.imageFile) {
-            $img.attr({ src: "images/" + s.imageFile, alt: s.imageAlt || s.title }).css("display", "block");
+            $img.stop(true, true).fadeOut(120, function () {
+                $img.attr({
+                    src: "images/" + s.imageFile,
+                    alt: s.imageAlt || s.title
+                }).fadeIn(180);
+            });
         } else if ($img.length) {
-            $img.css("display", "none");
+            $img.stop(true, true).fadeOut(180);
         }
 
         $dots.find(".carousel-dot").each(function (i) {
