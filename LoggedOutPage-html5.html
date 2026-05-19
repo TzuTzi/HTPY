@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -143,13 +143,26 @@
                             <tr class="nav-row">
                                 <td class="nav-logo-td"><b>BlimBlau</b></td>
                                 <td></td>
-                                <td><a href="films.html">Films</a></td>
+                                <td><a href="pages/featured-html5.html">Films</a></td>
                                 <td></td>
-                                <td><a href="lists.html">Lists</a></td>
+                                <td><a href="widgets.php">Dashboard</a></td>
                                 <td></td>
-                                <td><a href="members.html">Members</a></td>
+                                <td><a href="pages/mood-picker.html">Mood</a></td>
                                 <td></td>
-                                <td><a href="about.html">About</a></td>
+                                <td><a href="pages/recommendations-html5.html">Browse</a></td>
+                                <td></td>
+                                <td>
+                                    <div class="nav-dropdown-wrap">
+                                        <span class="nav-dropdown-trigger" tabindex="0" aria-haspopup="true" aria-expanded="false">
+                                            Extras &#9660;
+                                        </span>
+                                        <div class="nav-dropdown-panel">
+                                            <a href="pages/sprites.html">CSS Sprites</a>
+                                            <a href="pages/nested-list.html">Nested Lists</a>
+                                            <a href="pages/form-html5.html">Form</a>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td></td>
                                 <td>
                                     <form action="search.html" method="get" class="nav-search-form">
@@ -158,9 +171,9 @@
                                     </form>
                                 </td>
                                 <td></td>
-                                <td><a href="login.html">Login</a></td>
+                                <td><a href="login.php">Login</a></td>
                                 <td></td>
-                                <td><a href="form-html5.html">Register</a></td>
+                                <td><a href="register.php">Register</a></td>
                             </tr>
                         </table>
                     </td>
@@ -193,7 +206,7 @@
                                             <div id="carousel-genre"></div>
                                             <!-- Poster image – JS sets src when imageFile is present in data.js -->
                                             <img id="carousel-image" class="carousel-poster" src="" alt="" style="display:none;">
-                                            <a id="carousel-link" href="featured-html5.html">
+                                            <a id="carousel-link" href="pages/featured-html5.html">
                                                 <h2 id="carousel-title"></h2>
                                             </a>
                                             <div id="carousel-year"></div>
@@ -222,7 +235,7 @@
                                     <table class="section-inner">
                                         <tr class="section-head-row">
                                             <td><h2>Recommended Movies</h2></td>
-                                            <td class="view-all-cell"><a href="recommendations-html5.html" class="view-all-link">View all &rarr;</a></td>
+                                            <td class="view-all-cell"><a href="pages/recommendations-html5.html" class="view-all-link">View all &rarr;</a></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
@@ -285,7 +298,7 @@
                                 <td class="cta-box">
                                     <h3>Join BlimBlau Today!</h3>
                                     <p>Track movies, write reviews, and connect with other film lovers.</p>
-                                    <a href="form-html5.html" class="cta-btn-primary">Sign Up Now</a>
+                                    <a href="pages/form-html5.html" class="cta-btn-primary">Sign Up Now</a>
                                     <a href="login.html"      class="cta-btn-secondary">Login</a>
                                 </td>
                             </tr>
@@ -295,37 +308,37 @@
                         <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2 class="form-section-title">Formular de preferințe pentru filme</h2>
+                                    <h2 class="form-section-title">Form de preferințe pentru filme</h2>
                                     <p class="section-desc">
-                                        Completează formularul de mai jos pentru a ne spune ce fel de filme îți plac.
-                                        În acest formular folosim toate diacriticele limbii române: ă, â, î, ș, ț.
+                                        Fill in the form below to tell us what kinds of films you enjoy.
+                                        În acest Form folosim toate diacriticele limbii române: ă, â, î, ș, ț.
                                     </p>
 
                                     <!-- Collapsible lists -->
                                     <table style="width:100%;border-collapse:collapse;margin-bottom:1rem;">
                                         <tr>
                                             <td style="width:50%;vertical-align:top;border:none;padding:0 1rem 0 0;">
-                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">Pași de completare</b>
+                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">How to fill in</b>
                                                 <ol type="A" class="collapsible-wrap" style="margin-top:0.5rem;">
                                                     <li>Date personale
                                                         <ol type="i">
                                                             <li>Completează numele și adresa de e‑mail.</li>
-                                                            <li>Alege țara și orașul.</li>
+                                                            <li>Choose your country and city.</li>
                                                         </ol>
                                                     </li>
-                                                    <li>Preferințe de vizionare
+                                                    <li>Viewing preferences
                                                         <ol type="I">
-                                                            <li>Selectează genurile preferate.</li>
-                                                            <li>Bifează opțiunile suplimentare.</li>
+                                                            <li>Select your favourite genres.</li>
+                                                            <li>Check any extra options.</li>
                                                         </ol>
                                                     </li>
                                                 </ol>
                                             </td>
                                             <td style="width:50%;vertical-align:top;border:none;padding:0;">
-                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">Reguli și recomandări</b>
+                                                <b style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;">Reguli și Browse</b>
                                                 <ul class="collapsible-wrap" style="margin-top:0.5rem;">
-                                                    <li>Completează câmpurile marcate ca importante.</li>
-                                                    <li>Folosește propoziții clare în zona de comentarii.</li>
+                                                    <li>Fill in the marked fields.</li>
+                                                    <li>Use clear sentences in the comments.</li>
                                                     <li>Evită:
                                                         <ul>
                                                             <li>limbaj ofensator;</li>
@@ -352,19 +365,19 @@
                                             <tr>
                                                 <td style="color:var(--color-text-muted);">Țară</td>
                                                 <td>
-                                                    <select name="tara">
-                                                        <option value="ro">România</option>
+                                                    <select name="Country">
+                                                        <option value="ro">Romania</option>
                                                         <option value="md">Republica Moldova</option>
                                                         <option value="hu">Ungaria</option>
                                                         <option value="bg">Bulgaria</option>
-                                                        <option value="other">Altă țară</option>
+                                                        <option value="other">Other country</option>
                                                     </select>
                                                 </td>
                                                 <td style="color:var(--color-text-muted);">Oraș</td>
                                                 <td><input type="text" name="oras" size="20"></td>
                                             </tr>
                                             <tr>
-                                                <td style="color:var(--color-text-muted);">Cod formular</td>
+                                                <td style="color:var(--color-text-muted);">Cod Form</td>
                                                 <td colspan="3"><input type="text" name="cod_formular" size="20" value="BLIMBLAU-2024" readonly></td>
                                             </tr>
                                             <tr>
@@ -381,27 +394,27 @@
                                                 <td colspan="3"><textarea name="descriere" rows="4" cols="60"></textarea></td>
                                             </tr>
 
-                                            <tr><td colspan="4" class="pref-section-heading"><b>2. Preferințe de gen și obiceiuri</b></td></tr>
+                                            <tr><td colspan="4" class="pref-section-heading"><b>2. Genre preferences &amp; habits</b></td></tr>
 
                                             <tr>
                                                 <td rowspan="2" style="color:var(--color-text-muted);">Gen preferat</td>
                                                 <td colspan="3">
-                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="actiune"> Acțiune</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="actiune"> Action</label>
                                                     <label class="radio-label"><input type="radio" name="gen_preferat" value="drama"> Dramă</label>
                                                     <label class="radio-label"><input type="radio" name="gen_preferat" value="comedie"> Comedie</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3">
-                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="sf"> Științifico‑fantastic</label>
-                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="animatie"> Animație</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="sf"> Sci-Fi</label>
+                                                    <label class="radio-label"><input type="radio" name="gen_preferat" value="animatie"> Animation</label>
                                                     <label class="radio-label"><input type="radio" name="gen_preferat" value="altul"> Alt gen</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="color:var(--color-text-muted);">Genuri urmărite des</td>
+                                                <td style="color:var(--color-text-muted);">Frequently watched genres</td>
                                                 <td colspan="3">
-                                                    <label class="check-label"><input type="checkbox" name="g_actiune" value="da"> Acțiune</label>
+                                                    <label class="check-label"><input type="checkbox" name="g_actiune" value="da"> Action</label>
                                                     <label class="check-label"><input type="checkbox" name="g_drama"   value="da"> Dramă</label>
                                                     <label class="check-label"><input type="checkbox" name="g_comedie" value="da"> Comedie</label>
                                                     <label class="check-label"><input type="checkbox" name="g_sf"      value="da"> SF</label>
@@ -409,24 +422,24 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="color:var(--color-text-muted);">Frecvență vizionare</td>
+                                                <td style="color:var(--color-text-muted);">Viewing frequency</td>
                                                 <td colspan="3">
                                                     <select name="frecventa">
                                                         <option value="zilnic">Zilnic</option>
-                                                        <option value="saptamanal">Săptămânal</option>
+                                                        <option value="Weekly">Weekly</option>
                                                         <option value="lunar">Lunar</option>
                                                         <option value="rar">Mai rar</option>
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="color:var(--color-text-muted);">Unde preferi să vezi filme</td>
+                                                <td style="color:var(--color-text-muted);">Where do you watch films</td>
                                                 <td colspan="3">
                                                     <table style="border-collapse:collapse;">
                                                         <tr>
                                                             <td style="border:none;padding:0 1.5rem 0 0;">
                                                                 <label class="check-label"><input type="checkbox" name="loc_cinema"   value="da"> La cinema</label><br>
-                                                                <label class="check-label"><input type="checkbox" name="loc_acasa"    value="da"> Acasă</label><br>
+                                                                <label class="check-label"><input type="checkbox" name="loc_acasa"    value="da"> At home</label><br>
                                                                 <label class="check-label"><input type="checkbox" name="loc_prieteni" value="da"> La prieteni</label>
                                                             </td>
                                                             <td style="border:none;padding:0;">
@@ -438,12 +451,12 @@
                                                 </td>
                                             </tr>
 
-                                            <tr><td colspan="4" class="pref-section-heading"><b>3. Informații suplimentare</b></td></tr>
+                                            <tr><td colspan="4" class="pref-section-heading"><b>3. Additional info</b></td></tr>
 
                                             <tr>
-                                                <td style="color:var(--color-text-muted);">Recomandări pe e‑mail?</td>
+                                                <td style="color:var(--color-text-muted);">Browse pe e‑mail?</td>
                                                 <td colspan="3">
-                                                    <label class="check-label"><input type="checkbox" name="newsletter" value="da"> Da, doresc să primesc recomandări personalizate.</label>
+                                                    <label class="check-label"><input type="checkbox" name="newsletter" value="da"> Da, doresc să primesc Browse personalizate.</label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -453,7 +466,7 @@
                                             <tr>
                                                 <td colspan="4" style="padding-top:1rem;border-top:1px solid var(--color-border-subtle);">
                                                     <input type="submit" value="Trimite formularul">
-                                                    <input type="reset"  value="Șterge tot">
+                                                    <input type="reset"  value="Clear all">
                                                 </td>
                                             </tr>
 
@@ -477,7 +490,7 @@
     <tr>
         <td>
             &copy; 2024 BlimBlau. All rights reserved.
-            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="index.php">Home</a>
             &nbsp;&middot;&nbsp; <a href="about.html">About</a>
             &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
             &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>

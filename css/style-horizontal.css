@@ -121,6 +121,34 @@ table {
     text-shadow: 0 0 20px rgba(255,255,255,0.1);
 }
 
+/* Admin-only main nav link */
+#site-header .nav-row a.nav-admin-panel {
+    font-weight: 700;
+    color: #7eb3e0;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+#site-header .nav-row a.nav-admin-panel:hover {
+    color: var(--color-text);
+    border-bottom-color: rgba(126, 179, 224, 0.5);
+}
+#site-header .nav-row a.nav-admin-panel.is-current {
+    color: #fff;
+    border-bottom-color: var(--color-blue);
+}
+
+/* Banner on admin.php */
+.admin-area-banner {
+    margin: 0 0 1rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    background: rgba(126, 179, 224, 0.08);
+    border: 1px solid rgba(126, 179, 224, 0.25);
+    border-radius: var(--radius-sm);
+}
+
 #site-header .nav-row a {
     color: var(--color-text-muted);
     text-decoration: none;
@@ -214,17 +242,6 @@ table {
     transition: color var(--transition), background var(--transition);
 }
 
-/* Avatar circle via ::before */
-.nav-dropdown-trigger::before {
-    content: "";
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--color-border);
-    border: 1px solid var(--color-btn-hover);
-    flex-shrink: 0;
-}
 
 .nav-dropdown-trigger:hover,
 .nav-dropdown-wrap:hover .nav-dropdown-trigger {
@@ -1114,3 +1131,47 @@ table {
     font-size: 0.78rem;
     margin-top: 3px;
 }
+
+/* ── Butoane PHP pages ──────────────────────────────────────── */
+.btn-primary {
+    display: inline-block;
+    padding: 0.45rem 1.2rem;
+    background: #238636;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.17s;
+    font-family: inherit;
+}
+.btn-primary:hover { background: #2ea043; }
+
+.btn-secondary {
+    display: inline-block;
+    padding: 0.45rem 1.2rem;
+    background: var(--color-btn);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.17s, color 0.17s;
+    font-family: inherit;
+}
+.btn-secondary:hover { background: var(--color-btn-hover); color: var(--color-text); }
+
+.btn-danger {
+    display: inline-block;
+    padding: 0.45rem 1.2rem;
+    background: #3d1a1a;
+    color: #f85149;
+    border: 1px solid #5a2020;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.17s;
+    font-family: inherit;
+}
+.btn-danger:hover { background: #5a2020; }

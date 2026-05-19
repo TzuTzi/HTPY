@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,57 +8,46 @@
 <body>
 
 <!-- Header -->
-<table id="site-header">
-    <tr>
-        <td>
+<table id="site-header" width="100%">
+    <tr><td>
+        <table><tr><td>
             <table>
-                <tr>
+                <tr class="nav-row">
+                    <td class="nav-logo-td"><a href="index.php"><b>BlimBlau</b></a></td>
+                    <td></td>
+                    <td><a href="featured-html5.html">Films</a></td>
+                    <td></td>
+                    <td><a href="widgets.php">Dashboard</a></td>
+                    <td></td>
+                    <td><a href="mood-picker.html">Mood</a></td>
+                    <td></td>
+                    <td><a href="recommendations-html5.html">Browse</a></td>
+                    <td></td>
                     <td>
-                        <table>
-                            <tr class="nav-row">
-                                <td class="nav-logo-td"><b>BlimBlau</b></td>
-                                <td></td>
-                                <td><a href="films.html">Films</a></td>
-                                <td></td>
-                                <td><a href="lists.html">Lists</a></td>
-                                <td></td>
-                                <td><a href="members.html">Members</a></td>
-                                <td></td>
-                                <td><a href="about.html">About</a></td>
-                                <td></td>
-                                <td>
-                                    <form action="search.html" method="get" class="nav-search-form">
-                                        <input type="text" name="query" placeholder="Search movies...">
-                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
-                                    </form>
-                                </td>
-                                <td></td>
-                                <td class="nav-dropdown-wrap">
-                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true">
-                                        <span class="nav-dropdown-trigger-text">My Account</span>
-                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
-                                    </a>
-                                    <div class="nav-dropdown-panel" role="menu">
-                                        <div class="nav-dropdown-section">
-                                            <a href="index-html5.html" role="menuitem">Home</a>
-                                            <a href="profile-html5.html" role="menuitem">Profile</a>
-                                            <a href="films.html" role="menuitem">Films</a>
-                                            <a href="lists.html" role="menuitem">Lists</a>
-                                        </div>
-                                        <hr class="nav-dropdown-divider">
-                                        <div class="nav-dropdown-section">
-                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
-                                            <a href="logout.html" role="menuitem">Sign Out</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="nav-dropdown-wrap">
+                            <span class="nav-dropdown-trigger" tabindex="0" aria-haspopup="true" aria-expanded="false">Extras &#9660;</span>
+                            <div class="nav-dropdown-panel">
+                                <a href="sprites.html">CSS Sprites</a>
+                                <a href="nested-list.html">Nested Lists</a>
+                                <a href="form-html5.html">Form</a>
+                            </div>
+                        </div>
                     </td>
+                    <td></td>
+                    <td>
+                        <form action="search.html" method="get" class="nav-search-form">
+                            <input type="text" name="query" placeholder="Search movies...">
+                            <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                        </form>
+                    </td>
+                    <td></td>
+                    <td><a href="login.php">Login</a></td>
+                    <td></td>
+                    <td><a href="register.php">Register</a></td>
                 </tr>
             </table>
-        </td>
-    </tr>
+        </td></tr></table>
+    </td></tr>
 </table>
 
 <!-- Main Content -->
@@ -151,7 +140,7 @@
     <tr>
         <td>
             &copy; 2024 BlimBlau. All rights reserved.
-            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="index.php">Home</a>
             &nbsp;&middot;&nbsp; <a href="about.html">About</a>
             &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>

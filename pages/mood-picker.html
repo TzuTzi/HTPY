@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>BlimBlau – Mood Picker</title>
-    <link rel="stylesheet" href="css/mood-picker.css">
+    <link rel="stylesheet" href="../css/mood-picker.css">
     <style>
         /* ── Butoane de mood ── */
         .mood-btn {
@@ -91,55 +91,46 @@
 </head>
 <body>
 
-<table id="site-header">
-    <tr>
-        <td>
+<table id="site-header" width="100%">
+    <tr><td>
+        <table><tr><td>
             <table>
-                <tr>
+                <tr class="nav-row">
+                    <td class="nav-logo-td"><a href="../index.php"><b>BlimBlau</b></a></td>
+                    <td></td>
+                    <td><a href="featured-html5.html">Films</a></td>
+                    <td></td>
+                    <td><a href="../widgets.php">Dashboard</a></td>
+                    <td></td>
+                    <td><a href="mood-picker.html">Mood</a></td>
+                    <td></td>
+                    <td><a href="recommendations-html5.html">Browse</a></td>
+                    <td></td>
                     <td>
-                        <table>
-                            <tr class="nav-row">
-                                <td class="nav-logo-td"><b>BlimBlau</b></td>
-                                <td></td>
-                                <td><a href="films.html">Films</a></td>
-                                <td></td>
-                                <td><a href="mood-picker.html" class="nav-active">Mood Picker</a></td>
-                                <td></td>
-                                <td><a href="members.html">Members</a></td>
-                                <td></td>
-                                <td><a href="about.html">About</a></td>
-                                <td></td>
-                                <td>
-                                    <form action="search.html" method="get" class="nav-search-form">
-                                        <input type="text" name="query" placeholder="Search movies...">
-                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
-                                    </form>
-                                </td>
-                                <td></td>
-                                <td class="nav-dropdown-wrap">
-                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-                                        <span class="nav-dropdown-trigger-text">My Account</span>
-                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
-                                    </a>
-                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
-                                        <div class="nav-dropdown-section">
-                                            <a href="index-html5.html" role="menuitem">Home</a>
-                                            <a href="profile-html5.html" role="menuitem">Profile</a>
-                                        </div>
-                                        <hr class="nav-dropdown-divider">
-                                        <div class="nav-dropdown-section">
-                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
-                                            <a href="logout.html" role="menuitem">Sign Out</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="nav-dropdown-wrap">
+                            <span class="nav-dropdown-trigger" tabindex="0" aria-haspopup="true" aria-expanded="false">Extras &#9660;</span>
+                            <div class="nav-dropdown-panel">
+                                <a href="sprites.html">CSS Sprites</a>
+                                <a href="nested-list.html">Nested Lists</a>
+                                <a href="form-html5.html">Form</a>
+                            </div>
+                        </div>
                     </td>
+                    <td></td>
+                    <td>
+                        <form action="../search.html" method="get" class="nav-search-form">
+                            <input type="text" name="query" placeholder="Search movies...">
+                            <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                        </form>
+                    </td>
+                    <td></td>
+                    <td><a href="../login.php">Login</a></td>
+                    <td></td>
+                    <td><a href="../register.php">Register</a></td>
                 </tr>
             </table>
-        </td>
-    </tr>
+        </td></tr></table>
+    </td></tr>
 </table>
 
 <table id="main-content">
@@ -199,10 +190,10 @@
                                     <h2 class="form-section-title">Alte pagini</h2>
                                     <table class="offset-table">
                                         <tr><th>Pagina</th><th>Funcționalitate</th></tr>
-                                        <tr><td><a href="nested-list.html">nested-list.html</a></td><td>Liste imbricate colapsabile (JS)</td></tr>
+                                        <tr><td><a href="nested-list.html">nested-list.html</a></td><td>Nested Lists colapsabile (JS)</td></tr>
                                         <tr><td><a href="widgets.html">widgets.html</a></td><td>Tabel sortabil (JS)</td></tr>
-                                        <tr><td><a href="LoggedOutPage-html5.html">LoggedOutPage</a></td><td>Carousel automat (JS)</td></tr>
-                                        <tr><td><a href="form-html5.html">form-html5.html</a></td><td>Validare formular + dependențe (JS)</td></tr>
+                                        <tr><td><a href="../index.php">LoggedOutPage</a></td><td>Carousel automat (JS)</td></tr>
+                                        <tr><td><a href="form-html5.html">form-html5.html</a></td><td>Validare Form + dependențe (JS)</td></tr>
                                     </table>
                                 </td>
                             </tr>
@@ -219,13 +210,14 @@
     <tr>
         <td>
             &copy; 2024 BlimBlau. All rights reserved.
-            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="../index.php">Home</a>
             &nbsp;&middot;&nbsp; <a href="about.html">About</a>
         </td>
     </tr>
 </table>
 
-<script src="js/data.js" defer></script>
-<script src="js/mood-picker-jQuery.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../js/data.js" defer></script>
+<script src="../js/mood-picker-jQuery.js" defer></script>
 </body>
 </html>

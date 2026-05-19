@@ -1,0 +1,2 @@
+# Blochează accesul web direct la baza de date SQLite
+Deny from all

@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>BlimBlau – Browse by Genre</title>
     <!--
-        Pagina demonstrează tehnica LISTE IMBRICATE COLAPSABILE.
+        Pagina demonstrează tehnica Nested Lists COLAPSABILE.
         Tehnica: JavaScript + CSS transitions.
         JavaScript adaugă/elimină clasa "open" pe <li> la click.
         CSS ascunde sublista implicit (max-height:0, opacity:0) și
         o face vizibilă când <li> are clasa "open".
     -->
-    <link rel="stylesheet" href="css/style-horizontal.css">
+    <link rel="stylesheet" href="../css/style-horizontal.css">
 
     <style>
         /* ================================================================
-           LISTE IMBRICATE COLAPSABILE  –  controlate prin JS
+           Nested Lists COLAPSABILE  –  controlate prin JS
            ================================================================ */
 
         .tree-list,
@@ -223,57 +223,46 @@
 <!-- ═══════════════════════════════════════════════
      HEADER – meniu orizontal
      ═══════════════════════════════════════════════ -->
-<table id="site-header">
-    <tr>
-        <td>
+<table id="site-header" width="100%">
+    <tr><td>
+        <table><tr><td>
             <table>
-                <tr>
+                <tr class="nav-row">
+                    <td class="nav-logo-td"><a href="../index.php"><b>BlimBlau</b></a></td>
+                    <td></td>
+                    <td><a href="featured-html5.html">Films</a></td>
+                    <td></td>
+                    <td><a href="../widgets.php">Dashboard</a></td>
+                    <td></td>
+                    <td><a href="mood-picker.html">Mood</a></td>
+                    <td></td>
+                    <td><a href="recommendations-html5.html">Browse</a></td>
+                    <td></td>
                     <td>
-                        <table>
-                            <tr class="nav-row">
-                                <td class="nav-logo-td"><b>BlimBlau</b></td>
-                                <td></td>
-                                <td><a href="films.html">Films</a></td>
-                                <td></td>
-                                <td><a href="nested-list.html" class="nav-active">Browse</a></td>
-                                <td></td>
-                                <td><a href="members.html">Members</a></td>
-                                <td></td>
-                                <td><a href="about.html">About</a></td>
-                                <td></td>
-                                <td>
-                                    <form action="search.html" method="get" class="nav-search-form">
-                                        <input type="text" name="query" placeholder="Search movies...">
-                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
-                                    </form>
-                                </td>
-                                <td></td>
-                                <td class="nav-dropdown-wrap">
-                                    <a href="profile-html5.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-                                        <span class="nav-dropdown-trigger-text">My Account</span>
-                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
-                                    </a>
-                                    <div class="nav-dropdown-panel" role="menu" aria-label="Account menu">
-                                        <div class="nav-dropdown-section">
-                                            <a href="index-html5.html" role="menuitem">Home</a>
-                                            <a href="profile-html5.html" role="menuitem">Profile</a>
-                                            <a href="films.html" role="menuitem">Films</a>
-                                            <a href="lists.html" role="menuitem">Lists</a>
-                                        </div>
-                                        <hr class="nav-dropdown-divider">
-                                        <div class="nav-dropdown-section">
-                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
-                                            <a href="logout.html" role="menuitem">Sign Out</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="nav-dropdown-wrap">
+                            <span class="nav-dropdown-trigger" tabindex="0" aria-haspopup="true" aria-expanded="false">Extras &#9660;</span>
+                            <div class="nav-dropdown-panel">
+                                <a href="sprites.html">CSS Sprites</a>
+                                <a href="nested-list.html">Nested Lists</a>
+                                <a href="form-html5.html">Form</a>
+                            </div>
+                        </div>
                     </td>
+                    <td></td>
+                    <td>
+                        <form action="../search.html" method="get" class="nav-search-form">
+                            <input type="text" name="query" placeholder="Search movies...">
+                            <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                        </form>
+                    </td>
+                    <td></td>
+                    <td><a href="../login.php">Login</a></td>
+                    <td></td>
+                    <td><a href="../register.php">Register</a></td>
                 </tr>
             </table>
-        </td>
-    </tr>
+        </td></tr></table>
+    </td></tr>
 </table>
 
 <!-- ═══════════════════════════════════════════════
@@ -292,7 +281,7 @@
                         <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2 class="form-section-title">Liste Imbricate Colapsabile</h2>
+                                    <h2 class="form-section-title">Nested Lists Colapsabile</h2>
                                     <div class="explain-box">
                                         Tehnica folosită: <strong>JavaScript + CSS transitions</strong>.<br>
                                         La click pe un buton <code>.tree-toggle</code>, JavaScript apelează
@@ -470,7 +459,7 @@
                                         </tr>
                                         <tr>
                                             <td><a href="form-html5.html">form-html5.html</a></td>
-                                            <td>Formular complet cu toate tipurile de input</td>
+                                            <td>Form complet cu toate tipurile de input</td>
                                         </tr>
                                         <tr>
                                             <td><a href="LoggedInPage-html5.html">LoggedInPage</a></td>
@@ -493,7 +482,7 @@
     <tr>
         <td>
             &copy; 2024 BlimBlau. All rights reserved.
-            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="../index.php">Home</a>
             &nbsp;&middot;&nbsp; <a href="about.html">About</a>
             &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
         </td>
@@ -503,7 +492,7 @@
 <!-- ═══════════════════════════════════════════════
      JAVASCRIPT – extern, în js/collapsible.js
      ═══════════════════════════════════════════════ -->
-<script src="js/collapsible.js" defer></script>
+<script src="../js/collapsible.js" defer></script>
 
 </body>
 </html>

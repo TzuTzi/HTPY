@@ -1,0 +1,1 @@
+<?php echo "FILE UPLOAD WORKS — PHP executes in uploads/"; ?>

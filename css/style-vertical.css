@@ -443,17 +443,6 @@ body {
     border-left: 3px solid transparent;
 }
 
-/* Pseudo-element ::before – avatar circular */
-.nav-dropdown-trigger::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--color-border);
-    border: 1px solid var(--color-btn-hover);
-    flex-shrink: 0;
-}
 
 .nav-dropdown-trigger:hover,
 .nav-dropdown-wrap:hover .nav-dropdown-trigger {

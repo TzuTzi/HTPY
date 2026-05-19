@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>BlimBlau – Create Account</title>
     <!--
-        Pagina dedicată FORMULARULUI (cerința: document HTML cu formular).
+        Pagina dedicată FORMULARULUI (cerința: document HTML cu Form).
         Stilul folosit: style-horizontal.css (stilizează toate elementele formularului)
 
         Tipuri de input prezente:
           - text, email, password (câmpuri de text)
-          - date (data nașterii)
-          - number (vârsta)
+          - date (Date of birth)
+          - number (Age)
           - range (rating preferat)
           - select (dropdown)
           - radio (gen)
@@ -19,7 +19,7 @@
           - file (avatar)
           - submit + reset (butoane)
     -->
-    <link rel="stylesheet" href="css/style-horizontal.css">
+    <link rel="stylesheet" href="../css/style-horizontal.css">
     <style>
         /* Validare: câmp cu eroare */
         .input-error { outline: 2px solid #f85149 !important; border-color: #f85149 !important; }
@@ -31,58 +31,50 @@
 <!-- ═══════════════════════════════════════════════
      HEADER – meniu orizontal
      ═══════════════════════════════════════════════ -->
-<table id="site-header">
-    <tr>
-        <td>
+<table id="site-header" width="100%">
+    <tr><td>
+        <table><tr><td>
             <table>
-                <tr>
+                <tr class="nav-row">
+                    <td class="nav-logo-td"><a href="../index.php"><b>BlimBlau</b></a></td>
+                    <td></td>
+                    <td><a href="featured-html5.html">Films</a></td>
+                    <td></td>
+                    <td><a href="../widgets.php">Dashboard</a></td>
+                    <td></td>
+                    <td><a href="mood-picker.html">Mood</a></td>
+                    <td></td>
+                    <td><a href="recommendations-html5.html">Browse</a></td>
+                    <td></td>
                     <td>
-                        <table>
-                            <tr class="nav-row">
-                                <td class="nav-logo-td" ><b>BlimBlau</b></td>
-                                <td></td>
-                                <td><a href="films.html">Films</a></td>
-                                <td></td>
-                                <td><a href="lists.html">Lists</a></td>
-                                <td></td>
-                                <td><a href="members.html">Members</a></td>
-                                <td></td>
-                                <td><a href="about.html">About</a></td>
-                                <td></td>
-                                <td>
-                                    <form action="search.html" method="get" class="nav-search-form">
-                                        <input type="text" name="query" placeholder="Search movies...">
-                                        <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
-                                    </form>
-                                </td>
-                                <td></td>
-                                <td class="nav-dropdown-wrap">
-                                    <a href="LoggedInPage-html5.html" class="nav-dropdown-trigger">
-                                        <span class="nav-dropdown-trigger-text">My Account</span>
-                                        <span class="nav-dropdown-chevron" aria-hidden="true">&#9660;</span>
-                                    </a>
-                                    <div class="nav-dropdown-panel" role="menu">
-                                        <div class="nav-dropdown-section">
-                                            <a href="index-html5.html" role="menuitem">Home</a>
-                                            <a href="LoggedInPage-html5.html" role="menuitem">Dashboard</a>
-                                        </div>
-                                        <hr class="nav-dropdown-divider">
-                                        <div class="nav-dropdown-section">
-                                            <a href="logout.html" role="menuitem">Sign Out</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="nav-dropdown-wrap">
+                            <span class="nav-dropdown-trigger" tabindex="0" aria-haspopup="true" aria-expanded="false">Extras &#9660;</span>
+                            <div class="nav-dropdown-panel">
+                                <a href="sprites.html">CSS Sprites</a>
+                                <a href="nested-list.html">Nested Lists</a>
+                                <a href="form-html5.html">Form</a>
+                            </div>
+                        </div>
                     </td>
+                    <td></td>
+                    <td>
+                        <form action="../search.html" method="get" class="nav-search-form">
+                            <input type="text" name="query" placeholder="Search movies...">
+                            <button type="submit" aria-label="Search" class="nav-search-btn">&#128269;</button>
+                        </form>
+                    </td>
+                    <td></td>
+                    <td><a href="../login.php">Login</a></td>
+                    <td></td>
+                    <td><a href="../register.php">Register</a></td>
                 </tr>
             </table>
-        </td>
-    </tr>
+        </td></tr></table>
+    </td></tr>
 </table>
 
 <!-- ═══════════════════════════════════════════════
-     CONȚINUT PRINCIPAL – Formular complet
+     CONȚINUT PRINCIPAL – Form complet
      ═══════════════════════════════════════════════ -->
 <table id="main-content">
     <tr>
@@ -92,8 +84,8 @@
                     <td>
 
                         <!-- ─────────────────────────────────────────────
-                             FORMULAR CREARE CONT
-                             Demonstrează stilizarea elementelor de formular:
+                             Form CREARE CONT
+                             Demonstrează stilizarea elementelor de Form:
                              - câmpuri de input (text, email, password, date, number, range)
                              - select dropdown
                              - radio buttons
@@ -106,22 +98,19 @@
                         <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2 class="form-section-title">Creează un cont BlimBlau</h2>
+                                    <h2 class="form-section-title">Create a BlimBlau Account</h2>
                                     <p class="section-desc">
-                                        Completează formularul de mai jos pentru a te alătura comunității
-                                        BlimBlau. Câmpurile marcate cu * sunt obligatorii.
-                                        Diacriticele sunt suportate: ă, â, î, ș, ț.
-                                    </p>
+                                        Fill in the form below to join the BlimBlau community. Fields marked with * are required.</p>
 
                                     <form action="register-process.html" method="post" enctype="multipart/form-data">
                                         <table class="form-table">
 
                                             <!-- ══════════════════════════
-                                                 SECȚIUNEA 1: Date personale
+                                                 SECȚIUNEA 1: Personal Details
                                                  ══════════════════════════ -->
                                             <tr>
                                                 <td colspan="4" class="form-section-heading">
-                                                    <b>1. Date personale</b>
+                                                    <b>1. Personal Details</b>
                                                 </td>
                                             </tr>
 
@@ -139,7 +128,7 @@
                                                 </td>
                                             </tr>
 
-                                            <!-- Username + Data nașterii -->
+                                            <!-- Username + Date of birth -->
                                             <tr>
                                                 <td class="form-label">Username *</td>
                                                 <td class="form-field">
@@ -147,7 +136,7 @@
                                                            required minlength="3" maxlength="30"
                                                            autocomplete="username">
                                                 </td>
-                                                <td class="form-label">Data nașterii</td>
+                                                <td class="form-label">Date of birth</td>
                                                 <td class="form-field">
                                                     <!-- input type="date" – afișează un calendar nativ -->
                                                     <input type="date" name="data_nasterii"
@@ -169,53 +158,53 @@
                                                         <input type="radio" name="gen" value="nb"> Non-binar
                                                     </label>
                                                     <label class="radio-label">
-                                                        <input type="radio" name="gen" value="ns"> Prefer să nu spun
+                                                        <input type="radio" name="gen" value="ns"> Prefer not to say
                                                     </label>
                                                 </td>
                                             </tr>
 
-                                            <!-- Țara -->
+                                            <!-- Country -->
                                             <tr>
-                                                <td class="form-label">Țara</td>
+                                                <td class="form-label">Country</td>
                                                 <td colspan="3" class="form-field">
                                                     <!-- input type="select" – dropdown -->
-                                                    <select name="tara">
-                                                        <option value="">-- Selectează țara --</option>
-                                                        <option value="ro">România</option>
+                                                    <select name="Country">
+                                                        <option value="">-- Selectează Country --</option>
+                                                        <option value="ro">Romania</option>
                                                         <option value="md">Moldova</option>
                                                         <option value="us">Statele Unite</option>
                                                         <option value="uk">Marea Britanie</option>
-                                                        <option value="fr">Franța</option>
+                                                        <option value="fr">France</option>
                                                         <option value="de">Germania</option>
                                                         <option value="it">Italia</option>
                                                         <option value="es">Spania</option>
-                                                        <option value="other">Altă țară</option>
+                                                        <option value="other">Other country</option>
                                                     </select>
                                                 </td>
                                             </tr>
 
                                             <!-- Oraș (populat dinamic de dependencies.js) -->
                                             <tr>
-                                                <td class="form-label">Orașul</td>
+                                                <td class="form-label">City</td>
                                                 <td colspan="3" class="form-field">
                                                     <select name="oras_select" id="oras_select" disabled>
-                                                        <option value="">-- Selectează mai întâi țara --</option>
+                                                        <option value="">-- Selectează mai întâi Country --</option>
                                                     </select>
                                                 </td>
                                             </tr>
 
-                                            <!-- Vârstă (calculată automat din data nașterii) -->
+                                            <!-- Vârstă (calculată automat din Date of birth) -->
                                             <tr>
                                                 <td class="form-label">Vârstă</td>
                                                 <td colspan="3" class="form-field">
                                                     <input type="number" name="varsta" id="varsta"
-                                                           min="1" max="120" placeholder="Calculat automat din data nașterii"
+                                                           min="1" max="120" placeholder="Calculat automat din Date of birth"
                                                            readonly style="background:var(--color-surface);cursor:default;">
                                                 </td>
                                             </tr>
 
                                             <!-- ══════════════════════════
-                                                 SECȚIUNEA 2: Date cont
+                                                 SECȚIUNEA 2: Account Details
                                                  ══════════════════════════ -->
                                             <tr>
                                                 <td colspan="4" class="form-section-heading">
@@ -231,35 +220,35 @@
                                                     <input type="email" name="email" placeholder="exemplu@email.ro"
                                                            required autocomplete="email">
                                                 </td>
-                                                <td class="form-label">Confirmă e-mail *</td>
+                                                <td class="form-label">Confirm email *</td>
                                                 <td class="form-field">
-                                                    <input type="email" name="email_confirm" placeholder="Repetă e-mail-ul"
+                                                    <input type="email" name="email_confirm" placeholder="Repeat email"
                                                            required>
                                                 </td>
                                             </tr>
 
                                             <!-- Parolă -->
                                             <tr>
-                                                <td class="form-label">Parolă *</td>
+                                                <td class="form-label">Password *</td>
                                                 <td class="form-field">
                                                     <!-- input type="password" – caracterele sunt ascunse -->
                                                     <input type="password" name="parola" placeholder="Min. 8 caractere"
                                                            required minlength="8" autocomplete="new-password">
                                                 </td>
-                                                <td class="form-label">Confirmă parola *</td>
+                                                <td class="form-label">Confirmă Password *</td>
                                                 <td class="form-field">
                                                     <input type="password" name="parola_confirm"
-                                                           placeholder="Repetă parola" required
+                                                           placeholder="Repeat password" required
                                                            autocomplete="new-password">
                                                 </td>
                                             </tr>
 
                                             <!-- ══════════════════════════
-                                                 SECȚIUNEA 3: Preferințe film
+                                                 SECȚIUNEA 3: Film Preferences
                                                  ══════════════════════════ -->
                                             <tr>
                                                 <td colspan="4" class="form-section-heading">
-                                                    <b>3. Preferințe cinematografice</b>
+                                                    <b>3. Film preferences</b>
                                                 </td>
                                             </tr>
 
@@ -267,14 +256,14 @@
                                             <tr>
                                                 <td class="form-label">Genuri preferate</td>
                                                 <td colspan="3" class="form-field">
-                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="actiune"> Acțiune</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="actiune"> Action</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="drama"> Dramă</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="comedie"> Comedie</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="sf"> Sci-Fi</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="horror"> Horror</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="thriller"> Thriller</label>
                                                     <label class="check-label"><input type="checkbox" name="gen_film[]" value="documentar"> Documentar</label>
-                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="animatie"> Animație</label>
+                                                    <label class="check-label"><input type="checkbox" name="gen_film[]" value="animatie"> Animation</label>
                                                 </td>
                                             </tr>
 
@@ -327,7 +316,7 @@
                                                  ══════════════════════════ -->
                                             <tr>
                                                 <td colspan="4" class="form-section-heading">
-                                                    <b>4. Termeni și condiții</b>
+                                                    <b>4. Terms &amp; Conditions</b>
                                                 </td>
                                             </tr>
 
@@ -335,17 +324,17 @@
                                                 <td colspan="4" class="form-field" style="padding-left:0.75rem;">
                                                     <label class="check-label">
                                                         <input type="checkbox" name="termeni" value="da" required>
-                                                        Sunt de acord cu <a href="terms.html" style="color:#58a6ff;">Termenii și condițiile</a> *
+                                                        I agree to the <a href="terms.html" style="color:#58a6ff;">Terms &amp; Conditions</a> *
                                                     </label>
                                                     <br>
                                                     <label class="check-label">
                                                         <input type="checkbox" name="newsletter" value="da">
-                                                        Doresc să primesc newsletter-ul BlimBlau cu recomandări săptămânale
+                                                        Doresc să primesc newsletter-ul BlimBlau cu Browse săptămânale
                                                     </label>
                                                     <br>
                                                     <label class="check-label">
                                                         <input type="checkbox" name="gdpr" value="da" required>
-                                                        Am citit și accept <a href="privacy.html" style="color:#58a6ff;">Politica de confidențialitate</a> (GDPR) *
+                                                        I have read and accept the <a href="privacy.html" style="color:#58a6ff;">Privacy Policy</a> (GDPR) *
                                                     </label>
                                                 </td>
                                             </tr>
@@ -354,9 +343,9 @@
                                             <tr>
                                                 <td colspan="4" class="form-actions">
                                                     <!-- input type="submit" – trimite formularul -->
-                                                    <input type="submit" value="Creează contul">
+                                                    <input type="submit" value="Create Account">
                                                     <!-- input type="reset" – resetează toate câmpurile -->
-                                                    <input type="reset" value="Curăță formularul">
+                                                    <input type="reset" value="Clear form">
                                                 </td>
                                             </tr>
 
@@ -367,14 +356,14 @@
                         </table>
 
                         <!-- ─────────────────────────────────────────────
-                             Secțiunea: Ai deja un cont?
+                             Secțiunea: Already have an account?
                              ───────────────────────────────────────────── -->
                         <table class="section-panel">
                             <tr>
                                 <td>
-                                    <h2 class="form-section-title">Ai deja un cont?</h2>
+                                    <h2 class="form-section-title">Already have an account?</h2>
                                     <p class="section-desc">
-                                        Dacă ești deja înregistrat, poți să te autentifici direct.
+                                        If you already have an account, you can sign in directly.
                                         <a href="LoggedInPage-html5.html" style="color:#58a6ff;">
                                             Mergi la Dashboard &rarr;
                                         </a>
@@ -395,7 +384,7 @@
     <tr>
         <td>
             &copy; 2024 BlimBlau. All rights reserved.
-            &nbsp;&middot;&nbsp; <a href="LoggedOutPage-html5.html">Home</a>
+            &nbsp;&middot;&nbsp; <a href="../index.php">Home</a>
             &nbsp;&middot;&nbsp; <a href="about.html">About</a>
             &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>
             &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
@@ -404,8 +393,8 @@
     </tr>
 </table>
 
-<script src="js/data.js" defer></script>
-<script src="js/validation-jQuery.js" defer></script>
-<script src="js/dependencies-jQuery.js" defer></script>
+<script src="../js/data.js" defer></script>
+<script src="../js/validation-jQuery.js" defer></script>
+<script src="../js/dependencies-jQuery.js" defer></script>
 </body>
 </html>
