@@ -33,7 +33,7 @@ if ($loggedIn) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars($pageTitle ?? 'BlimBlau') ?> – BlimBlau</title>
-    <link rel="stylesheet" href="css/style-horizontal.css">
+    <link rel="stylesheet" href="/HTPY/css/style-horizontal.css">
     <?php if (!empty($extraCss)): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($extraCss) ?>">
     <?php endif; ?>
